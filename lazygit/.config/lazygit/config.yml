@@ -1,0 +1,11 @@
+git:
+  paging:
+    colorArg: always
+
+os:
+  editPreset: 'nvim-remote'
+
+gui:
+  theme:
+    selectedLineBgColor:
+      - default

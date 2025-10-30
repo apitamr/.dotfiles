@@ -1,0 +1,111 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // ============================================================================
+  // GLOBAL BINDINGS
+  // ============================================================================
+  {
+    "bindings": {
+      "ctrl-tab": "menu::SelectPrevious",
+      "tab": "menu::SelectNext",
+      "cmd-`": "editor::ToggleFocus"
+    }
+  },
+
+  // ============================================================================
+  // WORKSPACE
+  // ============================================================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-w": null,
+      "alt-shift-g": "git_panel::ToggleFocus"
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+
+  // ============================================================================
+  // PROJECT PANEL
+  // ============================================================================
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-enter": "project_panel::Rename"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "m": "project_panel::CollapseAllEntries"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus"
+    }
+  },
+
+  // ============================================================================
+  // EDITOR
+  // ============================================================================
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-tab": "editor::ContextMenuPrevious",
+      "ctrl-p": "editor::ContextMenuPrevious",
+      "tab": "editor::ContextMenuNext",
+      "ctrl-n": "editor::ContextMenuNext",
+      "pageup": "editor::ContextMenuFirst",
+      "pagedown": "editor::ContextMenuLast"
+    }
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "tab": null
+    }
+  },
+
+  // ============================================================================
+  // VIM MODE
+  // ============================================================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space w": "workspace::Save",
+      "space g b": "git::Blame",
+      "space g B": "git::Branch",
+      "space g a": "git::StageAll",
+      "space g c": "git::Commit",
+      "space g s": "git::Switch",
+      "space g d": "git::Diff",
+      "space g f": "git::Fetch",
+      "space g p": "git::Push",
+      "space g P": "git::Pull"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j j": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": ["vim::PushAddSurrounds", {}]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus"
+    }
+  }
+]

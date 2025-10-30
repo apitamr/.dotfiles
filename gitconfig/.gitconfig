@@ -1,0 +1,16 @@
+[user]
+	name = strygwyr
+	email = 13832826+apitamr@users.noreply.github.com
+[init]
+	defaultBranch = main
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential "https://github.com"]
+	useHttpPath = true
+[pull]
+	rebase = true
+
+
+
