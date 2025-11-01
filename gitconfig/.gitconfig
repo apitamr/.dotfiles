@@ -10,7 +10,6 @@
 [credential "https://github.com"]
 	useHttpPath = true
 [pull]
-	rebase = true
-
-
-
+  rebase = true
+[include]
+	path = ~/.dotfiles/gitconfig/.gitconfig-work
