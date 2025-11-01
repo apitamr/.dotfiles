@@ -58,7 +58,7 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 map("n", "<leader>e", function()
   local current_buf = vim.api.nvim_get_current_buf()
   local buf_ft = vim.bo[current_buf].filetype
-  
+
   if buf_ft == "neo-tree" then
     -- If cursor is in neo-tree, go back to previous window
     vim.cmd("wincmd p")
@@ -73,7 +73,7 @@ map("n", "<leader>e", function()
         break
       end
     end
-    
+
     if not neo_tree_open then
       vim.cmd("Neotree show")
       -- After opening, focus neo-tree
@@ -98,6 +98,42 @@ map("n", "<leader>E", "<cmd>Oil --float<cr>", { desc = "Toggle oil (float)" })
 map("n", "<leader>fw", function()
   Snacks.picker.grep()
 end, { desc = "Live grep" })
+map("v", "<leader>fw", function()
+  -- Get the current visual selection (before exiting visual mode)
+  local _, start_row, start_col, _ = unpack(vim.fn.getpos("v"))
+  local _, end_row, end_col, _ = unpack(vim.fn.getpos("."))
+
+  -- Ensure start is before end
+  if start_row > end_row or (start_row == end_row and start_col > end_col) then
+    start_row, end_row = end_row, start_row
+    start_col, end_col = end_col, start_col
+  end
+
+  local lines = vim.fn.getline(start_row, end_row)
+
+  if #lines == 0 then
+    return
+  end
+
+  -- Handle single line selection
+  if #lines == 1 then
+    lines[1] = string.sub(lines[1], start_col, end_col)
+  else
+    -- Handle multi-line selection
+    lines[1] = string.sub(lines[1], start_col)
+    lines[#lines] = string.sub(lines[#lines], 1, end_col)
+  end
+
+  local selected_text = table.concat(lines, "\n")
+
+  -- Exit visual mode first to clear the selection
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+
+  -- Search for the selected text globally with a fresh picker instance
+  vim.schedule(function()
+    Snacks.picker.grep({ search = selected_text })
+  end)
+end, { desc = "Search selected text globally" })
 map("n", "<leader>fb", function()
   Snacks.picker.buffers()
 end, { desc = "Find buffers" })
@@ -111,7 +147,7 @@ map("n", "<leader>fo", function()
   Snacks.picker.recent()
 end, { desc = "Find oldfiles" })
 map("n", "<leader>fz", function()
-  Snacks.picker.grep_bufword()
+  Snacks.picker.grep_buffers()
 end, { desc = "Find in current buffer" })
 map("n", "<leader>cm", function()
   Snacks.picker.git_log()
@@ -127,8 +163,8 @@ map("n", "<leader>fa", function()
   Snacks.picker.files({ cwd = root, hidden = true, no_ignore = true })
 end, { desc = "Find all files from git root" })
 
--- ========================================================================
 -- LSP Symbol Search
+-- ========================================================================
 -- ========================================================================
 map("n", "gs", function()
   Snacks.picker.lsp_symbols()
@@ -177,7 +213,9 @@ map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation"
 map("n", "gh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
-map("n", "<leader>do", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open diagnostic float" })
+map("n", "<leader>do", function()
+  Snacks.picker.diagnostics_buffer()
+end, { desc = "Open diagnostic float" })
 map("n", "<leader>dl", function()
   Snacks.picker.diagnostics()
 end, { desc = "List all diagnostics" })
@@ -237,11 +275,11 @@ map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason (LSP installer)" })
 -- ========================================================================
 -- Copilot
 -- ========================================================================
-map("i", "<C-J>", 'copilot#Accept("\\<CR>")', { 
-  expr = true, 
-  replace_keycodes = false, 
+map("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
   silent = true,
-  desc = "Copilot Accept"
+  desc = "Copilot Accept",
 })
 map("i", "<M-]>", "<Plug>(copilot-next)", { silent = true, desc = "Copilot Next" })
 map("i", "<M-[>", "<Plug>(copilot-previous)", { silent = true, desc = "Copilot Previous" })
