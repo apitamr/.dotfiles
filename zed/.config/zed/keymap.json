@@ -28,7 +28,15 @@
       // "shift shift": "file_finder::Toggle"
     }
   },
-
+  {
+    "context": "Workspace || Editor",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
   // ============================================================================
   // PROJECT PANEL
   // ============================================================================
@@ -86,7 +94,8 @@
       "space g d": "git::Diff",
       "space g f": "git::Fetch",
       "space g P": "git::Push",
-      "space g p": "git::Pull"
+      "space g p": "git::Pull",
+      "space g g": "git_panel::ToggleFocus"
     }
   },
   {

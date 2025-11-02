@@ -106,18 +106,18 @@
 
   // === AI Agent Configuration ===
   "agent_servers": {
-    "Z.AI": {
-      "command": "npx",
-      "args": ["claude-code-acp"],
-      "env": {
-        "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
-        "ANTHROPIC_AUTH_TOKEN": "a2319f7a150d49a7b7322787435aa57c.GlPxeI4FeOHbAfP7",
-        "API_TIMEOUT_MS": "3000000",
-        "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
-        "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.6",
-        "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.6"
-      }
-    }
+    // "Z.AI": {
+    //   "command": "npx",
+    //   "args": ["claude-code-acp"],
+    //   "env": {
+    //     "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    //     "ANTHROPIC_AUTH_TOKEN": "a2319f7a150d49a7b7322787435aa57c.GlPxeI4FeOHbAfP7",
+    //     "API_TIMEOUT_MS": "3000000",
+    //     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
+    //     "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.6",
+    //     "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.6"
+    //   }
+    // }
   },
   "agent": {
     "enabled": true,
