@@ -78,7 +78,6 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space w": "workspace::Save",
       "space g b": "git::Blame",
       "space g B": "git::Branch",
       "space g a": "git::StageAll",
@@ -86,8 +85,8 @@
       "space g s": "git::Switch",
       "space g d": "git::Diff",
       "space g f": "git::Fetch",
-      "space g p": "git::Push",
-      "space g P": "git::Pull"
+      "space g P": "git::Push",
+      "space g p": "git::Pull"
     }
   },
   {
