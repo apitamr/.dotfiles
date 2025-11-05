@@ -7,7 +7,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.autoformat = false
 
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- Automatically change directory to the file being edited
 vim.opt.autochdir = false
