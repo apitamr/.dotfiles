@@ -5,8 +5,6 @@ brew "git"
 brew "asdf"
 # Cross-platform make
 brew "cmake"
-# General-purpose scripting language
-brew "php", restart_service: :changed
 # Dependency Manager for PHP
 brew "composer"
 # Simple, fast and user-friendly alternative to find
@@ -25,8 +23,6 @@ brew "neovim"
 brew "openconnect"
 # Fast, disk space efficient package manager
 brew "pnpm"
-# Object-relational database system
-brew "postgresql@16", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Cross-shell prompt for astronauts
