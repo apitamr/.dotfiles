@@ -4,10 +4,6 @@ ZSH_THEME="robbyrussell"
 source $ZSH/oh-my-zsh.sh
 
 
-if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ]; then
-  tmux new -A -s main
-fi
-
 # ─── Load Custom Aliases ────────────────────────────────────────────────────
 [ -f ~/.zshrc_aliases ] && source ~/.zshrc_aliases
 

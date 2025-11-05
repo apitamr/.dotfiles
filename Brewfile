@@ -43,6 +43,8 @@ brew "zsh-syntax-highlighting"
 brew "oven-sh/bun/bun"
 # Allows connection to a computer remotely
 cask "anydesk"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
@@ -77,10 +79,6 @@ cask "slack"
 cask "tableplus"
 # Web browser
 cask "thebrowsercompany-dia"
-# Open-source code editor
-cask "visual-studio-code"
-# Rust-based terminal
-cask "warp"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Multiplayer code editor
