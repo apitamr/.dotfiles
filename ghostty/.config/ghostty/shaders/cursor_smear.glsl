@@ -60,8 +60,16 @@ float ease(float x) {
     return pow(1.0 - x, 3.0);
 }
 
-const vec4 TRAIL_COLOR = vec4(0.77, 0.79, 0.78, 1.0);
-const float DURATION = 0.1; //IN SECONDS
+// Use this site to convert from HEX to vec4
+// https://enchanted.games/app/colour-converter/
+// const vec4 TRAIL_COLOR = vec4(0.77, 0.79, 0.78, 1.0);
+const vec4 TRAIL_COLOR = vec4(1., 1., 0., 1.0); // yellow
+// const vec4 TRAIL_COLOR = vec4(0.976, 0.302, 1.0, 1.0); // cursor
+// const vec4 TRAIL_COLOR = vec4(0.914, 0.702, 0.992, 1.0); // light cursor
+// const vec4 TRAIL_COLOR = vec4(0.016, 0.82, 0.976, 1.0); // cyan
+// const vec4 TRAIL_COLOR = vec4(0.216, 0.957, 0.6, 1.0); // green
+const float OPACITY = 0.6;
+const float DURATION = 0.1;
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
@@ -99,14 +107,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float lineLength = distance(centerCC, centerCP);
 
     vec4 newColor = vec4(fragColor);
-    // Compute fade factor based on distance along the trail
-    float fadeFactor = 1.0 - smoothstep(lineLength, sdfCurrentCursor, easedProgress * lineLength);
-
-    // Apply fading effect to trail color
-    vec4 fadedTrailColor = TRAIL_COLOR * fadeFactor;
-
-    // Blend trail with fade effect
-    newColor = mix(newColor, fadedTrailColor, antialising(sdfTrail));
+    // Draw trail
+    newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
     // Draw current cursor
     newColor = mix(newColor, TRAIL_COLOR, antialising(sdfCurrentCursor));
     newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));
