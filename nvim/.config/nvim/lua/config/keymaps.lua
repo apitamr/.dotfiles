@@ -286,20 +286,20 @@ map("i", "<M-[>", "<Plug>(copilot-previous)", { silent = true, desc = "Copilot P
 map("i", "<C-\\>", "<Plug>(copilot-dismiss)", { silent = true, desc = "Copilot Dismiss" })
 
 -- ========================================================================
--- CodeCompanion (AI Assistant)
+-- CodeCompanion (AI Assistant) - DISABLED
 -- ========================================================================
-map({ "n", "v" }, "<leader>aa", function()
-  require("codecompanion").toggle()
-end, { desc = "AI Toggle Chat" })
-map({ "n", "v" }, "<leader>ap", "<cmd>CodeCompanionActions<cr>", { desc = "AI Action Palette" })
-map("v", "<leader>aA", "<cmd>CodeCompanionChat Add<cr>", { desc = "AI Add to Chat" })
-map("n", "<leader>ao", "<cmd>CodeCompanionChat<cr>", { desc = "AI Open Chat" })
-map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "AI Inline Assistant" })
-map("n", "<leader>ac", "<cmd>CodeCompanionCmd<cr>", { desc = "AI Generate Command" })
-map("n", "<leader>aq", function()
-  local input = vim.fn.input("Quick AI Prompt: ")
-  if input ~= "" then
-    require("codecompanion").prompt(input)
-  end
-end, { desc = "AI Quick Prompt" })
-vim.cmd([[cab cc CodeCompanion]])
+-- map({ "n", "v" }, "<leader>aa", function()
+--   require("codecompanion").toggle()
+-- end, { desc = "AI Toggle Chat" })
+-- map({ "n", "v" }, "<leader>ap", "<cmd>CodeCompanionActions<cr>", { desc = "AI Action Palette" })
+-- map("v", "<leader>aA", "<cmd>CodeCompanionChat Add<cr>", { desc = "AI Add to Chat" })
+-- map("n", "<leader>ao", "<cmd>CodeCompanionChat<cr>", { desc = "AI Open Chat" })
+-- map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "AI Inline Assistant" })
+-- map("n", "<leader>ac", "<cmd>CodeCompanionCmd<cr>", { desc = "AI Generate Command" })
+-- map("n", "<leader>aq", function()
+--   local input = vim.fn.input("Quick AI Prompt: ")
+--   if input ~= "" then
+--     require("codecompanion").prompt(input)
+--   end
+-- end, { desc = "AI Quick Prompt" })
+-- vim.cmd([[cab cc CodeCompanion]])

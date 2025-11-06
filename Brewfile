@@ -5,8 +5,8 @@ brew "git"
 brew "asdf"
 # Cross-platform make
 brew "cmake"
-# Dependency Manager for PHP
-brew "composer"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # GitHub command-line tool
@@ -19,6 +19,8 @@ brew "lazygit"
 brew "lsd"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# AI coding agent, built for the terminal
+brew "opencode"
 # Open client for Cisco AnyConnect VPN
 brew "openconnect"
 # Fast, disk space efficient package manager
@@ -31,6 +33,8 @@ brew "starship"
 brew "stow"
 # Terminal multiplexer
 brew "tmux"
+# Watch files and take action when they change
+brew "watchman"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
@@ -39,8 +43,6 @@ brew "zsh-syntax-highlighting"
 brew "oven-sh/bun/bun"
 # Allows connection to a computer remotely
 cask "anydesk"
-# Terminal-based AI coding assistant
-cask "claude-code"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
