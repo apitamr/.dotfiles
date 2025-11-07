@@ -115,5 +115,12 @@
     "bindings": {
       "space e": "project_panel::ToggleFocus"
     }
+  },
+  {
+    "context": "Editor && !VimCount && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }]
+    }
   }
 ]
