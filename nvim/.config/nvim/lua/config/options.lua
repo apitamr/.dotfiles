@@ -6,6 +6,9 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.autoformat = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.textwidth = 120
 
 vim.opt.relativenumber = true
 
