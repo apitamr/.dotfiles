@@ -67,6 +67,30 @@ The install script will:
 1. Remove any existing symlinks for each package
 2. Create fresh symlinks to your home directory
 
+## macOS Configuration
+
+### Keyboard Settings
+
+Improve keyboard responsiveness for faster typing:
+
+```bash
+# Reduce key repeat delay and increase repeat rate
+defaults write -g InitialKeyRepeat -int 9
+defaults write -g KeyRepeat -int 1
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
+### Dock Settings
+
+Make Dock auto-hide more responsive:
+
+```bash
+# Remove delay when auto-hiding Dock
+defaults write com.apple.dock autohide-delay -int 0
+defaults write com.apple.dock autohide-time-modifier -float 0.4
+killall Dock
+```
+
 ## Structure
 
 Each directory represents a package that can be independently stowed:
