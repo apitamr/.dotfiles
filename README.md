@@ -14,6 +14,7 @@ Personal configuration files for development environment setup.
 - **lazygit** - Git TUI configuration
 - **github-copilot** - GitHub Copilot CLI configuration
 - **gitconfig** - Git configuration
+- **opencode** - OpenCode AI assistant configuration
 
 ## Installation
 
@@ -56,7 +57,7 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) for symlink management.
 ```bash
 # Set environment variables (optional)
 export DOTFILES=$HOME/.dotfiles
-export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,github-copilot,gitconfig"
+export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,github-copilot,gitconfig,opencode"
 
 # Run install script
 ./install
@@ -102,6 +103,7 @@ Each directory represents a package that can be independently stowed:
 ├── gitconfig/        # Git configuration
 ├── lazygit/          # Git TUI
 ├── nvim/             # Neovim editor
+├── opencode/         # OpenCode AI assistant
 ├── tmux/             # Terminal multiplexer
 ├── zed/              # Code editor
 └── zsh/              # Shell

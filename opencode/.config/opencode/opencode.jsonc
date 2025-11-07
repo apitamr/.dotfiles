@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  
+  // Theme configuration
+  "theme": "opencode",
+  
+  // Model configuration
+  "model": "glm-4.6",
+  "small_model": "glm-4.5-flash",
+  
+ // Auto-update configuration
+  "autoupdate": true,
+  
+  // MCP servers
+  "mcp": {},
+  
+  // Disabled providers (none disabled by default)
+  "disabled_providers": []
+}
