@@ -8,7 +8,6 @@ return {
       ensure_installed = {
         -- LSP Servers
         "clangd",
-        "cmake-language-server",
         "css-lsp",
         "docker-compose-language-service",
         "docker-language-server",
