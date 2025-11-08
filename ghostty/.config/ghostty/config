@@ -18,6 +18,7 @@ working-directory = home
 macos-window-buttons = visible
 macos-titlebar-proxy-icon = hidden
 macos-icon = official
+macos-option-as-alt = true
 
 
 # Font
