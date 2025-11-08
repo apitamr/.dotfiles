@@ -5,7 +5,7 @@
   "theme": "opencode",
 
   // Model configuration
-  "model": "glm-4.6",
+  "model": "claude-sonnet-4-5",
 
   // Auto-update configuration
   "autoupdate": true,

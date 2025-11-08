@@ -5,6 +5,8 @@ alias v='nvim'
 alias c='code'
 alias z='zed'
 alias bbdd='brew bundle dump --describe'
+alias ff='fastfetch'
+alias reload='source ~/.zshrc'
 
 # ─── Git Aliases ────────────────────────────────────────────────────────────
 alias gs='git status'

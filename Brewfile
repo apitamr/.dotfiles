@@ -7,10 +7,14 @@ brew "asdf"
 brew "cmake"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # GitHub command-line tool
 brew "gh"
+# Improved top (interactive process viewer)
+brew "htop"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Simple terminal UI for git commands
