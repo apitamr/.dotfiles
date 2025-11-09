@@ -20,7 +20,7 @@ export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 export PATH="/Users/strygwyr/.bun/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-export GOBIN="$HOME/.asdf/shims"
+. "$HOME/.goup/env"
 
 # ─── ASDF Version Manager (Homebrew) ────────────────────────────────────────
 . $(brew --prefix asdf)/libexec/asdf.sh
@@ -32,4 +32,3 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fpath=(/Users/strygwyr/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
-
