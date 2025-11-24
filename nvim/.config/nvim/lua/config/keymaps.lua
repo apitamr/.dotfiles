@@ -286,6 +286,13 @@ map("i", "<M-[>", "<Plug>(copilot-previous)", { silent = true, desc = "Copilot P
 map("i", "<C-\\>", "<Plug>(copilot-dismiss)", { silent = true, desc = "Copilot Dismiss" })
 
 -- ========================================================================
+-- Triforce (Profile Viewer)
+-- ========================================================================
+map("n", "<leader>tp", function()
+  require("triforce").show_profile()
+end, { desc = "Open triforce profile" })
+
+-- ========================================================================
 -- CodeCompanion (AI Assistant) - DISABLED
 -- ========================================================================
 -- map({ "n", "v" }, "<leader>aa", function()
