@@ -5,6 +5,11 @@
 
 {
   // === Theme ===
+  "autosave": "off",
+  "show_edit_predictions": false,
+  "sticky_scroll": {
+    "enabled": true
+  },
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
@@ -49,12 +54,18 @@
   },
 
   // === Window & Tabs ===
+  // "max_tabs": 1,
+  "tab_bar":{
+    // "show": false,
+    "show_nav_history_buttons": false
+  },
   "use_system_window_tabs": false,
   "title_bar": {
     "show_branch_icon": true
   },
   "toolbar": {
-    "code_actions": false
+    "code_actions": false,
+    "quick_actions": false
   },
   "tabs": {
     "file_icons": true
@@ -101,6 +112,9 @@
 
   // === Git ===
   "git": {
+    "blame": {
+      "show_avatar": true
+    },
     "inline_blame": {
       "enabled": false
     }
@@ -124,25 +138,23 @@
 
   // === Features ===
   "features": {
-    "edit_prediction_provider": "none"
+    "edit_prediction_provider": "zed"
   },
 
   // === Context Servers (MCP) ===
   "context_servers": {
     "atlassian": {
-      "source": "custom",
       "command": "npx",
       "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"],
       "enabled": false
     },
     "chrome-devtools": {
-      "source": "custom",
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
     },
     "figma": {
+      "env": {},
       "enabled": true,
-      "source": "custom",
       "command": "npx",
       "args": [
         "-y",
@@ -155,7 +167,6 @@
       "env": {},
       "args": ["artisan", "boost:mcp"],
       "command": "php",
-      "source": "custom",
       "enabled": true
     }
   },
