@@ -84,21 +84,6 @@
   // VIM MODE
   // ============================================================================
   {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "space g b": "git::Blame",
-      "space g B": "git::Branch",
-      "space g a": "git::StageAll",
-      "space g c": "git::Commit",
-      "space g s": "git::Switch",
-      "space g d": "git::Diff",
-      "space g f": "git::Fetch",
-      "space g P": "git::Push",
-      "space g p": "git::Pull",
-      "space g g": "git_panel::ToggleFocus"
-    }
-  },
-  {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
       "j j": "vim::NormalBefore"
@@ -122,5 +107,24 @@
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }]
     }
-  }
+  },
+  {
+    "context": "(Editor && vim_mode == normal)",
+    "bindings": {
+      "space d s": "diagnostics::DeployCurrentFile"
+    }
+  },
+  {
+    "context": "(Editor && vim_mode == normal)",
+    "bindings": {
+      "space d l": "diagnostics::Deploy"
+    }
+  },
+  // {
+  //   "context": "Pane",
+  //   "bindings": {
+  //     "tab": "pane::ActivateNextItem",
+  //     "ctrl-shift-tab": "pane::ActivatePrevItem"
+  //   }
+  // }
 ]
