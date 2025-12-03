@@ -7,6 +7,12 @@ local map = vim.keymap.set
 -- Remove default LazyVim keymaps if needed
 -- vim.keymap.del("n", "<leader>n")
 
+-- Remove LazyVim's <leader>x group (diagnostics/quickfix) so our close buffer works
+pcall(vim.keymap.del, "n", "<leader>xx")
+pcall(vim.keymap.del, "n", "<leader>xX")
+pcall(vim.keymap.del, "n", "<leader>xq")
+pcall(vim.keymap.del, "n", "<leader>xQ")
+
 -- ========================================================================
 -- Window Navigation
 -- ========================================================================
@@ -40,11 +46,7 @@ map("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
-map("n", "<leader>x", function()
-  local buf = vim.api.nvim_get_current_buf()
-  vim.cmd("bnext")
-  vim.api.nvim_buf_delete(buf, { force = false })
-end, { desc = "Close buffer" })
+map("n", "<leader>x", "<cmd>bd<cr>", { desc = "Close buffer", nowait = true })
 
 -- ========================================================================
 -- Comments
@@ -194,7 +196,7 @@ map("v", "p", '"_dP', { desc = "Paste without yanking" })
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 map("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
 map({ "n", "v" }, "<leader>pp", '"+p', { desc = "Paste from system clipboard" })
-map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
+map({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete without yanking" })
 
 -- ========================================================================
 -- Text Editing

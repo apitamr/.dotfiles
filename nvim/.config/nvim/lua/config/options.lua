@@ -30,5 +30,5 @@ vim.opt.fillchars:append({
 })
 
 -- Timeout settings
-vim.opt.timeoutlen = 1000
+vim.opt.timeoutlen = 300  -- faster which-key popup
 vim.opt.ttimeoutlen = 0

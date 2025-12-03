@@ -2,17 +2,26 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+    delay = 0,
+    spec = {
+      { "<leader>f", group = "find/files" },
+      { "<leader>g", group = "git" },
+      { "<leader>d", group = "diagnostics" },
+      { "<leader>m", group = "markdown/marks" },
+      { "<leader>u", group = "utils" },
+      { "<leader>a", group = "ai" },
+      { "<leader>p", group = "paste" },
+      { "<leader>t", group = "triforce" },
+      { "<leader>x", hidden = true }, -- hide LazyVim's diagnostics group, we use it for close buffer
+    },
   },
   keys = {
     {
       "<leader>?",
       function()
-        require("which-key").show({ global = true })
+        require("which-key").show({ global = false })
       end,
-      desc = "Buffer Local Keymaps (which-key)",
+      desc = "Buffer Local Keymaps",
     },
   },
 }

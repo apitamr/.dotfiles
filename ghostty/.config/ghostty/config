@@ -23,7 +23,7 @@ macos-option-as-alt = true
 
 # Font
 font-family = JetBrainsMono NFM Regular
-font-size = 13
+font-size = 14
 font-feature = -liga
 font-style = bold
 font-feature = "ss01"

@@ -5,7 +5,7 @@
   "theme": "opencode",
 
   // Model configuration
-  "model": "claude-sonnet-4-5",
+  "model": "anthropic/claude-opus-4-5",
 
   // Auto-update configuration
   "autoupdate": true,
