@@ -9,7 +9,7 @@ return {
       { "<leader>d", group = "diagnostics" },
       { "<leader>m", group = "markdown/marks" },
       { "<leader>u", group = "utils" },
-      { "<leader>a", group = "ai" },
+      { "<leader>o", group = "opencode" },
       { "<leader>p", group = "paste" },
       { "<leader>t", group = "triforce" },
       { "<leader>x", hidden = true }, -- hide LazyVim's diagnostics group, we use it for close buffer

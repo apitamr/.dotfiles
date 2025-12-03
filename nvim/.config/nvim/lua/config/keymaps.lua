@@ -295,20 +295,52 @@ map("n", "<leader>tp", function()
 end, { desc = "Open triforce profile" })
 
 -- ========================================================================
--- CodeCompanion (AI Assistant) - DISABLED
+-- OpenCode (AI Assistant)
 -- ========================================================================
--- map({ "n", "v" }, "<leader>aa", function()
---   require("codecompanion").toggle()
--- end, { desc = "AI Toggle Chat" })
--- map({ "n", "v" }, "<leader>ap", "<cmd>CodeCompanionActions<cr>", { desc = "AI Action Palette" })
--- map("v", "<leader>aA", "<cmd>CodeCompanionChat Add<cr>", { desc = "AI Add to Chat" })
--- map("n", "<leader>ao", "<cmd>CodeCompanionChat<cr>", { desc = "AI Open Chat" })
--- map({ "n", "v" }, "<leader>ai", "<cmd>CodeCompanion<cr>", { desc = "AI Inline Assistant" })
--- map("n", "<leader>ac", "<cmd>CodeCompanionCmd<cr>", { desc = "AI Generate Command" })
--- map("n", "<leader>aq", function()
---   local input = vim.fn.input("Quick AI Prompt: ")
---   if input ~= "" then
---     require("codecompanion").prompt(input)
---   end
--- end, { desc = "AI Quick Prompt" })
--- vim.cmd([[cab cc CodeCompanion]])
+map({ "n", "t" }, "<leader>oo", function()
+  require("opencode").toggle()
+end, { desc = "OpenCode toggle" })
+
+map({ "n", "x" }, "<leader>oa", function()
+  local oc = require("opencode")
+  oc.show()
+  oc.ask("@this: ", { submit = false })
+end, { desc = "OpenCode ask" })
+
+map({ "n", "x" }, "<leader>os", function()
+  local oc = require("opencode")
+  oc.show()
+  oc.select()
+end, { desc = "OpenCode select action" })
+
+map("n", "<leader>on", function()
+  require("opencode").command("session.new")
+end, { desc = "OpenCode new session" })
+
+map("n", "<leader>ol", function()
+  require("opencode").command("session.list")
+end, { desc = "OpenCode list sessions" })
+
+map("n", "<leader>oi", function()
+  require("opencode").command("session.interrupt")
+end, { desc = "OpenCode interrupt" })
+
+map("n", "<leader>oc", function()
+  require("opencode").command("session.compact")
+end, { desc = "OpenCode compact session" })
+
+map("n", "<leader>ou", function()
+  require("opencode").command("session.undo")
+end, { desc = "OpenCode undo" })
+
+map("n", "<leader>or", function()
+  require("opencode").command("session.redo")
+end, { desc = "OpenCode redo" })
+
+map("n", "<leader>oS", function()
+  require("opencode").command("session.share")
+end, { desc = "OpenCode share session" })
+
+map("n", "<leader>og", function()
+  require("opencode").command("agent.cycle")
+end, { desc = "OpenCode cycle agent" })
