@@ -101,7 +101,6 @@ map("n", "<leader>e", function()
   end
 end, { desc = "Toggle neo-tree focus" })
 map("n", "<C-n>", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree" })
-map("n", "<leader>E", "<cmd>Oil --float<cr>", { desc = "Toggle oil (float)" })
 
 -- ========================================================================
 -- Snacks Picker (LazyVim's built-in picker)
