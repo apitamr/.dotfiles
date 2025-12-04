@@ -13,6 +13,15 @@ pcall(vim.keymap.del, "n", "<leader>xX")
 pcall(vim.keymap.del, "n", "<leader>xq")
 pcall(vim.keymap.del, "n", "<leader>xQ")
 
+-- Remove LazyVim's terminal keymaps
+pcall(vim.keymap.del, "n", "<leader>ft")
+pcall(vim.keymap.del, "n", "<leader>fT")
+pcall(vim.keymap.del, "n", "<c-/>")
+pcall(vim.keymap.del, "n", "<c-_>")
+pcall(vim.keymap.del, "t", "<c-/>")
+pcall(vim.keymap.del, "t", "<c-_>")
+pcall(vim.keymap.del, "t", "<esc><esc>")
+
 -- ========================================================================
 -- Window Navigation
 -- ========================================================================
@@ -178,16 +187,7 @@ map("n", "<leader>fr", function()
   Snacks.picker.lsp_references()
 end, { desc = "Find references" })
 
--- ========================================================================
--- Terminal
--- ========================================================================
-map("t", "<Esc><Esc>", "<C-\\><C-N>", { desc = "Escape terminal mode" })
-map("t", "<C-q>", "<C-\\><C-N>:bd!<CR>", { desc = "Close terminal" })
 
--- Toggle horizontal terminal
-map("n", "<leader>h", function()
-  Snacks.terminal(nil, { win = { position = "bottom", height = 0.3 } })
-end, { desc = "Toggle horizontal term" })
 
 -- ========================================================================
 -- Better Copy/Paste
