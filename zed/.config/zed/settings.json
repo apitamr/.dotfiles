@@ -1,33 +1,66 @@
 // Zed settings
-//
 // Docs: https://zed.dev/docs/configuring-zed
-// To view default settings: open command palette (cmd-shift-p / ctrl-shift-p) and run `zed: open default settings`
 
 {
-  // === Theme ===
-  "agent": {
-    "inline_assistant_model": {
-      "provider": "ollama",
-      "model": "glm-4.6:cloud"
-    },
-    "default_profile": "ask",
-    "default_model": {
-      "provider": "GLM 4.6",
-      "model": "glm-4.6"
-    },
-    "model_parameters": []
-  },
-  "autosave": "off",
-  "show_edit_predictions": false,
-  "sticky_scroll": {
-    "enabled": true
+  // Appearance
+  "always_treat_brackets_as_autoclosed": true,
+  "colorize_brackets": true,
+  "theme": {
+    "mode": "dark",
+    "light": "Kanso Zen (No italics)",
+    "dark": "Kanso Zen (No italics)"
   },
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
     "dark": "Zed (Default)"
   },
+  "ui_font_family": "JetBrains Mono",
+  "ui_font_size": 15.0,
+  "ui_font_weight": 400.0,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 13.0,
+  "buffer_font_weight": 600,
+  "buffer_line_height": { "custom": 1.8 },
   "cursor_shape": "bar",
+  "scrollbar": { "show": "never" },
+  "minimap": {
+    "show": "always",
+    "current_line_highlight": "all",
+    "thumb": "always",
+    "thumb_border": "full"
+  },
+  "indent_guides": {
+    "coloring": "indent_aware",
+    "active_line_width": 2
+  },
+  "inlay_hints": { "enabled": false },
+  "sticky_scroll": { "enabled": true },
+
+  // Window & Tabs
+  "use_system_window_tabs": false,
+  "confirm_quit": true,
+  "title_bar": { "show_branch_icon": true },
+  "tab_bar": { "show_nav_history_buttons": false },
+  "tabs": { "file_icons": true },
+  "toolbar": {
+    "code_actions": false,
+    "quick_actions": false
+  },
+
+  // Editor Behavior
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+  "autosave": "off",
+  "format_on_save": "off",
+  "soft_wrap": "editor_width",
+  "extend_comment_on_newline": false,
+  "completion_menu_scrollbar": "always",
+  "restore_on_startup": "none",
+  "hide_mouse": "on_typing_and_movement",
+  "show_edit_predictions": false,
+
+  // Project Panel
   "project_panel": {
     "git_status": true,
     "hide_gitignore": false,
@@ -37,81 +70,19 @@
     "file_icons": true,
     "folder_icons": true
   },
-  "theme": {
-    "mode": "dark",
-    "light": "Kanso Zen (No italics)",
-    "dark": "Kanso Zen (No italics)"
-  },
 
-  // === UI Font Settings ===
-  "ui_font_family": "JetBrains Mono",
-  "ui_font_size": 15.0,
-  "ui_font_weight": 400.0,
-
-  // === Editor Font Settings ===
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 13.0,
-  "buffer_font_weight": 600,
-  "buffer_line_height": {
-    "custom": 1.8
-  },
-
-  // === Terminal Settings ===
+  // Terminal
   "terminal": {
-    "toolbar": {
-      "breadcrumbs": true
-    },
+    "dock": "bottom",
     "font_family": "JetBrainsMono Nerd Font Mono",
-    "dock": "bottom"
+    "toolbar": { "breadcrumbs": true }
   },
 
-  // === Window & Tabs ===
-  // "max_tabs": 1,
-  "tab_bar": {
-    // "show": false,
-    "show_nav_history_buttons": false
+  // Git & Diagnostics
+  "git": {
+    "blame": { "show_avatar": true },
+    "inline_blame": { "enabled": true }
   },
-  "use_system_window_tabs": false,
-  "title_bar": {
-    "show_branch_icon": true
-  },
-  "toolbar": {
-    "code_actions": false,
-    "quick_actions": false
-  },
-  "tabs": {
-    "file_icons": true
-  },
-  "confirm_quit": true,
-
-  // === Editor Behavior ===
-  "vim_mode": true,
-  "relative_line_numbers": "enabled",
-  "format_on_save": "off",
-  "extend_comment_on_newline": false,
-  "completion_menu_scrollbar": "always",
-  "soft_wrap": "editor_width",
-  "restore_on_startup": "none",
-  "hide_mouse": "on_typing_and_movement",
-
-  // === Visual Elements ===
-  "scrollbar": {
-    "show": "never"
-  },
-  "indent_guides": {
-    "active_line_width": 2
-  },
-  "inlay_hints": {
-    "enabled": false
-  },
-  "minimap": {
-    "show": "always",
-    "current_line_highlight": "all",
-    "thumb": "always",
-    "thumb_border": "full"
-  },
-
-  // === Diagnostics ===
   "diagnostics": {
     "inline": {
       "enabled": true,
@@ -122,50 +93,32 @@
     }
   },
 
-  // === Git ===
-  "git": {
-    "blame": {
-      "show_avatar": true
+  // AI & Agent
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "GLM 4.6",
+      "model": "glm-4.6"
     },
-    "inline_blame": {
-      "enabled": true
+    "inline_assistant_model": {
+      "provider": "ollama",
+      "model": "glm-4.6:cloud"
     }
   },
+  "features": { "edit_prediction_provider": "zed" },
 
-  // === AI Agent Configuration ===
-  "agent_servers": {
-    // "Z.AI": {
-    //   "command": "npx",
-    //   "args": ["claude-code-acp"],
-    //   "env": {
-    //     "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
-    //     "ANTHROPIC_AUTH_TOKEN": "a2319f7a150d49a7b7322787435aa57c.GlPxeI4FeOHbAfP7",
-    //     "API_TIMEOUT_MS": "3000000",
-    //     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
-    //     "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.6",
-    //     "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.6"
-    //   }
-    // }
-  },
-
-  // === Features ===
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
-
-  // === Context Servers (MCP) ===
+  // MCP Context Servers
   "context_servers": {
     "atlassian": {
+      "enabled": true,
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"],
-      "enabled": true
+      "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
     },
     "chrome-devtools": {
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
     },
     "figma": {
-      "env": {},
       "enabled": true,
       "command": "npx",
       "args": [
@@ -176,14 +129,13 @@
       ]
     },
     "laravel-boost": {
-      "env": {},
-      "args": ["artisan", "boost:mcp"],
+      "enabled": true,
       "command": "php",
-      "enabled": true
+      "args": ["artisan", "boost:mcp"]
     }
   },
 
-  // === Language Server (LSP) ===
+  // Language Servers
   "languages": {
     "PHP": {
       "language_servers": ["intelephense", "!phpactor", "..."]
@@ -199,15 +151,9 @@
     "intelephense": {
       "initialization_options": {
         "enable": true,
-        "completion": {
-          "snippetSupport": true
-        },
-        "format": {
-          "enable": true
-        },
-        "codeAction": {
-          "enable": true
-        },
+        "completion": { "snippetSupport": true },
+        "format": { "enable": true },
+        "codeAction": { "enable": true },
         "diagnostics": {
           "enable": true,
           "undefinedProperties": true
@@ -216,7 +162,7 @@
     }
   },
 
-  // === Telemetry ===
+  // Telemetry
   "telemetry": {
     "diagnostics": false,
     "metrics": false
