@@ -12,7 +12,8 @@ return {
       { "<leader>o", group = "opencode" },
       { "<leader>p", group = "paste" },
       { "<leader>t", group = "triforce" },
-      { "<leader>x", hidden = true }, -- hide LazyVim's diagnostics group, we use it for close buffer
+      -- Completely disable <leader>x group so our close buffer mapping works instantly
+      { "<leader>x", group = false, hidden = true },
     },
   },
   keys = {

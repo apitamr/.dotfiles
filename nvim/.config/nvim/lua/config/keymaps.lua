@@ -55,7 +55,9 @@ map("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
-map("n", "<leader>x", "<cmd>bd<cr>", { desc = "Close buffer", nowait = true })
+map("n", "<leader>x", function()
+  Snacks.bufdelete()
+end, { desc = "Close buffer", nowait = true })
 
 -- ========================================================================
 -- Comments
