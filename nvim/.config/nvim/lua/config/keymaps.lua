@@ -325,3 +325,17 @@ end, { desc = "OpenCode share session" })
 map("n", "<leader>og", function()
   require("opencode").command("agent.cycle")
 end, { desc = "OpenCode cycle agent" })
+
+-- ========================================================================
+-- Krust (Rust Diagnostics)
+-- ========================================================================
+map("n", "<leader>k", function()
+  require("krust").render()
+end, { desc = "Krust Rust diagnostics" })
+
+-- ========================================================================
+-- Context (Editor context for picker)
+-- ========================================================================
+map({ "n", "v" }, "<leader>ac", function()
+  require("context").pick()
+end, { desc = "Context picker" })
