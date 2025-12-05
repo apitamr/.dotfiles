@@ -64,43 +64,34 @@ map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
 -- ========================================================================
--- File Explorer
+-- File Explorer (nvim-tree)
 -- ========================================================================
 map("n", "<leader>e", function()
+  local api = require("nvim-tree.api")
   local current_buf = vim.api.nvim_get_current_buf()
   local buf_ft = vim.bo[current_buf].filetype
 
-  if buf_ft == "neo-tree" then
-    -- If cursor is in neo-tree, go back to previous window
+  if buf_ft == "NvimTree" then
+    -- If cursor is in nvim-tree, go back to previous window
     vim.cmd("wincmd p")
   else
-    -- If cursor is not in neo-tree, focus neo-tree (open if not open)
-    local neo_tree_open = false
+    -- If cursor is not in nvim-tree, focus nvim-tree (open if not open)
+    local nvim_tree_open = false
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       local buf = vim.api.nvim_win_get_buf(win)
-      if vim.bo[buf].filetype == "neo-tree" then
-        neo_tree_open = true
+      if vim.bo[buf].filetype == "NvimTree" then
+        nvim_tree_open = true
         vim.api.nvim_set_current_win(win)
         break
       end
     end
 
-    if not neo_tree_open then
-      vim.cmd("Neotree show")
-      -- After opening, focus neo-tree
-      vim.defer_fn(function()
-        for _, win in ipairs(vim.api.nvim_list_wins()) do
-          local buf = vim.api.nvim_win_get_buf(win)
-          if vim.bo[buf].filetype == "neo-tree" then
-            vim.api.nvim_set_current_win(win)
-            break
-          end
-        end
-      end, 50)
+    if not nvim_tree_open then
+      api.tree.open()
     end
   end
-end, { desc = "Toggle neo-tree focus" })
-map("n", "<C-n>", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree" })
+end, { desc = "Toggle nvim-tree focus" })
+map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle nvim-tree" })
 
 -- ========================================================================
 -- Snacks Picker (LazyVim's built-in picker)
@@ -274,17 +265,6 @@ map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason (LSP installer)" })
 
 -- ========================================================================
--- Copilot
--- ========================================================================
-map("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false,
-  silent = true,
-  desc = "Copilot Accept",
-})
-map("i", "<M-]>", "<Plug>(copilot-next)", { silent = true, desc = "Copilot Next" })
-map("i", "<M-[>", "<Plug>(copilot-previous)", { silent = true, desc = "Copilot Previous" })
-map("i", "<C-\\>", "<Plug>(copilot-dismiss)", { silent = true, desc = "Copilot Dismiss" })
 
 -- ========================================================================
 -- Triforce (Profile Viewer)

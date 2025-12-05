@@ -26,6 +26,9 @@ return {
       picker = {
         finder = "fd",
       },
+      input = {
+        enabled = false,
+      },
     },
   },
 }
