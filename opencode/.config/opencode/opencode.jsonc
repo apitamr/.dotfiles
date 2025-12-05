@@ -37,7 +37,8 @@
   },
 
   "permission": {
-    "edit": "ask" 
+    "edit": "ask",
+    "webfetch": "ask",
   },
 
   // Disabled providers (none disabled by default)
