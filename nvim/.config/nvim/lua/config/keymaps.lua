@@ -56,6 +56,7 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 -- Oil (File Explorer)
 -- ========================================================================
 map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
+map("n", "<leader>E", "<cmd>Oil --float<cr>", { desc = "Open Oil (float)" })
 
 -- ========================================================================
 -- Outline
@@ -102,6 +103,10 @@ end, { desc = "Search selected text" })
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find buffers" })
 map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help page" })
 map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Find oldfiles" })
+map("n", "<leader>fO", function()
+  vim.v.oldfiles = {}
+  vim.notify("Oldfiles cleared", vim.log.levels.INFO)
+end, { desc = "Clear oldfiles" })
 map("n", "<leader>fz", function() Snacks.picker.grep_buffers() end, { desc = "Find in current buffer" })
 map("n", "<leader>fr", function() Snacks.picker.lsp_references() end, { desc = "Find references" })
 map("n", "<leader>cm", function() Snacks.picker.git_log() end, { desc = "Git commits" })
