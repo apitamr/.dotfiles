@@ -11,6 +11,9 @@ return {
         relative_width = false,
         no_provider_message = "",
       },
+      symbol_folding = {
+        autofold_depth = false,
+      },
     },
     config = function(_, opts)
       require("outline").setup(opts)

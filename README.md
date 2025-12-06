@@ -7,12 +7,11 @@ Personal configuration files for development environment setup.
 ## What's Included
 
 - **nvim** - Neovim configuration with plugins and themes
-- **zsh** - Shell configuration
+- **zsh** - Shell configuration and aliases
 - **tmux** - Terminal multiplexer configuration
-- **ghostty** - Terminal emulator themes and config
+- **ghostty** - Terminal emulator config with shaders and themes
 - **zed** - Code editor themes and settings
 - **lazygit** - Git TUI configuration
-- **github-copilot** - GitHub Copilot CLI configuration
 - **gitconfig** - Git configuration
 - **opencode** - OpenCode AI assistant configuration
 
@@ -57,7 +56,7 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) for symlink management.
 ```bash
 # Set environment variables (optional)
 export DOTFILES=$HOME/.dotfiles
-export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,github-copilot,gitconfig,opencode"
+export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,gitconfig,opencode"
 
 # Run install script
 ./install
@@ -99,7 +98,6 @@ Each directory represents a package that can be independently stowed:
 ```
 .dotfiles/
 ├── ghostty/          # Terminal emulator
-├── github-copilot/   # GitHub Copilot CLI
 ├── gitconfig/        # Git configuration
 ├── lazygit/          # Git TUI
 ├── nvim/             # Neovim editor
