@@ -56,7 +56,7 @@ map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 -- Oil (File Explorer)
 -- ========================================================================
 map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
-map("n", "<leader>E", "<cmd>Oil --float<cr>", { desc = "Open Oil (float)" })
+map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Open Oil (float)" })
 
 -- ========================================================================
 -- Outline
@@ -196,29 +196,6 @@ map("n", "<leader>?", function() require("which-key").show({ global = false }) e
 -- Triforce
 -- ========================================================================
 map("n", "<leader>tp", function() require("triforce").show_profile() end, { desc = "Open profile" })
-
--- ========================================================================
--- OpenCode
--- ========================================================================
-map({ "n", "t" }, "<leader>oo", function() require("opencode").toggle() end, { desc = "Toggle" })
-map({ "n", "x" }, "<leader>oa", function()
-  local oc = require("opencode")
-  oc.show()
-  oc.ask("@this: ", { submit = false })
-end, { desc = "Ask" })
-map({ "n", "x" }, "<leader>os", function()
-  local oc = require("opencode")
-  oc.show()
-  oc.select()
-end, { desc = "Select action" })
-map("n", "<leader>on", function() require("opencode").command("session.new") end, { desc = "New session" })
-map("n", "<leader>ol", function() require("opencode").command("session.list") end, { desc = "List sessions" })
-map("n", "<leader>oi", function() require("opencode").command("session.interrupt") end, { desc = "Interrupt" })
-map("n", "<leader>oc", function() require("opencode").command("session.compact") end, { desc = "Compact session" })
-map("n", "<leader>ou", function() require("opencode").command("session.undo") end, { desc = "Undo" })
-map("n", "<leader>or", function() require("opencode").command("session.redo") end, { desc = "Redo" })
-map("n", "<leader>oS", function() require("opencode").command("session.share") end, { desc = "Share session" })
-map("n", "<leader>og", function() require("opencode").command("agent.cycle") end, { desc = "Cycle agent" })
 
 -- ========================================================================
 -- Krust (Rust Diagnostics)

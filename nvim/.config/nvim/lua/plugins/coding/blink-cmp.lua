@@ -3,8 +3,15 @@ return {
   opts = {
     keymap = {
       preset = "default",
-      ["<Tab>"] = { "select_next", "fallback" },
-      ["<S-Tab>"] = { "select_prev", "fallback" },
+      ["<Tab>"] = {
+        "snippet_forward",
+        "select_next",
+        function() -- sidekick next edit suggestion
+          return require("sidekick").nes_jump_or_apply()
+        end,
+        "fallback",
+      },
+      ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
     },
   },
