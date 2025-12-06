@@ -22,6 +22,10 @@ pcall(vim.keymap.del, "t", "<c-/>")
 pcall(vim.keymap.del, "t", "<c-_>")
 pcall(vim.keymap.del, "t", "<esc><esc>")
 
+-- Remove LazyVim's explorer keymaps (using nvim-tree instead)
+pcall(vim.keymap.del, "n", "<leader>fe")
+pcall(vim.keymap.del, "n", "<leader>fE")
+
 -- ========================================================================
 -- Window Navigation
 -- ========================================================================
@@ -158,13 +162,18 @@ end, { desc = "Git commits" })
 map("n", "<leader>gt", function()
   Snacks.picker.git_status()
 end, { desc = "Git status" })
+-- ========================================================================
+-- FFF File Finder
+-- ========================================================================
 map("n", "<leader>ff", function()
-  Snacks.picker.files()
-end, { desc = "Find files" })
+  require("fff").find_files()
+end, { desc = "FFF Find files" })
+map("n", "<leader>fF", function()
+  require("fff").find_in_git_root()
+end, { desc = "FFF Find files (git root)" })
 map("n", "<leader>fa", function()
-  local root = vim.fs.root(0, { ".git" })
-  Snacks.picker.files({ cwd = root, hidden = true, no_ignore = true })
-end, { desc = "Find all files from git root" })
+  require("fff").find_in_git_root()
+end, { desc = "FFF Find all files (git root)" })
 
 -- LSP Symbol Search
 -- ========================================================================
