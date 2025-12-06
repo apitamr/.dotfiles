@@ -1,7 +1,7 @@
 return {
   {
     "hedyhli/outline.nvim",
-    lazy = false,
+    lazy = true,
     opts = {
       outline_window = {
         position = "left",
@@ -17,25 +17,6 @@ return {
     },
     config = function(_, opts)
       require("outline").setup(opts)
-
-      -- Auto-open outline when opening a file
-      vim.api.nvim_create_autocmd("BufReadPost", {
-        callback = function()
-          -- Skip special buffers
-          local buftype = vim.bo.buftype
-          local filetype = vim.bo.filetype
-          if buftype ~= "" or filetype == "Outline" or filetype == "" then
-            return
-          end
-          -- Defer to ensure LSP is attached
-          vim.defer_fn(function()
-            local outline = require("outline")
-            if not outline.is_open() then
-              vim.cmd("OutlineOpen")
-            end
-          end, 100)
-        end,
-      })
 
       -- Auto-close outline when it's the last window
       vim.api.nvim_create_autocmd("BufEnter", {
