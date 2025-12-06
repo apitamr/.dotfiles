@@ -1,16 +1,6 @@
 return {
   {
     "stevearc/conform.nvim",
-    keys = {
-      {
-        "<leader>fm",
-        function()
-          require("conform").format({ lsp_fallback = true })
-        end,
-        mode = { "n", "v" },
-        desc = "Format file",
-      },
-    },
     opts = {
       -- Disable format on save (use <leader>fm for manual formatting)
       format_on_save = false,

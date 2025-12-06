@@ -34,3 +34,11 @@ vim.api.nvim_create_autocmd("UIEnter", {
     vim.defer_fn(set_border_colors, 100)
   end,
 })
+
+-- Disable auto comment continuation on new line (enforce for all filetypes)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})

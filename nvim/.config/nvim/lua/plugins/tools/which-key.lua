@@ -16,13 +16,4 @@ return {
       { "<leader>x", group = false, hidden = true },
     },
   },
-  keys = {
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps",
-    },
-  },
 }

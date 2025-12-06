@@ -32,3 +32,6 @@ vim.opt.fillchars:append({
 -- Timeout settings
 vim.opt.timeoutlen = 300  -- faster which-key popup
 vim.opt.ttimeoutlen = 0
+
+-- Disable auto comment continuation on new line
+vim.opt.formatoptions:remove({ "c", "r", "o" })
