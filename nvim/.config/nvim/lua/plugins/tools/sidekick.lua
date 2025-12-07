@@ -2,10 +2,13 @@ return {
   "folke/sidekick.nvim",
   event = "VeryLazy",
   opts = {
+    nes = {
+      enabled = false,
+    },
     cli = {
       mux = {
         backend = "tmux", -- or "zellij" if you use that
-        enabled = true,
+        enabled = false, -- disable session persistence (closes CLI when vim exits)
       },
       default = "opencode", -- use opencode as default CLI tool
       win = {
