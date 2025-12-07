@@ -14,6 +14,6 @@ return {
     },
     bold = false,
     italics = false,
-    transparent = false,
+    transparent = true,
   },
 }
