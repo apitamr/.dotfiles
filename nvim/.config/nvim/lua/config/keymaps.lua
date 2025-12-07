@@ -43,7 +43,20 @@ map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<leader>x", function()
+  -- Check if this is the last non-oil buffer
+  local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+  local non_oil_bufs = vim.tbl_filter(function(buf)
+    return vim.bo[buf.bufnr].filetype ~= "oil"
+  end, bufs)
+
   Snacks.bufdelete()
+
+  -- If we just closed the last buffer, open Oil
+  if #non_oil_bufs <= 1 then
+    vim.schedule(function()
+      require("oil").open()
+    end)
+  end
 end, { desc = "Close buffer", nowait = true })
 
 -- ========================================================================

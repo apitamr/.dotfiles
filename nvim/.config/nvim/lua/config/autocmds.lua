@@ -42,3 +42,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
+
+-- Open Oil automatically when Neovim starts with no file arguments
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    -- Check if no arguments were passed (or only a directory)
+    if vim.fn.argc() == 0 then
+      require("oil").open()
+    end
+  end,
+})

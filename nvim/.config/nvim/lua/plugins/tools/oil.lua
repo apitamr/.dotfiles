@@ -20,8 +20,32 @@ return {
         border = "rounded",
       },
       keymaps = {
-        ["q"] = "actions.close",
-        ["<Esc>"] = "actions.close",
+        ["q"] = {
+          callback = function()
+            -- Only close if there's another buffer to return to
+            local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+            local non_oil_bufs = vim.tbl_filter(function(buf)
+              return vim.bo[buf.bufnr].filetype ~= "oil"
+            end, bufs)
+            if #non_oil_bufs > 0 then
+              require("oil.actions").close.callback()
+            end
+          end,
+          desc = "Close oil if other buffers exist",
+        },
+        ["<Esc>"] = {
+          callback = function()
+            -- Only close if there's another buffer to return to
+            local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+            local non_oil_bufs = vim.tbl_filter(function(buf)
+              return vim.bo[buf.bufnr].filetype ~= "oil"
+            end, bufs)
+            if #non_oil_bufs > 0 then
+              require("oil.actions").close.callback()
+            end
+          end,
+          desc = "Close oil if other buffers exist",
+        },
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
         ["<C-v>"] = "actions.select_vsplit",
