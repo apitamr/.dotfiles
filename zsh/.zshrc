@@ -1,7 +1,10 @@
 # ─── Auto-start Tmux ────────────────────────────────────────────────────────
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
-#     tmux attach -t default || tmux new -s default
-# fi
+# Only auto-start in Ghostty (skip IDEs like VS Code, Zed, JetBrains)
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+    tmux attach -t default || tmux new -s default
+  fi
+fi
 
 # ─── Oh My Zsh Configuration ────────────────────────────────────────────────
 export ZSH="$HOME/.oh-my-zsh"
