@@ -1,7 +1,7 @@
 # ─── Auto-start Tmux ────────────────────────────────────────────────────────
-if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
-    tmux attach -t default || tmux new -s default
-fi
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
+#     tmux attach -t default || tmux new -s default
+# fi
 
 # ─── Oh My Zsh Configuration ────────────────────────────────────────────────
 export ZSH="$HOME/.oh-my-zsh"

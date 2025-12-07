@@ -3,8 +3,12 @@ tap "oven-sh/bun"
 brew "git"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Cross-platform make
 brew "cmake"
+# Documentation for CMake
+brew "cmake-docs"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # Like neofetch, but much faster because written mostly in C
@@ -13,6 +17,8 @@ brew "fastfetch"
 brew "fd"
 # GitHub command-line tool
 brew "gh"
+# Post-modern modal text editor
+brew "helix"
 # Improved top (interactive process viewer)
 brew "htop"
 # Tools and libraries to manipulate images in many formats
@@ -29,6 +35,8 @@ brew "opencode"
 brew "openconnect"
 # Fast, disk space efficient package manager
 brew "pnpm"
+# Object-relational database system
+brew "postgresql@16", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Cross-shell prompt for astronauts
@@ -47,6 +55,10 @@ brew "zsh-syntax-highlighting"
 brew "oven-sh/bun/bun"
 # Allows connection to a computer remotely
 cask "anydesk"
+# Terminal-based AI coding assistant
+cask "claude-code"
+# Database manager
+cask "dataflare"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
