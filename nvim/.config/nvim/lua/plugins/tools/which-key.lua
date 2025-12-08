@@ -9,7 +9,7 @@ return {
       { "<leader>d", group = "diagnostics" },
       { "<leader>m", group = "markdown/marks" },
       { "<leader>u", group = "utils" },
-      { "<leader>o", group = "opencode" },
+      { "<leader>o", group = "oil" },
       { "<leader>p", group = "paste" },
       { "<leader>t", group = "triforce" },
       -- Completely disable <leader>x group so our close buffer mapping works instantly
