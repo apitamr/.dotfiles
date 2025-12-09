@@ -52,3 +52,22 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+-- Auto-delete empty/unnamed buffers when leaving them
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function(args)
+    local buf = args.buf
+    -- Check if buffer is unnamed and empty
+    if vim.api.nvim_buf_get_name(buf) == "" and vim.bo[buf].buftype == "" then
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      if #lines == 1 and lines[1] == "" then
+        -- Schedule deletion to avoid issues during buffer switch
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(buf) then
+            pcall(vim.api.nvim_buf_delete, buf, { force = true })
+          end
+        end)
+      end
+    end
+  end,
+})
