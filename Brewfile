@@ -17,8 +17,6 @@ brew "fastfetch"
 brew "fd"
 # GitHub command-line tool
 brew "gh"
-# Post-modern modal text editor
-brew "helix"
 # Improved top (interactive process viewer)
 brew "htop"
 # Tools and libraries to manipulate images in many formats
@@ -35,10 +33,10 @@ brew "opencode"
 brew "openconnect"
 # Fast, disk space efficient package manager
 brew "pnpm"
-# Object-relational database system
-brew "postgresql@16", restart_service: :changed
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -47,6 +45,8 @@ brew "stow"
 brew "tmux"
 # Watch files and take action when they change
 brew "watchman"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
@@ -96,4 +96,4 @@ cask "thebrowsercompany-dia"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Multiplayer code editor
-cask "zed"
+cask "zed@preview"
