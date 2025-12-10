@@ -20,6 +20,9 @@ local function set_border_colors()
   vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#23262c", bg = "NONE" })
   vim.api.nvim_set_hl(0, "VertSplit", { fg = "#23262c", bg = "NONE" })
   vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#23262c", bg = "NONE" })
+  -- LSP float with solid background
+  vim.api.nvim_set_hl(0, "LspFloat", { bg = "#1a1a1a" })
+  vim.api.nvim_set_hl(0, "LspFloatBorder", { bg = "#1a1a1a", fg = "#5c5c5c" })
 end
 
 -- Set on colorscheme change
@@ -32,6 +35,37 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 vim.api.nvim_create_autocmd("UIEnter", {
   callback = function()
     vim.defer_fn(set_border_colors, 100)
+  end,
+})
+
+-- LSP float window styling (solid background, border)
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    -- Only override once
+    if vim.g.lsp_float_override then
+      return
+    end
+    vim.g.lsp_float_override = true
+
+    vim.diagnostic.config({
+      float = { border = "rounded" },
+    })
+
+    local orig = vim.lsp.util.open_floating_preview
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+      opts = opts or {}
+      opts.border = opts.border or "rounded"
+      opts.focus_id = "lsp_float"
+      local bufnr, winnr = orig(contents, syntax, opts, ...)
+      if winnr and vim.api.nvim_win_is_valid(winnr) then
+        vim.wo[winnr].winblend = 0
+        vim.wo[winnr].winhighlight = "Normal:LspFloat,FloatBorder:LspFloatBorder"
+        -- Auto focus the float window
+        vim.api.nvim_set_current_win(winnr)
+      end
+      return bufnr, winnr
+    end
   end,
 })
 

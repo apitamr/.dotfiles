@@ -2,8 +2,8 @@
 theme = kanso-zen
 
 # Window
-# background-opacity = 0.85
-# background-blur = true
+background-opacity = 0.85
+background-blur = true
 # background-image = ~/.dotfiles/images/anime-city.jpg << issue vram usage
 # background-image-fit = cover
 # background-image-opacity = 0.08

@@ -5,7 +5,7 @@ return {
     keymap = false, -- Keymap defined in keymaps.lua
     float_win = {
       border = "rounded",
-      auto_focus = false,
+      auto_focus = true,
     },
   },
 }

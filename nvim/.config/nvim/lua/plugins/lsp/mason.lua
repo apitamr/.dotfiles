@@ -11,6 +11,7 @@ return {
         "css-lsp",
         "docker-compose-language-service",
         "docker-language-server",
+        "gopls",
         "html-lsp",
         "intelephense",
         "json-lsp",
@@ -26,6 +27,7 @@ return {
 
         -- Formatters & Linters
         "biome",
+        "goimports",
         "htmlhint",
         "shfmt",
         "stylua",
