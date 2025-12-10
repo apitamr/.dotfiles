@@ -13,12 +13,8 @@ brew "cmake-docs"
 brew "cocoapods"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # GitHub command-line tool
 brew "gh"
-# Improved top (interactive process viewer)
-brew "htop"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Simple terminal UI for git commands
@@ -35,8 +31,6 @@ brew "openconnect"
 brew "pnpm"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
