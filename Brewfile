@@ -1,16 +1,8 @@
 tap "oven-sh/bun"
 # Distributed revision control system
 brew "git"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Cross-platform make
-brew "cmake"
-# Documentation for CMake
-brew "cmake-docs"
-# Dependency manager for Cocoa projects
-brew "cocoapods"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
 # GitHub command-line tool
@@ -29,8 +21,6 @@ brew "opencode"
 brew "openconnect"
 # Fast, disk space efficient package manager
 brew "pnpm"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -71,8 +61,6 @@ cask "gitkraken"
 cask "google-chrome"
 # Chromium-based web browser
 cask "helium-browser"
-# Open source API development ecosystem
-cask "hoppscotch"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Knowledge base that works on top of a local folder of plain text Markdown files
