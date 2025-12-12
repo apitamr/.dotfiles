@@ -37,6 +37,8 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ─── Docker CLI Completion ──────────────────────────────────────────────────
-fpath=(/Users/strygwyr/.docker/completions $fpath)
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/apitamr/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
+# End of Docker CLI completions
