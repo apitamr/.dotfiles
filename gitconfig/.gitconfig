@@ -13,3 +13,5 @@
   rebase = true
 [include]
 	path = ~/.dotfiles/gitconfig/.gitconfig-work
+[credential "https://codeberg.org"]
+	provider = generic
