@@ -12,8 +12,8 @@ return {
       light = "saturated",
       dark = "default",
     },
-    bold = false,
+    bold = true,
     italics = false,
-    transparent = true,
+    transparent = false,
   },
 }

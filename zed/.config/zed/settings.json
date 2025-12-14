@@ -109,30 +109,30 @@
 
   // MCP Context Servers
   "context_servers": {
-    "atlassian": {
-      "enabled": true,
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
-    },
+    // "atlassian": {
+    //   "enabled": true,
+    //   "command": "npx",
+    //   "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
+    // },
     "chrome-devtools": {
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
     },
-    "figma": {
-      "enabled": true,
-      "command": "npx",
-      "args": [
-        "-y",
-        "figma-developer-mcp",
-        "--figma-api-key=YOUR_FIGMA_API_KEY",
-        "--stdio"
-      ]
-    },
-    "laravel-boost": {
-      "enabled": true,
-      "command": "php",
-      "args": ["artisan", "boost:mcp"]
-    }
+    // "figma": {
+    //   "enabled": true,
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "figma-developer-mcp",
+    //     "--figma-api-key=YOUR_FIGMA_API_KEY",
+    //     "--stdio"
+    //   ]
+    // },
+    // "laravel-boost": {
+    //   "enabled": true,
+    //   "command": "php",
+    //   "args": ["artisan", "boost:mcp"]
+    // }
   },
 
   // Language Servers

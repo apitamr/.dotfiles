@@ -24,14 +24,14 @@ export VISUAL="nvim"
 
 # ─── Path Configuration ─────────────────────────────────────────────────────
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 export PATH="/Users/strygwyr/.bun/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 . "$HOME/.goup/env"
 
-# ─── ASDF Version Manager (Homebrew) ────────────────────────────────────────
-. $(brew --prefix asdf)/libexec/asdf.sh
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio
+
 # ─── Zsh Plugins ────────────────────────────────────────────────────────────
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
