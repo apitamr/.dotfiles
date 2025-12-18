@@ -3,6 +3,12 @@
 
 {
   // Appearance
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "git_panel": {
+    "tree_view": true
+  },
   "always_treat_brackets_as_autoclosed": true,
   "colorize_brackets": true,
   "theme": {
@@ -13,7 +19,7 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Catppuccin Latte"
   },
   "ui_font_family": "JetBrains Mono",
   "ui_font_size": 15.0,
@@ -95,6 +101,7 @@
 
   // AI & Agent
   "agent": {
+    "notify_when_agent_waiting": "all_screens",
     "default_profile": "ask",
     "default_model": {
       "provider": "GLM 4.6",

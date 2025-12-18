@@ -13,8 +13,8 @@
     "bindings": {
       "ctrl-tab": "menu::SelectPrevious",
       "tab": "menu::SelectNext",
-      "cmd-`": "editor::ToggleFocus"
-    }
+      "cmd-`": "editor::ToggleFocus",
+    },
   },
 
   // ============================================================================
@@ -24,9 +24,16 @@
     "context": "Workspace",
     "bindings": {
       "cmd-w": null,
-      "alt-shift-g": "git_panel::ToggleFocus"
+      // "alt-shift-g": "git_panel::ToggleFocus",
+      "ctrl-shift-g": [
+        "task::Spawn",
+        {
+          "task_name": "LazyGit",
+          "reveal_target": "center",
+        },
+      ],
       // "shift shift": "file_finder::Toggle"
-    }
+    },
   },
   {
     "context": "Workspace || Editor",
@@ -34,8 +41,8 @@
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
-    }
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
   },
   // ============================================================================
   // PROJECT PANEL
@@ -43,20 +50,20 @@
   {
     "context": "ProjectPanel",
     "bindings": {
-      "cmd-enter": "project_panel::Rename"
-    }
+      "cmd-enter": "project_panel::Rename",
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
-      "m": "project_panel::CollapseAllEntries"
-    }
+      "m": "project_panel::CollapseAllEntries",
+    },
   },
   {
     "context": "ProjectPanel",
     "bindings": {
-      "space e": "project_panel::ToggleFocus"
-    }
+      "space e": "project_panel::ToggleFocus",
+    },
   },
 
   // ============================================================================
@@ -70,14 +77,14 @@
       "tab": "editor::ContextMenuNext",
       "ctrl-n": "editor::ContextMenuNext",
       "pageup": "editor::ContextMenuFirst",
-      "pagedown": "editor::ContextMenuLast"
-    }
+      "pagedown": "editor::ContextMenuLast",
+    },
   },
   {
     "context": "(Editor && edit_prediction)",
     "bindings": {
-      "tab": null
-    }
+      "tab": null,
+    },
   },
 
   // ============================================================================
@@ -86,45 +93,42 @@
   {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
-      "j j": "vim::NormalBefore"
-    }
+      "j j": "vim::NormalBefore",
+    },
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "shift-s": ["vim::PushAddSurrounds", {}]
-    }
+      "shift-s": ["vim::PushAddSurrounds", {}],
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space e": "project_panel::ToggleFocus"
-    }
+      "space e": "project_panel::ToggleFocus",
+    },
   },
   {
     "context": "Editor && !VimCount && (vim_mode == normal || vim_mode == visual)",
     "bindings": {
       "j": ["vim::Down", { "display_lines": true }],
-      "k": ["vim::Up", { "display_lines": true }]
-    }
+      "k": ["vim::Up", { "display_lines": true }],
+    },
   },
   {
-    "context": "(Editor && vim_mode == normal)",
+    "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space d s": "diagnostics::DeployCurrentFile"
-    }
+      "space d s": "diagnostics::DeployCurrentFile",
+      "space d l": "diagnostics::Deploy",
+      "space x": "pane::CloseActiveItem",
+      "space c f": "editor::Format",
+      "space g g": [
+        "task::Spawn",
+        {
+          "task_name": "LazyGit",
+          "reveal_target": "center",
+        },
+      ],
+    },
   },
-  {
-    "context": "(Editor && vim_mode == normal)",
-    "bindings": {
-      "space d l": "diagnostics::Deploy"
-    }
-  },
-  // {
-  //   "context": "Pane",
-  //   "bindings": {
-  //     "tab": "pane::ActivateNextItem",
-  //     "ctrl-shift-tab": "pane::ActivatePrevItem"
-  //   }
-  // }
 ]

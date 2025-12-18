@@ -4,16 +4,13 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    background = {
-      light = "pearl",
-      dark = "zen",
-    },
+    background = "zen",
     foreground = {
       light = "saturated",
-      dark = "default",
+      dark = "saturated",  -- default, saturated
     },
     bold = true,
     italics = false,
-    transparent = false,
+    transparent = true,
   },
 }
