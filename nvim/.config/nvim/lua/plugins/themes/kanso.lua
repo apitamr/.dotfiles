@@ -9,7 +9,7 @@ return {
       light = "saturated",
       dark = "saturated",  -- default, saturated
     },
-    bold = true,
+    bold = false,
     italics = false,
     transparent = true,
   },

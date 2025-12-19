@@ -2,11 +2,12 @@
 theme = kanso-zen
 
 # Window
-background-opacity = 0.75
+background-opacity = 0.85
+# background-blur = macos-glass-regular
 background-blur = true
-background-image = ~/.dotfiles/images/anime-city.jpg
-background-image-fit = cover
-background-image-opacity = 0.08
+# background-image = ~/.dotfiles/images/anime-city.jpg
+# background-image-fit = cover
+# background-image-opacity = 0.08
 window-width = 110
 window-height = 27
 window-padding-y = 2
