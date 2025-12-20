@@ -14,7 +14,7 @@ pcall(vim.keymap.del, "n", "<c-/>")
 pcall(vim.keymap.del, "n", "<c-_>")
 pcall(vim.keymap.del, "t", "<c-/>")
 pcall(vim.keymap.del, "t", "<c-_>")
-pcall(vim.keymap.del, "t", "<esc><esc>")
+-- pcall(vim.keymap.del, "t", "<esc><esc>") -- Keep this for our terminal mapping
 pcall(vim.keymap.del, "n", "<leader>fe")
 pcall(vim.keymap.del, "n", "<leader>fE")
 
@@ -218,3 +218,9 @@ map("n", "<leader>k", function() require("krust").render() end, { desc = "Rust d
 -- Context
 -- ========================================================================
 map({ "n", "v" }, "<leader>ac", function() require("context").pick() end, { desc = "Context picker" })
+
+-- ========================================================================
+-- Terminal
+-- ========================================================================
+map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Toggle terminal" })
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

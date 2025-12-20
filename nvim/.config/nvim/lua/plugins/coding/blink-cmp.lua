@@ -1,6 +1,12 @@
 return {
   "saghen/blink.cmp",
   opts = {
+    sources = {
+      default = { "buffer" },
+      providers = {
+        path = { enabled = false },
+      },
+    },
     keymap = {
       preset = "default",
       ["<Tab>"] = {
