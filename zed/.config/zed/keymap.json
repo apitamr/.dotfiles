@@ -24,14 +24,14 @@
     "context": "Workspace",
     "bindings": {
       "cmd-w": null,
-      // "alt-shift-g": "git_panel::ToggleFocus",
-      "ctrl-shift-g": [
-        "task::Spawn",
-        {
-          "task_name": "LazyGit",
-          "reveal_target": "center",
-        },
-      ],
+      "alt-shift-g": "git_panel::ToggleFocus",
+      // "ctrl-shift-g": [
+      //   "task::Spawn",
+      //   {
+      //     "task_name": "LazyGit",
+      //     "reveal_target": "center",
+      //   },
+      // ],
       // "shift shift": "file_finder::Toggle"
     },
   },
@@ -100,12 +100,7 @@
     "context": "vim_mode == visual",
     "bindings": {
       "shift-s": ["vim::PushAddSurrounds", {}],
-    },
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "space e": "project_panel::ToggleFocus",
+      "space /": "editor::ToggleComments",
     },
   },
   {
@@ -122,13 +117,15 @@
       "space d l": "diagnostics::Deploy",
       "space x": "pane::CloseActiveItem",
       "space c f": "editor::Format",
-      "space g g": [
-        "task::Spawn",
-        {
-          "task_name": "LazyGit",
-          "reveal_target": "center",
-        },
-      ],
+      "space /": "editor::ToggleComments",
+      "space e": "project_panel::ToggleFocus",
+      // "space g g": [
+      //   "task::Spawn",
+      //   {
+      //     "task_name": "LazyGit",
+      //     "reveal_target": "center",
+      //   },
+      // ],
     },
   },
 ]
