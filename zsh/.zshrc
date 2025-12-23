@@ -25,6 +25,7 @@ export VISUAL="nvim"
 # Path Configuration
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
 export PATH="/Users/strygwyr/.bun/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.goup/env"
 
