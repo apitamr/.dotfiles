@@ -4,41 +4,33 @@
 {
   // Appearance
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "git_panel": {
-    "tree_view": true
+    "tree_view": true,
   },
   "always_treat_brackets_as_autoclosed": true,
   "colorize_brackets": true,
   "theme": {
     "mode": "dark",
     "light": "Kanso Zen (No italics)",
-    "dark": "Kanso Zen (No italics)"
+    "dark": "Kanso Zen (No italics)",
   },
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Catppuccin Latte"
+    "dark": "Catppuccin Latte",
   },
   "ui_font_family": "JetBrains Mono",
-  "ui_font_size": 15.0,
-  "ui_font_weight": 400.0,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 13.0,
-  "buffer_font_weight": 600,
-  "buffer_line_height": { "custom": 1.8 },
+  "buffer_font_family": "JetBrains Mono",
   "cursor_shape": "bar",
   "scrollbar": { "show": "never" },
   "minimap": {
-    "show": "always",
-    "current_line_highlight": "all",
-    "thumb": "always",
-    "thumb_border": "full"
+    "show": "never",
   },
   "indent_guides": {
     "coloring": "indent_aware",
-    "active_line_width": 2
+    "active_line_width": 2,
   },
   "inlay_hints": { "enabled": false },
   "sticky_scroll": { "enabled": true },
@@ -46,12 +38,12 @@
   // Window & Tabs
   "use_system_window_tabs": false,
   "confirm_quit": true,
-  "title_bar": { "show_branch_icon": true },
+  "title_bar": { "show_branch_icon": true, "show_user_picture": false },
   "tab_bar": { "show_nav_history_buttons": false },
   "tabs": { "file_icons": true },
   "toolbar": {
     "code_actions": false,
-    "quick_actions": false
+    "quick_actions": false,
   },
 
   // Editor Behavior
@@ -62,7 +54,7 @@
   "soft_wrap": "editor_width",
   "extend_comment_on_newline": false,
   "completion_menu_scrollbar": "always",
-  "restore_on_startup": "none",
+  "restore_on_startup": "launchpad",
   "hide_mouse": "on_typing_and_movement",
   "show_edit_predictions": false,
 
@@ -74,20 +66,20 @@
     "hide_root": true,
     "auto_fold_dirs": false,
     "file_icons": true,
-    "folder_icons": true
+    "folder_icons": true,
   },
 
   // Terminal
   "terminal": {
     "dock": "bottom",
-    "font_family": "JetBrainsMono Nerd Font Mono",
-    "toolbar": { "breadcrumbs": true }
+    "font_family": "JetBrainsMono Nerd Font",
+    "toolbar": { "breadcrumbs": true },
   },
 
   // Git & Diagnostics
   "git": {
     "blame": { "show_avatar": true },
-    "inline_blame": { "enabled": true }
+    "inline_blame": { "enabled": true },
   },
   "diagnostics": {
     "inline": {
@@ -95,8 +87,8 @@
       "update_debounce_ms": 150,
       "padding": 2,
       "min_column": 80,
-      "max_severity": "info"
-    }
+      "max_severity": "info",
+    },
   },
 
   // AI & Agent
@@ -105,55 +97,35 @@
     "default_profile": "ask",
     "default_model": {
       "provider": "GLM 4.6",
-      "model": "glm-4.6"
+      "model": "glm-4.6",
     },
     "inline_assistant_model": {
       "provider": "ollama",
-      "model": "glm-4.6:cloud"
-    }
+      "model": "glm-4.6:cloud",
+    },
   },
   "features": { "edit_prediction_provider": "zed" },
 
   // MCP Context Servers
   "context_servers": {
-    // "atlassian": {
-    //   "enabled": true,
-    //   "command": "npx",
-    //   "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
-    // },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": ["chrome-devtools-mcp@latest"],
     },
-    // "figma": {
-    //   "enabled": true,
-    //   "command": "npx",
-    //   "args": [
-    //     "-y",
-    //     "figma-developer-mcp",
-    //     "--figma-api-key=YOUR_FIGMA_API_KEY",
-    //     "--stdio"
-    //   ]
-    // },
-    // "laravel-boost": {
-    //   "enabled": true,
-    //   "command": "php",
-    //   "args": ["artisan", "boost:mcp"]
-    // }
   },
 
   // Language Servers
   "languages": {
     "PHP": {
-      "language_servers": ["intelephense", "!phpactor", "..."]
-    }
+      "language_servers": ["intelephense", "!phpactor", "..."],
+    },
   },
   "lsp": {
     "biome": {
       "settings": {
         "config_path": "./biome.jsonc",
-        "require_config_file": true
-      }
+        "require_config_file": true,
+      },
     },
     "intelephense": {
       "initialization_options": {
@@ -163,15 +135,15 @@
         "codeAction": { "enable": true },
         "diagnostics": {
           "enable": true,
-          "undefinedProperties": true
-        }
-      }
-    }
+          "undefinedProperties": true,
+        },
+      },
+    },
   },
 
   // Telemetry
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
-  }
+    "metrics": false,
+  },
 }

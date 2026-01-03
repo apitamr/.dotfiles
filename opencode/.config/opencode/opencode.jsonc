@@ -12,28 +12,10 @@
 
   // MCP servers
   "mcp": {
-    // "atlassian-mcp-server": {
-    //   "type": "local",
-    //   "command": ["npx", "-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"]
-    // },
     "chrome-devtools": {
       "type": "local",
       "command": ["npx", "chrome-devtools-mcp@latest"]
     }
-    // "laravel-boost": {
-    //   "type": "local",
-    //   "command": ["php", "artisan", "boost:mcp"]
-    // },
-    // "figma": {
-    //   "type": "local",
-    //   "command": [
-    //     "npx",
-    //     "-y",
-    //     "figma-developer-mcp",
-    //     "--figma-api-key=${FIGMA_API_KEY}",
-    //     "--stdio"
-    //   ]
-    // }
   },
 
   "permission": {
