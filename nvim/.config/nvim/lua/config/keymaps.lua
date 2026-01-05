@@ -57,7 +57,35 @@ map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 -- ========================================================================
 -- Buffer Navigation
 -- ========================================================================
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "New Buffer" })
+map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "New Buffer" })
+map("n", "<leader>bd", function()
+  local current_win = vim.api.nvim_get_current_win()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local is_floating = vim.api.nvim_win_get_config(current_win).relative ~= ""
+  local is_oil = vim.bo[current_buf].filetype == "oil"
+
+  -- If in floating Oil, close the float first
+  if is_floating and is_oil then
+    vim.api.nvim_win_close(current_win, true)
+  end
+
+  -- Close all non-Oil buffers (including existing Oil buffers to get fresh one)
+  local bufs = vim.api.nvim_list_bufs()
+  for _, buf in ipairs(bufs) do
+    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+      local name = vim.api.nvim_buf_get_name(buf)
+      local ft = vim.bo[buf].filetype
+      if ft ~= "oil" and not name:match("^oil://") then
+        pcall(vim.api.nvim_buf_delete, buf, { force = true })
+      end
+    end
+  end
+
+  -- Always open fresh Oil
+  vim.schedule(function()
+    require("oil").open(vim.fn.getcwd())
+  end)
+end, { desc = "Close All Buffers" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
@@ -88,7 +116,11 @@ map("v", "<leader>/", "gc", { desc = "Toggle Comment", remap = true })
 -- Oil (File Explorer)
 -- ========================================================================
 map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
-map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil Float" })
+map("n", "<leader>o", function()
+  if vim.bo.filetype ~= "oil" then
+    require("oil").open_float()
+  end
+end, { desc = "Oil Float" })
 
 -- ========================================================================
 -- Outline

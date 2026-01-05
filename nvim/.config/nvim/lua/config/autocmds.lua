@@ -77,12 +77,27 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Oil minimal style (no extra padding)
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter" }, {
+  pattern = { "oil", "oil://*" },
+  callback = function()
+    vim.schedule(function()
+      vim.opt_local.signcolumn = "no"
+      vim.opt_local.foldcolumn = "0"
+      vim.opt_local.statuscolumn = ""
+      vim.opt_local.numberwidth = 1
+    end)
+  end,
+})
+
 -- Open Oil automatically when Neovim starts with no file arguments
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     -- Check if no arguments were passed (or only a directory)
     if vim.fn.argc() == 0 then
-      require("oil").open()
+      vim.schedule(function()
+        require("oil").open(vim.fn.getcwd())
+      end)
     end
   end,
 })

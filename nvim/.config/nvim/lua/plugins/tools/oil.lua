@@ -13,6 +13,14 @@ return {
           return vim.startswith(name, ".")
         end,
       },
+      win_options = {
+        signcolumn = "no",
+        number = true,
+        relativenumber = true,
+        numberwidth = 1,
+        foldcolumn = "0",
+        statuscolumn = "",
+      },
       float = {
         padding = 2,
         max_width = 100,
@@ -35,7 +43,14 @@ return {
         },
         ["<Esc>"] = {
           callback = function()
-            -- Only close if there's another buffer to return to
+            local win = vim.api.nvim_get_current_win()
+            local is_floating = vim.api.nvim_win_get_config(win).relative ~= ""
+            -- Always close floating Oil
+            if is_floating then
+              vim.api.nvim_win_close(win, true)
+              return
+            end
+            -- For non-floating, only close if there's another buffer
             local bufs = vim.fn.getbufinfo({ buflisted = 1 })
             local non_oil_bufs = vim.tbl_filter(function(buf)
               return vim.bo[buf.bufnr].filetype ~= "oil"
@@ -44,7 +59,7 @@ return {
               require("oil.actions").close.callback()
             end
           end,
-          desc = "Close oil if other buffers exist",
+          desc = "Close oil (always for float)",
         },
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
