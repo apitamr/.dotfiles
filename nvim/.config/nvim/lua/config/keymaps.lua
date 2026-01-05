@@ -176,6 +176,14 @@ map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle git blame" })
 map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Open commit URL" })
 map("n", "<leader>gc", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy commit SHA" })
 map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
+map("n", "<leader>gf", function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file ~= "" then
+    Snacks.picker.git_log_file({ file = file })
+  else
+    vim.notify("No file in current buffer", vim.log.levels.WARN)
+  end
+end, { desc = "Git file history" })
 map("n", "[c", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Previous git hunk" })
 map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next git hunk" })
 

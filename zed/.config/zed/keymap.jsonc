@@ -130,5 +130,10 @@
       // Git (commented out)
       // "space g g": ["task::Spawn", { "task_name": "LazyGit", "reveal_target": "center" }]
     }
+  },
+  {
+    "bindings": {
+      "alt-cmd-0": "zed::ResetAllZoom"
+    }
   }
 ]
