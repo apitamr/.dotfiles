@@ -25,6 +25,25 @@ map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
+map("n", "<leader>wq", function()
+  -- Close all windows except Oil buffers
+  local wins = vim.api.nvim_list_wins()
+  for _, win in ipairs(wins) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local ft = vim.bo[buf].filetype
+    if ft ~= "oil" then
+      local ok, _ = pcall(vim.api.nvim_win_close, win, false)
+      if not ok then
+        -- Window might be the last one or have unsaved changes, try force close
+        pcall(vim.api.nvim_win_close, win, true)
+      end
+    end
+  end
+  -- If no windows left, open Oil
+  if #vim.api.nvim_list_wins() == 0 or (#vim.api.nvim_list_wins() == 1 and vim.bo.filetype ~= "oil") then
+    require("oil").open()
+  end
+end, { desc = "Close all windows" })
 
 -- ========================================================================
 -- General Editing
@@ -38,7 +57,7 @@ map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 -- ========================================================================
 -- Buffer Navigation
 -- ========================================================================
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer" })
+map("n", "<leader>b", "<cmd>enew<CR>", { desc = "New Buffer" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
@@ -57,19 +76,19 @@ map("n", "<leader>x", function()
       require("oil").open()
     end)
   end
-end, { desc = "Close buffer", nowait = true })
+end, { desc = "Close Buffer", nowait = true })
 
 -- ========================================================================
 -- Comments
 -- ========================================================================
-map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
-map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
+map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
+map("v", "<leader>/", "gc", { desc = "Toggle Comment", remap = true })
 
 -- ========================================================================
 -- Oil (File Explorer)
 -- ========================================================================
 map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
-map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Open Oil (float)" })
+map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil Float" })
 
 -- ========================================================================
 -- Outline
@@ -81,7 +100,7 @@ map("n", "<leader>e", function()
   else
     outline.open()
   end
-end, { desc = "Focus Outline" })
+end, { desc = "Outline" })
 map("n", "<C-n>", "<cmd>Outline<cr>", { desc = "Toggle Outline" })
 
 -- ========================================================================
@@ -89,7 +108,7 @@ map("n", "<C-n>", "<cmd>Outline<cr>", { desc = "Toggle Outline" })
 -- ========================================================================
 map("n", "<leader>fw", function()
   Snacks.picker.grep()
-end, { desc = "Live grep" })
+end, { desc = "Grep" })
 map("v", "<leader>fw", function()
   local _, start_row, start_col, _ = unpack(vim.fn.getpos("v"))
   local _, end_row, end_col, _ = unpack(vim.fn.getpos("."))
@@ -112,41 +131,41 @@ map("v", "<leader>fw", function()
   vim.schedule(function()
     Snacks.picker.grep({ search = selected_text })
   end)
-end, { desc = "Search selected text" })
-map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find buffers" })
-map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help page" })
-map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Find oldfiles" })
+end, { desc = "Grep Selection" })
+map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help" })
+map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent Files" })
 map("n", "<leader>fO", function()
   vim.v.oldfiles = {}
   vim.notify("Oldfiles cleared", vim.log.levels.INFO)
-end, { desc = "Clear oldfiles" })
-map("n", "<leader>fz", function() Snacks.picker.grep_buffers() end, { desc = "Find in current buffer" })
-map("n", "<leader>fr", function() Snacks.picker.lsp_references() end, { desc = "Find references" })
-map("n", "<leader>cm", function() Snacks.picker.git_log() end, { desc = "Git commits" })
-map("n", "<leader>gt", function() Snacks.picker.git_status() end, { desc = "Git status" })
-map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Find marks" })
+end, { desc = "Clear Recent" })
+map("n", "<leader>fz", function() Snacks.picker.grep_buffers() end, { desc = "Grep Buffer" })
+map("n", "<leader>fr", function() Snacks.picker.lsp_references() end, { desc = "References" })
+map("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Commits" })
+map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Status" })
+map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
 
 -- ========================================================================
 -- FFF File Finder
 -- ========================================================================
-map("n", "<leader>ff", function() require("fff").find_files() end, { desc = "Find files" })
-map("n", "<leader>fF", function() require("fff").find_in_git_root() end, { desc = "Find files (git root)" })
-map("n", "<leader>fa", function() require("fff").find_in_git_root() end, { desc = "Find all files (git root)" })
+map("n", "<leader>ff", function() require("fff").find_files() end, { desc = "Files" })
+map("n", "<leader>fF", function() require("fff").find_in_git_root() end, { desc = "Files (Git Root)" })
+map("n", "<leader>fa", function() require("fff").find_in_git_root() end, { desc = "All Files" })
 
 -- ========================================================================
 -- LSP Symbol Search
 -- ========================================================================
-map("n", "gs", function() Snacks.picker.lsp_symbols() end, { desc = "Find symbols in document" })
-map("n", "gS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Find symbols in workspace" })
+map("n", "gss", function() Snacks.picker.lsp_symbols() end, { desc = "Document Symbols" })
+map("n", "gsS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols" })
 
 -- ========================================================================
 -- Copy/Paste
 -- ========================================================================
 map("v", "p", '"_dP', { desc = "Paste without yanking" })
-map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-map("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
-map({ "n", "v" }, "<leader>pp", '"+p', { desc = "Paste from system clipboard" })
-map({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete without yanking" })
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to Clipboard" })
+map("n", "<leader>Y", '"+Y', { desc = "Yank Line to Clipboard" })
+map({ "n", "v" }, "<leader>pp", '"+p', { desc = "Paste from Clipboard" })
+map({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete (No Yank)" })
 
 -- ========================================================================
 -- Text Editing
@@ -164,17 +183,17 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Go to impl
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
-map("n", "<leader>do", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer diagnostics" })
-map("n", "<leader>dl", function() Snacks.picker.diagnostics() end, { desc = "All diagnostics" })
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "Diagnostic loclist" })
+map("n", "<leader>do", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer" })
+map("n", "<leader>dl", function() Snacks.picker.diagnostics() end, { desc = "All" })
+map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "Loclist" })
 
 -- ========================================================================
 -- Git
 -- ========================================================================
-map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview git hunk" })
-map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle git blame" })
-map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Open commit URL" })
-map("n", "<leader>gc", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy commit SHA" })
+map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview Hunk" })
+map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Blame" })
+map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Blame URL" })
+map("n", "<leader>gC", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy SHA" })
 map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
 map("n", "<leader>gf", function()
   local file = vim.api.nvim_buf_get_name(0)
@@ -183,7 +202,7 @@ map("n", "<leader>gf", function()
   else
     vim.notify("No file in current buffer", vim.log.levels.WARN)
   end
-end, { desc = "Git file history" })
+end, { desc = "File History" })
 map("n", "[c", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Previous git hunk" })
 map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next git hunk" })
 
@@ -199,36 +218,36 @@ map("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor() end, { des
 -- ========================================================================
 -- Markdown (Markview)
 -- ========================================================================
-map("n", "<leader>mt", "<cmd>Markview toggle<cr>", { desc = "Toggle markdown preview" })
-map("n", "<leader>mp", "<cmd>Markview enable<cr>", { desc = "Enable markdown preview" })
-map("n", "<leader>ms", "<cmd>Markview disable<cr>", { desc = "Disable markdown preview" })
-map("n", "<leader>mh", "<cmd>Markview hybridToggle<cr>", { desc = "Toggle hybrid mode" })
-map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Toggle split view" })
+map("n", "<leader>mt", "<cmd>Markview toggle<cr>", { desc = "Toggle Preview" })
+map("n", "<leader>mp", "<cmd>Markview enable<cr>", { desc = "Enable Preview" })
+map("n", "<leader>ms", "<cmd>Markview disable<cr>", { desc = "Disable Preview" })
+map("n", "<leader>mh", "<cmd>Markview hybridToggle<cr>", { desc = "Hybrid Mode" })
+map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split View" })
 
 -- ========================================================================
 -- Miscellaneous
 -- ========================================================================
-map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update plugins" })
+map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update Plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
-map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer keymaps" })
+map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer Keymaps" })
 
 -- ========================================================================
 -- Triforce
 -- ========================================================================
-map("n", "<leader>tp", function() require("triforce").show_profile() end, { desc = "Open profile" })
+map("n", "<leader>tp", function() require("triforce").show_profile() end, { desc = "Profile" })
 
 -- ========================================================================
 -- Krust (Rust Diagnostics)
 -- ========================================================================
-map("n", "<leader>k", function() require("krust").render() end, { desc = "Rust diagnostics" })
+map("n", "<leader>k", function() require("krust").render() end, { desc = "Rust Diagnostics" })
 
 -- ========================================================================
 -- Context
 -- ========================================================================
-map({ "n", "v" }, "<leader>ac", function() require("context").pick() end, { desc = "Context picker" })
+map({ "n", "v" }, "<leader>ac", function() require("context").pick() end, { desc = "Context" })
 
 -- ========================================================================
 -- Terminal
 -- ========================================================================
-map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Toggle terminal" })
+map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Terminal" })
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
