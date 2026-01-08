@@ -2,9 +2,9 @@
 theme = kanso-zen
 
 # Window
-background-opacity = 0.85
+# background-opacity = 0.85
 # background-blur = macos-glass-regular
-background-blur = true
+# background-blur = true
 # background-image = ~/.dotfiles/images/anime-city.jpg
 # background-image-fit = cover
 # background-image-opacity = 0.08
@@ -15,6 +15,8 @@ window-padding-balance = true
 window-save-state = always
 fullscreen = false
 window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = true
 mouse-hide-while-typing = true
 
 # Working Directory
