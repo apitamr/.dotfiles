@@ -178,11 +178,11 @@ map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Stat
 map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
 
 -- ========================================================================
--- FFF File Finder
+-- File Finder
 -- ========================================================================
-map("n", "<leader>ff", function() require("fff").find_files() end, { desc = "Files" })
-map("n", "<leader>fF", function() require("fff").find_in_git_root() end, { desc = "Files (Git Root)" })
-map("n", "<leader>fa", function() require("fff").find_in_git_root() end, { desc = "All Files" })
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Files" })
+map("n", "<leader>fF", function() Snacks.picker.files({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }) end, { desc = "Files (Git Root)" })
+map("n", "<leader>fa", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "All Files" })
 
 -- ========================================================================
 -- LSP Symbol Search
