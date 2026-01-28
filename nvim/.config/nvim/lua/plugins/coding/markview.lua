@@ -1,8 +1,7 @@
 return {
   {
     "OXY2DEV/markview.nvim",
-    lazy = false, -- Recommended to load immediately for markdown files
-    ft = "markdown", -- Load only for markdown files
+    ft = "markdown",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
@@ -11,7 +10,6 @@ return {
       preview = {
         modes = { "n", "no", "c" }, -- Modes where markview is active
         hybrid_modes = { "n" }, -- Hybrid mode shows raw markdown on cursor line
-        
         -- Callbacks for when markview is attached/detached
         callbacks = {
           on_enable = function(_, win)

@@ -14,7 +14,6 @@ pcall(vim.keymap.del, "n", "<c-/>")
 pcall(vim.keymap.del, "n", "<c-_>")
 pcall(vim.keymap.del, "t", "<c-/>")
 pcall(vim.keymap.del, "t", "<c-_>")
--- pcall(vim.keymap.del, "t", "<esc><esc>") -- Keep this for our terminal mapping
 pcall(vim.keymap.del, "n", "<leader>fe")
 pcall(vim.keymap.del, "n", "<leader>fE")
 
@@ -262,16 +261,6 @@ map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split View" })
 map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update Plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
 map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer Keymaps" })
-
--- ========================================================================
--- Triforce
--- ========================================================================
-map("n", "<leader>tp", function() require("triforce").show_profile() end, { desc = "Profile" })
-
--- ========================================================================
--- Krust (Rust Diagnostics)
--- ========================================================================
-map("n", "<leader>k", function() require("krust").render() end, { desc = "Rust Diagnostics" })
 
 -- ========================================================================
 -- Context
