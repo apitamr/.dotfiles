@@ -102,6 +102,25 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+-- Open file from lazygit without splits
+function _G.LazygitEdit(filename, line)
+  vim.schedule(function()
+    -- Close all floating windows (lazygit)
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local cfg = vim.api.nvim_win_get_config(win)
+      if cfg.relative ~= "" then
+        pcall(vim.api.nvim_win_close, win, true)
+      end
+    end
+    -- Open the file in the current window
+    vim.cmd("edit " .. vim.fn.fnameescape(filename))
+    if line and line > 0 then
+      pcall(vim.api.nvim_win_set_cursor, 0, { line, 0 })
+    end
+  end)
+  return ""
+end
+
 -- Auto-delete empty/unnamed buffers when leaving them
 vim.api.nvim_create_autocmd("BufLeave", {
   callback = function(args)

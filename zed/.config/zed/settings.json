@@ -10,7 +10,7 @@
     "trust_all_worktrees": true,
   },
   "git_panel": {
-    "tree_view": true,
+    "tree_view": false,
   },
   "always_treat_brackets_as_autoclosed": true,
   "colorize_brackets": true,
@@ -108,12 +108,7 @@
       "provider": "GLM 4.6",
       "model": "glm-4.6",
     },
-    "inline_assistant_model": {
-      "provider": "ollama",
-      "model": "glm-4.6:cloud",
-    },
   },
-  "features": { "edit_prediction_provider": "zed" },
 
   // MCP Context Servers
   "context_servers": {
@@ -125,17 +120,18 @@
 
   // Language Servers
   "languages": {
-    "PHP": {
-      "language_servers": ["intelephense", "!phpactor", "..."],
+    "TypeScript": {
+      "language_servers": ["typescript-language-server", "!vtsls", "..."]
     },
+    "TSX": {
+      "language_servers": ["typescript-language-server", "!vtsls", "..."]
+    },
+    "JavaScript": {
+      "language_servers": ["typescript-language-server", "!vtsls", "..."]
+    }
   },
+
   "lsp": {
-    "biome": {
-      "settings": {
-        "config_path": "./biome.jsonc",
-        "require_config_file": true,
-      },
-    },
     "intelephense": {
       "initialization_options": {
         "enable": true,

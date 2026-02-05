@@ -10,6 +10,16 @@ return {
       },
       lazygit = {
         configure = true,
+        config = {
+          os = {
+            editPreset = "",
+            edit = [[nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit('{{filename}}')"]],
+            editAtLine = [[nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit('{{filename}}', {{line}})"]],
+            editAtLineAndWait = [[nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit('{{filename}}', {{line}})"]],
+            editInTerminal = false,
+            openDirInEditor = [[nvim --server "$NVIM" --remote-expr "v:lua.LazygitEdit('{{filename}}')"]],
+          },
+        },
         theme = {
           [241] = { fg = "Special" },
           activeBorderColor = { fg = "MatchParen", bold = true },

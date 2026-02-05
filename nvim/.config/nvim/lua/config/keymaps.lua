@@ -179,8 +179,10 @@ map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
 -- ========================================================================
 -- File Finder
 -- ========================================================================
-map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Files" })
-map("n", "<leader>fF", function() Snacks.picker.files({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }) end, { desc = "Files (Git Root)" })
+map("n", "<leader>ff", function()
+  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+  Snacks.picker.files({ hidden = true, ignored = true, cwd = git_root or nil, exclude = { "node_modules" } })
+end, { desc = "Files" })
 map("n", "<leader>fa", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "All Files" })
 
 -- ========================================================================
