@@ -24,23 +24,38 @@ map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
+map("n", "<leader>wd", function()
+  local buf = vim.api.nvim_get_current_buf()
+  local wins = vim.tbl_filter(function(w)
+    return vim.api.nvim_win_get_config(w).relative == ""
+  end, vim.api.nvim_list_wins())
+  if #wins > 1 then
+    vim.cmd("close")
+    pcall(vim.api.nvim_buf_delete, buf, { force = true })
+  else
+    require("oil").open(vim.fn.getcwd())
+    vim.schedule(function()
+      pcall(vim.api.nvim_buf_delete, buf, { force = true })
+    end)
+  end
+end, { desc = "Close Window" })
 map("n", "<leader>wq", function()
-  -- Close all windows except Oil buffers
+  -- Close all non-Oil windows and delete their buffers
   local wins = vim.api.nvim_list_wins()
   for _, win in ipairs(wins) do
     local buf = vim.api.nvim_win_get_buf(win)
-    local ft = vim.bo[buf].filetype
-    if ft ~= "oil" then
-      local ok, _ = pcall(vim.api.nvim_win_close, win, false)
-      if not ok then
-        -- Window might be the last one or have unsaved changes, try force close
-        pcall(vim.api.nvim_win_close, win, true)
+    if vim.bo[buf].filetype ~= "oil" then
+      if not pcall(vim.api.nvim_win_close, win, false) then
+        vim.api.nvim_set_current_win(win)
+        require("oil").open(vim.fn.getcwd())
       end
     end
   end
-  -- If no windows left, open Oil
-  if #vim.api.nvim_list_wins() == 0 or (#vim.api.nvim_list_wins() == 1 and vim.bo.filetype ~= "oil") then
-    require("oil").open()
+  -- Delete all non-Oil buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "oil" then
+      pcall(vim.api.nvim_buf_delete, buf, { force = true })
+    end
   end
 end, { desc = "Close all windows" })
 
