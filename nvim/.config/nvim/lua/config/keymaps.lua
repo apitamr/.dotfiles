@@ -178,33 +178,63 @@ map("v", "<leader>fw", function()
     Snacks.picker.grep({ search = selected_text })
   end)
 end, { desc = "Grep Selection" })
-map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help" })
-map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent Files" })
+map("n", "<leader>fb", function()
+  Snacks.picker.buffers()
+end, { desc = "Buffers" })
+map("n", "<leader>fh", function()
+  Snacks.picker.help()
+end, { desc = "Help" })
+map("n", "<leader>fo", function()
+  Snacks.picker.recent()
+end, { desc = "Recent Files" })
 map("n", "<leader>fO", function()
   vim.v.oldfiles = {}
   vim.notify("Oldfiles cleared", vim.log.levels.INFO)
 end, { desc = "Clear Recent" })
-map("n", "<leader>fz", function() Snacks.picker.grep_buffers() end, { desc = "Grep Buffer" })
-map("n", "<leader>fr", function() Snacks.picker.lsp_references() end, { desc = "References" })
-map("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Commits" })
-map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Status" })
-map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
+map("n", "<leader>fz", function()
+  Snacks.picker.grep_buffers()
+end, { desc = "Grep Buffer" })
+map("n", "<leader>fr", function()
+  Snacks.picker.lsp_references()
+end, { desc = "References" })
+map("n", "<leader>gc", function()
+  Snacks.picker.git_log()
+end, { desc = "Commits" })
+map("n", "<leader>gs", function()
+  Snacks.picker.git_status()
+end, { desc = "Status" })
+map("n", "<leader>ma", function()
+  Snacks.picker.marks()
+end, { desc = "Marks" })
 
 -- ========================================================================
 -- File Finder
 -- ========================================================================
 map("n", "<leader>ff", function()
   local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-  Snacks.picker.files({ hidden = true, ignored = true, cwd = git_root or nil, exclude = { "node_modules" } })
+  if vim.v.shell_error ~= 0 then
+    git_root = nil
+  end
+  Snacks.picker.files({
+    hidden = true,
+    ignored = true,
+    cwd = git_root,
+    exclude = require("config.exclude"),
+  })
 end, { desc = "Files" })
-map("n", "<leader>fa", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "All Files" })
+map("n", "<leader>fa", function()
+  Snacks.picker.files({ hidden = true, ignored = true })
+end, { desc = "All Files" })
 
 -- ========================================================================
 -- LSP Symbol Search
 -- ========================================================================
-map("n", "gss", function() Snacks.picker.lsp_symbols() end, { desc = "Document Symbols" })
-map("n", "gsS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols" })
+map("n", "gss", function()
+  Snacks.picker.lsp_symbols()
+end, { desc = "Document Symbols" })
+map("n", "gsS", function()
+  Snacks.picker.lsp_workspace_symbols()
+end, { desc = "Workspace Symbols" })
 
 -- ========================================================================
 -- Copy/Paste
@@ -231,8 +261,12 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Go to impl
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
-map("n", "<leader>do", function() Snacks.picker.diagnostics_buffer() end, { desc = "Buffer" })
-map("n", "<leader>dl", function() Snacks.picker.diagnostics() end, { desc = "All" })
+map("n", "<leader>do", function()
+  Snacks.picker.diagnostics_buffer()
+end, { desc = "Buffer" })
+map("n", "<leader>dl", function()
+  Snacks.picker.diagnostics()
+end, { desc = "All" })
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "Loclist" })
 
 -- ========================================================================
@@ -242,7 +276,9 @@ map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview Hunk"
 map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Blame" })
 map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Blame URL" })
 map("n", "<leader>gC", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy SHA" })
-map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
+map("n", "<leader>gg", function()
+  Snacks.lazygit()
+end, { desc = "LazyGit" })
 map("n", "<leader>gf", function()
   local file = vim.api.nvim_buf_get_name(0)
   if file ~= "" then
@@ -257,11 +293,21 @@ map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next git hunk" })
 -- ========================================================================
 -- UFO Folding
 -- ========================================================================
-map("n", "zR", function() require("ufo").openAllFolds() end, { desc = "Open all folds" })
-map("n", "zM", function() require("ufo").closeAllFolds() end, { desc = "Close all folds" })
-map("n", "zr", function() require("ufo").openFoldsExceptKinds() end, { desc = "Fold less" })
-map("n", "zm", function() require("ufo").closeFoldsWith() end, { desc = "Fold more" })
-map("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor() end, { desc = "Peek fold" })
+map("n", "zR", function()
+  require("ufo").openAllFolds()
+end, { desc = "Open all folds" })
+map("n", "zM", function()
+  require("ufo").closeAllFolds()
+end, { desc = "Close all folds" })
+map("n", "zr", function()
+  require("ufo").openFoldsExceptKinds()
+end, { desc = "Fold less" })
+map("n", "zm", function()
+  require("ufo").closeFoldsWith()
+end, { desc = "Fold more" })
+map("n", "zp", function()
+  require("ufo").peekFoldedLinesUnderCursor()
+end, { desc = "Peek fold" })
 
 -- ========================================================================
 -- Markdown (Markview)
@@ -277,15 +323,21 @@ map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split View" })
 -- ========================================================================
 map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update Plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
-map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer Keymaps" })
+map("n", "<leader>?", function()
+  require("which-key").show({ global = false })
+end, { desc = "Buffer Keymaps" })
 
 -- ========================================================================
 -- Context
 -- ========================================================================
-map({ "n", "v" }, "<leader>ac", function() require("context").pick() end, { desc = "Context" })
+map({ "n", "v" }, "<leader>ac", function()
+  require("context").pick()
+end, { desc = "Context" })
 
 -- ========================================================================
 -- Terminal
 -- ========================================================================
-map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Terminal" })
+map("n", "<leader>h", function()
+  Snacks.terminal()
+end, { desc = "Terminal" })
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
