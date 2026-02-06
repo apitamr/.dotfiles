@@ -2,6 +2,11 @@
 // Docs: https://zed.dev/docs/configuring-zed
 
 {
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    }
+  },
   "which_key": {
     "enabled": true,
   },
