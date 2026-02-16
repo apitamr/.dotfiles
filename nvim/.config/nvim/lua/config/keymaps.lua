@@ -211,19 +211,13 @@ end, { desc = "Marks" })
 -- File Finder
 -- ========================================================================
 map("n", "<leader>ff", function()
-  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-  if vim.v.shell_error ~= 0 then
-    git_root = nil
-  end
-  Snacks.picker.files({
-    hidden = true,
-    ignored = true,
-    cwd = git_root,
-    exclude = require("config.exclude"),
-  })
-end, { desc = "Files" })
+  require("fff").find_files()
+end, { desc = "Find Files" })
+map("n", "<leader>fg", function()
+  require("fff").find_in_git_root()
+end, { desc = "Find in Git Root" })
 map("n", "<leader>fa", function()
-  Snacks.picker.files({ hidden = true, ignored = true })
+  require("fff").find_files()
 end, { desc = "All Files" })
 
 -- ========================================================================

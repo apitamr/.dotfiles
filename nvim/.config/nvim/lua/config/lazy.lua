@@ -39,20 +39,48 @@ require("lazy").setup({
   },
   install = { colorscheme = { "kanso", "habamax" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+    enabled = false, -- disable automatic plugin update checks (saves CPU)
+    notify = false,
+  },
+  change_detection = {
+    enabled = false, -- disable config file change detection (saves CPU)
+    notify = false,
+  },
   performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true,
     rtp = {
-      -- disable some rtp plugins
+      reset = true,
+      -- disable more rtp plugins for faster startup
       disabled_plugins = {
+        "2html_plugin",
+        "bugreport",
+        "compiler",
+        "ftplugin",
+        "getscript",
+        "getscriptPlugin",
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "logipat",
+        "matchit",
+        "netrw",
+        "netrwFileHandlers",
+        "netrwPlugin",
+        "netrwSettings",
+        "optwin",
+        "rplugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "synmenu",
+        "syntax",
+        "tar",
         "tarPlugin",
         "tohtml",
         "tutor",
+        "vimball",
+        "vimballPlugin",
+        "zip",
         "zipPlugin",
       },
     },

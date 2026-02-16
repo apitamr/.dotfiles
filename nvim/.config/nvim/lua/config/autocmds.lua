@@ -25,17 +25,11 @@ local function set_border_colors()
   vim.api.nvim_set_hl(0, "LspFloatBorder", { bg = "#1a1a1a", fg = "#5c5c5c" })
 end
 
--- Set on colorscheme change
+-- Set on colorscheme change (run once)
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = set_border_colors,
-})
-
--- Set after UI enters (to override lazy-loaded plugins)
-vim.api.nvim_create_autocmd("UIEnter", {
-  callback = function()
-    vim.defer_fn(set_border_colors, 100)
-  end,
+  once = true, -- Only run once to reduce overhead
 })
 
 -- LSP float window styling (solid background, border)
@@ -70,10 +64,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Disable auto comment continuation on new line (enforce for all filetypes)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
+-- Using BufEnter with debounce instead of FileType for better performance
+local format_opts_timer = nil
+vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+    if format_opts_timer then
+      vim.fn.timer_stop(format_opts_timer)
+    end
+    format_opts_timer = vim.fn.timer_start(50, function()
+      vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+    end)
   end,
 })
 
@@ -121,21 +121,26 @@ function _G.LazygitEdit(filename, line)
   return ""
 end
 
--- Auto-delete empty/unnamed buffers when leaving them
+-- Auto-delete empty/unnamed buffers when leaving them (debounced)
+local buf_cleanup_timer = nil
 vim.api.nvim_create_autocmd("BufLeave", {
   callback = function(args)
     local buf = args.buf
-    -- Check if buffer is unnamed and empty
-    if vim.api.nvim_buf_get_name(buf) == "" and vim.bo[buf].buftype == "" then
-      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-      if #lines == 1 and lines[1] == "" then
-        -- Schedule deletion to avoid issues during buffer switch
-        vim.schedule(function()
-          if vim.api.nvim_buf_is_valid(buf) then
+    -- Debounce to avoid running on rapid buffer switches
+    if buf_cleanup_timer then
+      vim.fn.timer_stop(buf_cleanup_timer)
+    end
+    buf_cleanup_timer = vim.fn.timer_start(100, function()
+      -- Check if buffer is unnamed and empty
+      if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf) == "" then
+        local ok, buftype = pcall(vim.api.nvim_buf_get_option, buf, "buftype")
+        if ok and buftype == "" then
+          local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+          if #lines == 1 and lines[1] == "" then
             pcall(vim.api.nvim_buf_delete, buf, { force = true })
           end
-        end)
+        end
       end
-    end
+    end)
   end,
 })

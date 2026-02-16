@@ -4,17 +4,27 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
     },
-    event = "VeryLazy",
+    event = "BufReadPost", -- Load only when reading a file
+    keys = {
+      { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
+      { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
+    },
     opts = {
-      -- Use treesitter as the provider
+      -- Use indent as primary (lighter than treesitter), treesitter as fallback
       provider_selector = function(bufnr, filetype, buftype)
-        return { "treesitter", "indent" }
+        -- Skip for special buffers
+        if buftype ~= "" then
+          return ""
+        end
+        return { "indent" }
       end,
+      -- Reduce fold update frequency
+      close_fold_kinds_for_ft = {},
+      open_fold_hl_timeout = 0,
     },
     config = function(_, opts)
-      -- Fold options
-      vim.o.foldcolumn = "1" -- Show fold column
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value
+      vim.o.foldcolumn = "0" -- Hide fold column (reduces rendering)
+      vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
 
