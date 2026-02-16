@@ -2,7 +2,7 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    delay = 0,
+    delay = 300, -- Small delay reduces CPU when typing fast
     sort = { "alphanum" },
     icons = {
       mappings = false,

@@ -1,6 +1,6 @@
 return {
   "folke/sidekick.nvim",
-  event = "VeryLazy",
+  -- Load only when keymaps are used (not on VeryLazy)
   opts = {
     nes = {
       enabled = false,
