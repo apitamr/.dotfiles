@@ -133,7 +133,7 @@ vim.api.nvim_create_autocmd("BufLeave", {
     buf_cleanup_timer = vim.fn.timer_start(100, function()
       -- Check if buffer is unnamed and empty
       if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf) == "" then
-        local ok, buftype = pcall(vim.api.nvim_buf_get_option, buf, "buftype")
+        local ok, buftype = pcall(function() return vim.bo[buf].buftype end)
         if ok and buftype == "" then
           local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
           if #lines == 1 and lines[1] == "" then

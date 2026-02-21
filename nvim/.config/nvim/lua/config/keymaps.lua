@@ -24,6 +24,13 @@ map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
+
+-- Window resize
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
 map("n", "<leader>wd", function()
   local buf = vim.api.nvim_get_current_buf()
   local wins = vim.tbl_filter(function(w)
@@ -40,7 +47,6 @@ map("n", "<leader>wd", function()
   end
 end, { desc = "Close Window" })
 map("n", "<leader>wq", function()
-  -- Close all non-Oil windows and delete their buffers
   local wins = vim.api.nvim_list_wins()
   for _, win in ipairs(wins) do
     local buf = vim.api.nvim_win_get_buf(win)
@@ -51,22 +57,38 @@ map("n", "<leader>wq", function()
       end
     end
   end
-  -- Delete all non-Oil buffers
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "oil" then
       pcall(vim.api.nvim_buf_delete, buf, { force = true })
     end
   end
 end, { desc = "Close all windows" })
+map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
+map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
+map("n", "<leader>w=", "<C-w>=", { desc = "Equalize windows" })
 
 -- ========================================================================
 -- General Editing
 -- ========================================================================
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+map("i", "<C-s>", "<cmd>w<CR><Esc>", { desc = "Save file" })
 map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "Copy whole file" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
+
+-- Centered scrolling
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
+map("n", "n", "nzzzv", { desc = "Next search result centered" })
+map("n", "N", "Nzzzv", { desc = "Previous search result centered" })
+
+-- Move lines
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+
+-- Join lines without moving cursor
+map("n", "J", "mzJ`z", { desc = "Join lines" })
 
 -- ========================================================================
 -- Buffer Navigation
@@ -78,12 +100,10 @@ map("n", "<leader>bd", function()
   local is_floating = vim.api.nvim_win_get_config(current_win).relative ~= ""
   local is_oil = vim.bo[current_buf].filetype == "oil"
 
-  -- If in floating Oil, close the float first
   if is_floating and is_oil then
     vim.api.nvim_win_close(current_win, true)
   end
 
-  -- Close all non-Oil buffers (including existing Oil buffers to get fresh one)
   local bufs = vim.api.nvim_list_bufs()
   for _, buf in ipairs(bufs) do
     if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
@@ -95,7 +115,6 @@ map("n", "<leader>bd", function()
     end
   end
 
-  -- Always open fresh Oil
   vim.schedule(function()
     require("oil").open(vim.fn.getcwd())
   end)
@@ -104,7 +123,6 @@ map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
 map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<leader>x", function()
-  -- Check if this is the last non-oil buffer
   local bufs = vim.fn.getbufinfo({ buflisted = 1 })
   local non_oil_bufs = vim.tbl_filter(function(buf)
     return vim.bo[buf.bufnr].filetype ~= "oil"
@@ -112,7 +130,6 @@ map("n", "<leader>x", function()
 
   Snacks.bufdelete()
 
-  -- If we just closed the last buffer, open Oil
   if #non_oil_bufs <= 1 then
     vim.schedule(function()
       require("oil").open()
@@ -206,6 +223,15 @@ end, { desc = "Status" })
 map("n", "<leader>ma", function()
   Snacks.picker.marks()
 end, { desc = "Marks" })
+map("n", "<leader>fk", function()
+  Snacks.picker.keymaps()
+end, { desc = "Keymaps" })
+map("n", "<leader>fc", function()
+  Snacks.picker.commands()
+end, { desc = "Commands" })
+map("n", "<leader>fd", function()
+  Snacks.picker.diagnostics()
+end, { desc = "Diagnostics" })
 
 -- ========================================================================
 -- File Finder
@@ -217,8 +243,8 @@ map("n", "<leader>fg", function()
   require("fff").find_in_git_root()
 end, { desc = "Find in Git Root" })
 map("n", "<leader>fa", function()
-  require("fff").find_files()
-end, { desc = "All Files" })
+  Snacks.picker.files({ hidden = true, ignored = true })
+end, { desc = "All Files (inc. hidden)" })
 
 -- ========================================================================
 -- LSP Symbol Search
@@ -248,13 +274,31 @@ map("v", ">", ">gv", { desc = "Indent right and reselect" })
 -- ========================================================================
 -- LSP
 -- ========================================================================
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Go to definition" })
-map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Go to declaration" })
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Go to references" })
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Go to implementation" })
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover documentation" })
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+map("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+map("n", "gy", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
+map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature help" })
+map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+
+map("n", "[d", function()
+  vim.diagnostic.goto_prev()
+end, { desc = "Previous diagnostic" })
+map("n", "]d", function()
+  vim.diagnostic.goto_next()
+end, { desc = "Next diagnostic" })
+map("n", "[e", function()
+  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Previous error" })
+map("n", "]e", function()
+  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next error" })
 map("n", "<leader>do", function()
   Snacks.picker.diagnostics_buffer()
 end, { desc = "Buffer" })
@@ -262,11 +306,25 @@ map("n", "<leader>dl", function()
   Snacks.picker.diagnostics()
 end, { desc = "All" })
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "Loclist" })
+map("n", "<leader>dd", function()
+  vim.diagnostic.open_float()
+end, { desc = "Line diagnostics" })
 
 -- ========================================================================
 -- Git
 -- ========================================================================
 map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview Hunk" })
+map("n", "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage Hunk" })
+map("n", "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", { desc = "Reset Hunk" })
+map("n", "<leader>ghS", "<cmd>Gitsigns stage_buffer<cr>", { desc = "Stage Buffer" })
+map("n", "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", { desc = "Undo Stage Hunk" })
+map("n", "<leader>ghd", "<cmd>Gitsigns diffthis<cr>", { desc = "Diff This" })
+map("v", "<leader>ghs", function()
+  require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end, { desc = "Stage Hunk" })
+map("v", "<leader>ghr", function()
+  require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end, { desc = "Reset Hunk" })
 map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Blame" })
 map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Blame URL" })
 map("n", "<leader>gC", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy SHA" })
@@ -311,6 +369,19 @@ map("n", "<leader>mp", "<cmd>Markview enable<cr>", { desc = "Enable Preview" })
 map("n", "<leader>ms", "<cmd>Markview disable<cr>", { desc = "Disable Preview" })
 map("n", "<leader>mh", "<cmd>Markview hybridToggle<cr>", { desc = "Hybrid Mode" })
 map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split View" })
+
+-- ========================================================================
+-- Quickfix
+-- ========================================================================
+map("n", "[q", "<cmd>cprev<cr>zz", { desc = "Previous quickfix" })
+map("n", "]q", "<cmd>cnext<cr>zz", { desc = "Next quickfix" })
+map("n", "<leader>qo", "<cmd>copen<cr>", { desc = "Open quickfix" })
+map("n", "<leader>qc", "<cmd>cclose<cr>", { desc = "Close quickfix" })
+
+-- ========================================================================
+-- Quit
+-- ========================================================================
+map("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Quit Neovim" })
 
 -- ========================================================================
 -- Miscellaneous

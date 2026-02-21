@@ -4,26 +4,35 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
     },
-    event = "BufReadPost", -- Load only when reading a file
+    event = "BufReadPost",
     keys = {
       { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
       { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
     },
     opts = {
-      -- Use indent as primary (lighter than treesitter), treesitter as fallback
-      provider_selector = function(bufnr, filetype, buftype)
-        -- Skip for special buffers
+      -- Treesitter for structured languages, indent as universal fallback
+      provider_selector = function(_, filetype, buftype)
         if buftype ~= "" then
           return ""
         end
+        -- Languages where treesitter folding is reliable
+        local ts_langs = {
+          "lua", "python", "javascript", "typescript", "typescriptreact",
+          "javascriptreact", "go", "rust", "c", "cpp", "json", "yaml",
+          "html", "css", "vue", "tsx", "jsx", "ruby", "php", "zig",
+        }
+        for _, lang in ipairs(ts_langs) do
+          if filetype == lang then
+            return { "treesitter", "indent" }
+          end
+        end
         return { "indent" }
       end,
-      -- Reduce fold update frequency
       close_fold_kinds_for_ft = {},
       open_fold_hl_timeout = 0,
     },
     config = function(_, opts)
-      vim.o.foldcolumn = "0" -- Hide fold column (reduces rendering)
+      vim.o.foldcolumn = "0"
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true

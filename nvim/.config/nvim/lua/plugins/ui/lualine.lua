@@ -8,29 +8,39 @@ return {
         theme = "kanso",
         component_separators = "",
         section_separators = "",
-        globalstatus = true, -- Single statusline (less rendering)
+        globalstatus = true,
         refresh = {
-          statusline = 500, -- Refresh every 500ms instead of 100ms
+          statusline = 500,
         },
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = {},
+        lualine_b = {
+          { "branch", icon = "" },
+        },
         lualine_c = {
           {
             "filename",
-            path = 1, -- Relative path (shorter)
+            path = 1,
+            symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
             cond = function()
               return vim.bo.buftype == ""
             end,
           },
         },
-        lualine_x = {}, -- Remove encoding/fileformat
-        lualine_y = { "progress" }, -- Keep progress
-        lualine_z = {}, -- Remove location (visible in ruler)
+        lualine_x = {
+          {
+            "diagnostics",
+            symbols = { error = " ", warn = " ", info = " ", hint = " " },
+          },
+        },
+        lualine_y = { "filetype" },
+        lualine_z = { "progress" },
       },
       inactive_sections = {
-        lualine_c = { "filename" },
+        lualine_c = {
+          { "filename", path = 1 },
+        },
         lualine_x = {},
       },
     })

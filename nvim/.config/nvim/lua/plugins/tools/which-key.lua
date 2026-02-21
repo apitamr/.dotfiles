@@ -2,7 +2,7 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    delay = 300, -- Small delay reduces CPU when typing fast
+    delay = 300,
     sort = { "alphanum" },
     icons = {
       mappings = false,
@@ -15,17 +15,19 @@ return {
       { "<leader>d", group = "diagnostics" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
+      { "<leader>gh", group = "hunks" },
       { "<leader>l", group = "lsp" },
       { "<leader>m", group = "markdown" },
       { "<leader>n", group = "notify" },
       { "<leader>p", group = "paste" },
-      { "<leader>q", group = "quit" },
+      { "<leader>q", group = "quit/quickfix" },
       { "<leader>s", group = "search" },
       { "<leader>t", group = "triforce" },
       { "<leader>u", group = "utils" },
       { "<leader>w", group = "window" },
       { "<leader>x", group = "trouble" },
       { "<leader><Tab>", group = "tabs" },
+      { "gs", group = "symbols" },
     },
   },
 }

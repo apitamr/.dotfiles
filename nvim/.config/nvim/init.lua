@@ -17,15 +17,7 @@ local function change_to_arg_dir()
   end
 end
 
--- Run immediately before LazyVim loads
 change_to_arg_dir()
 
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
-
--- Ensure directory is set after all plugins load
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.defer_fn(change_to_arg_dir, 50)
-  end,
-})
