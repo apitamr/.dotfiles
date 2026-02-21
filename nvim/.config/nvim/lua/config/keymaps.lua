@@ -121,7 +121,6 @@ map("n", "<leader>bd", function()
 end, { desc = "Close All Buffers" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Goto prev buffer" })
-map("n", "<C-]>", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 map("n", "<leader>x", function()
   local bufs = vim.fn.getbufinfo({ buflisted = 1 })
   local non_oil_bufs = vim.tbl_filter(function(buf)
@@ -152,19 +151,6 @@ map("n", "<leader>o", function()
     require("oil").open_float()
   end
 end, { desc = "Oil Float" })
-
--- ========================================================================
--- Outline
--- ========================================================================
-map("n", "<leader>e", function()
-  local outline = require("outline")
-  if outline.is_open() then
-    outline.focus_outline()
-  else
-    outline.open()
-  end
-end, { desc = "Outline" })
-map("n", "<C-n>", "<cmd>Outline<cr>", { desc = "Toggle Outline" })
 
 -- ========================================================================
 -- Snacks Picker
@@ -288,16 +274,16 @@ map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" 
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 
 map("n", "[d", function()
-  vim.diagnostic.goto_prev()
+  vim.diagnostic.jump({ count = -1 })
 end, { desc = "Previous diagnostic" })
 map("n", "]d", function()
-  vim.diagnostic.goto_next()
+  vim.diagnostic.jump({ count = 1 })
 end, { desc = "Next diagnostic" })
 map("n", "[e", function()
-  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Previous error" })
 map("n", "]e", function()
-  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Next error" })
 map("n", "<leader>do", function()
   Snacks.picker.diagnostics_buffer()
@@ -328,9 +314,6 @@ end, { desc = "Reset Hunk" })
 map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Blame" })
 map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Blame URL" })
 map("n", "<leader>gC", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy SHA" })
-map("n", "<leader>gg", function()
-  Snacks.lazygit()
-end, { desc = "LazyGit" })
 map("n", "<leader>gf", function()
   local file = vim.api.nvim_buf_get_name(0)
   if file ~= "" then
@@ -345,12 +328,6 @@ map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next git hunk" })
 -- ========================================================================
 -- UFO Folding
 -- ========================================================================
-map("n", "zR", function()
-  require("ufo").openAllFolds()
-end, { desc = "Open all folds" })
-map("n", "zM", function()
-  require("ufo").closeAllFolds()
-end, { desc = "Close all folds" })
 map("n", "zr", function()
   require("ufo").openFoldsExceptKinds()
 end, { desc = "Fold less" })
@@ -393,16 +370,6 @@ map("n", "<leader>?", function()
 end, { desc = "Buffer Keymaps" })
 
 -- ========================================================================
--- Context
--- ========================================================================
-map({ "n", "v" }, "<leader>ac", function()
-  require("context").pick()
-end, { desc = "Context" })
-
--- ========================================================================
 -- Terminal
 -- ========================================================================
-map("n", "<leader>h", function()
-  Snacks.terminal()
-end, { desc = "Terminal" })
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
