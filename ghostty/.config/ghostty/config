@@ -2,60 +2,62 @@
 theme = kanso-zen
 
 # Window
-# background-opacity = 0.85
-# background-blur = macos-glass-regular
-# background-blur = true
-# background-image = ~/.dotfiles/images/anime-city.jpg
-# background-image-fit = cover
-# background-image-opacity = 0.08
 window-width = 110
 window-height = 27
 window-padding-y = 2
 window-padding-balance = true
-window-save-state = always
-fullscreen = false
+window-padding-color = extend
+window-colorspace = display-p3
 window-inherit-working-directory = false
 tab-inherit-working-directory = false
 split-inherit-working-directory = true
-mouse-hide-while-typing = true
-
-# Working Directory
 working-directory = home
 
-# macOS
-macos-window-buttons = visible
-macos-titlebar-proxy-icon = hidden
-macos-icon = official
-macos-option-as-alt = true
-
+# Appearance
+background-opacity = 0.9
+background-blur = true
+unfocused-split-opacity = 0.85
+mouse-hide-while-typing = true
+minimum-contrast = 1.1
+link-previews = osc8
 
 # Font
-font-family = JetBrainsMono Nerd Font
+font-family = JetBrainsMono NF Light
 font-size = 14
-font-feature = -liga
-font-style = bold
-font-feature = "ss01"
-font-feature = "ss02"
-font-feature = "ss03"
-font-feature = "ss04"
+font-thicken = true
+adjust-cell-width = -4%
 adjust-cell-height = 3
 
 # Cursor
 cursor-style = bar
 cursor-style-blink = true
+cursor-click-to-move = true
 adjust-cursor-thickness = 4
-shell-integration-features = no-cursor
+
+#Shell Integration
+shell-integration-features = no-cursor,sudo,title,ssh-env,ssh-terminfo
+confirm-close-surface = true
+
+# macOS
+macos-non-native-fullscreen = true
+macos-window-buttons = visible
+macos-titlebar-proxy-icon = hidden
+macos-icon = official
+macos-option-as-alt = true
+
+# Clipboard & Input
+copy-on-select = true
+right-click-action = copy-or-paste
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+
+# Keybinds
+keybind = shift+enter=text:\x1b\r
+
+# Shaders
+custom-shader = shaders/cursor_blaze.glsl
+custom-shader = shaders/cursor_smear.glsl
 
 # Updates
 auto-update = check
 auto-update-channel = tip
-
-# Behavior
-right-click-action = copy
-copy-on-select = clipboard
-link-previews = osc8
-keybind = shift+enter=text:\x1b\r
-
-# Shader
-custom-shader = shaders/cursor_blaze.glsl
-custom-shader = shaders/cursor_smear.glsl
