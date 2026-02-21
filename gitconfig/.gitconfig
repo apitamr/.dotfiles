@@ -10,7 +10,15 @@
 [credential "https://github.com"]
 	useHttpPath = true
 [pull]
-  rebase = true
+	rebase = true
+[push]
+	autoSetupRemote = true
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
+[merge]
+	conflictstyle = zdiff3
 [include]
 	path = ~/.dotfiles/gitconfig/.gitconfig-work
 [credential "https://codeberg.org"]

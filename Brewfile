@@ -25,6 +25,10 @@ brew "pnpm"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Small command-line interface to move files to the Trash
+brew "trash"
+# Manage multiple Node.js versions
+brew "nvm"
 # Terminal multiplexer
 brew "tmux"
 # Watch files and take action when they change

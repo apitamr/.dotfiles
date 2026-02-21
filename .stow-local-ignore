@@ -1,1 +1,10 @@
 \.DS_Store
+README\.md
+LICENSE
+\.git
+\.gitignore
+images
+Brewfile
+install
+stow
+\.stow-local-ignore

@@ -1,16 +1,18 @@
-# Auto-start Tmux
-# Only auto-start in Ghostty (skip IDEs like VS Code, Zed, JetBrains)
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-#   if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
-#     tmux attach -t default || tmux new -s default
-#   fi
-# fi
+# Zsh Options
+setopt AUTO_CD              # cd by typing directory name
+setopt HIST_IGNORE_DUPS     # don't record duplicate commands
+setopt HIST_IGNORE_SPACE    # don't record commands starting with space
+setopt HIST_REDUCE_BLANKS   # remove extra blanks from history
+setopt SHARE_HISTORY        # share history across sessions
+setopt INTERACTIVE_COMMENTS # allow comments in interactive shell
+
+# Docker CLI Completions (must be before compinit)
+fpath=($HOME/.docker/completions $fpath)
 
 # Oh My Zsh Configuration
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-source $ZSH/oh-my-zsh.sh
-
+ZSH_THEME=""  # disabled — using Starship
+source "$ZSH/oh-my-zsh.sh"
 
 # Load Custom Aliases
 [ -f ~/.zshrc_aliases ] && source ~/.zshrc_aliases
@@ -24,27 +26,22 @@ export VISUAL="nvim"
 
 # Path Configuration
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
-export PATH="/Users/strygwyr/.bun/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
-. "$HOME/.goup/env"
+[ -f "$HOME/.goup/env" ] && . "$HOME/.goup/env"
 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completio
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # Zsh Plugins
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Docker CLI Completion
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/apitamr/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # PHP
 export PATH="/opt/homebrew/opt/php@8.3/bin:$PATH"
 export PATH="/opt/homebrew/opt/php@8.3/sbin:$PATH"
-export COMPOSER_PHP="$(brew --prefix php@8.3)/bin/php"
+export COMPOSER_PHP="/opt/homebrew/opt/php@8.3/bin/php"
