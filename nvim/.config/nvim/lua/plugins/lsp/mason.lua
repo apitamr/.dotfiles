@@ -27,10 +27,15 @@ return {
 
         -- Formatters & Linters
         "biome",
+        "black",
+        "gofumpt",
         "goimports",
         "htmlhint",
+        "isort",
+        "prettier",
         "shfmt",
         "stylua",
+        "taplo",
 
         -- Tools
         "tree-sitter-cli",

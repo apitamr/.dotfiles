@@ -1,11 +1,4 @@
 -- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Disable LazyVim's root detection autocmd
 vim.api.nvim_create_autocmd("User", {
@@ -25,11 +18,10 @@ local function set_border_colors()
   vim.api.nvim_set_hl(0, "LspFloatBorder", { bg = "#1a1a1a", fg = "#5c5c5c" })
 end
 
--- Set on colorscheme change (run once)
+-- Set on colorscheme change
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = set_border_colors,
-  once = true, -- Only run once to reduce overhead
 })
 
 -- LSP float window styling (solid background, border)
@@ -40,10 +32,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     vim.g.lsp_float_override = true
-
-    vim.diagnostic.config({
-      float = { border = "rounded" },
-    })
 
     local orig = vim.lsp.util.open_floating_preview
     ---@diagnostic disable-next-line: duplicate-set-field
@@ -64,29 +52,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Disable auto comment continuation on new line (enforce for all filetypes)
--- Using BufEnter with debounce instead of FileType for better performance
-local format_opts_timer = nil
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
   callback = function()
-    if format_opts_timer then
-      vim.fn.timer_stop(format_opts_timer)
-    end
-    format_opts_timer = vim.fn.timer_start(50, function()
-      vim.opt_local.formatoptions:remove({ "c", "r", "o" })
-    end)
-  end,
-})
-
--- Oil minimal style (no extra padding)
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter" }, {
-  pattern = { "oil", "oil://*" },
-  callback = function()
-    vim.schedule(function()
-      vim.opt_local.signcolumn = "no"
-      vim.opt_local.foldcolumn = "0"
-      vim.opt_local.statuscolumn = ""
-      vim.opt_local.numberwidth = 1
-    end)
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 

@@ -22,7 +22,6 @@ return {
       { "<leader>s", group = "search" },
       { "<leader>u", group = "utils" },
       { "<leader>w", group = "window" },
-      { "<leader>x", group = "trouble" },
       { "gs", group = "symbols" },
     },
   },

@@ -1,5 +1,4 @@
 -- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
 local map = vim.keymap.set
 
@@ -18,6 +17,48 @@ pcall(vim.keymap.del, "n", "<leader>fe")
 pcall(vim.keymap.del, "n", "<leader>fE")
 
 -- ========================================================================
+-- General Editing
+-- ========================================================================
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
+map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+map("i", "<C-s>", "<cmd>w<CR><Esc>", { desc = "Save file" })
+map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "Copy whole file" })
+map("n", ";", ":", { desc = "CMD enter command mode" })
+map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
+
+-- Centered scrolling
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
+map("n", "n", "nzzzv", { desc = "Next search result centered" })
+map("n", "N", "Nzzzv", { desc = "Previous search result centered" })
+
+-- Move lines
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+
+-- Join lines without moving cursor
+map("n", "J", "mzJ`z", { desc = "Join lines" })
+
+-- Indent
+map("v", "<", "<gv", { desc = "Indent left and reselect" })
+map("v", ">", ">gv", { desc = "Indent right and reselect" })
+
+-- ========================================================================
+-- Copy/Paste
+-- ========================================================================
+map("v", "p", '"_dP', { desc = "Paste without yanking" })
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to Clipboard" })
+map("n", "<leader>Y", '"+Y', { desc = "Yank Line to Clipboard" })
+map({ "n", "v" }, "<leader>pp", '"+p', { desc = "Paste from Clipboard" })
+map({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete (No Yank)" })
+
+-- ========================================================================
+-- Comments
+-- ========================================================================
+map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
+map("v", "<leader>/", "gc", { desc = "Toggle Comment", remap = true })
+
+-- ========================================================================
 -- Window Navigation
 -- ========================================================================
 map("n", "<C-h>", "<C-w>h", { desc = "Switch window left" })
@@ -25,7 +66,6 @@ map("n", "<C-l>", "<C-w>l", { desc = "Switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "Switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "Switch window up" })
 
--- Window resize
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
@@ -66,29 +106,6 @@ end, { desc = "Close all windows" })
 map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
 map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
 map("n", "<leader>w=", "<C-w>=", { desc = "Equalize windows" })
-
--- ========================================================================
--- General Editing
--- ========================================================================
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
-map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
-map("i", "<C-s>", "<cmd>w<CR><Esc>", { desc = "Save file" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "Copy whole file" })
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
-
--- Centered scrolling
-map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down centered" })
-map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up centered" })
-map("n", "n", "nzzzv", { desc = "Next search result centered" })
-map("n", "N", "Nzzzv", { desc = "Previous search result centered" })
-
--- Move lines
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
-
--- Join lines without moving cursor
-map("n", "J", "mzJ`z", { desc = "Join lines" })
 
 -- ========================================================================
 -- Buffer Navigation
@@ -137,12 +154,6 @@ map("n", "<leader>x", function()
 end, { desc = "Close Buffer", nowait = true })
 
 -- ========================================================================
--- Comments
--- ========================================================================
-map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
-map("v", "<leader>/", "gc", { desc = "Toggle Comment", remap = true })
-
--- ========================================================================
 -- Oil (File Explorer)
 -- ========================================================================
 map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
@@ -153,8 +164,15 @@ map("n", "<leader>o", function()
 end, { desc = "Oil Float" })
 
 -- ========================================================================
--- Snacks Picker
+-- Outline
 -- ========================================================================
+map("n", "<leader>e", "<cmd>Outline<cr>", { desc = "Outline" })
+map("n", "<C-n>", "<cmd>Outline<cr>", { desc = "Toggle Outline" })
+
+-- ========================================================================
+-- Snacks
+-- ========================================================================
+-- Picker
 map("n", "<leader>fw", function()
   Snacks.picker.grep()
 end, { desc = "Grep" })
@@ -181,6 +199,9 @@ map("v", "<leader>fw", function()
     Snacks.picker.grep({ search = selected_text })
   end)
 end, { desc = "Grep Selection" })
+map("n", "<leader>fa", function()
+  Snacks.picker.files({ hidden = true, ignored = true })
+end, { desc = "All Files (inc. hidden)" })
 map("n", "<leader>fb", function()
   Snacks.picker.buffers()
 end, { desc = "Buffers" })
@@ -200,15 +221,6 @@ end, { desc = "Grep Buffer" })
 map("n", "<leader>fr", function()
   Snacks.picker.lsp_references()
 end, { desc = "References" })
-map("n", "<leader>gc", function()
-  Snacks.picker.git_log()
-end, { desc = "Commits" })
-map("n", "<leader>gs", function()
-  Snacks.picker.git_status()
-end, { desc = "Status" })
-map("n", "<leader>ma", function()
-  Snacks.picker.marks()
-end, { desc = "Marks" })
 map("n", "<leader>fk", function()
   Snacks.picker.keymaps()
 end, { desc = "Keymaps" })
@@ -218,17 +230,6 @@ end, { desc = "Commands" })
 map("n", "<leader>fd", function()
   Snacks.picker.diagnostics()
 end, { desc = "Diagnostics" })
-
--- ========================================================================
--- File Finder
--- ========================================================================
-map("n", "<leader>fa", function()
-  Snacks.picker.files({ hidden = true, ignored = true })
-end, { desc = "All Files (inc. hidden)" })
-
--- ========================================================================
--- LSP Symbol Search
--- ========================================================================
 map("n", "gss", function()
   Snacks.picker.lsp_symbols()
 end, { desc = "Document Symbols" })
@@ -236,20 +237,19 @@ map("n", "gsS", function()
   Snacks.picker.lsp_workspace_symbols()
 end, { desc = "Workspace Symbols" })
 
--- ========================================================================
--- Copy/Paste
--- ========================================================================
-map("v", "p", '"_dP', { desc = "Paste without yanking" })
-map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to Clipboard" })
-map("n", "<leader>Y", '"+Y', { desc = "Yank Line to Clipboard" })
-map({ "n", "v" }, "<leader>pp", '"+p', { desc = "Paste from Clipboard" })
-map({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete (No Yank)" })
+-- Tools
+map("n", "<leader>gg", function()
+  Snacks.lazygit()
+end, { desc = "LazyGit" })
+map("n", "<leader>h", function()
+  Snacks.terminal()
+end, { desc = "Terminal" })
 
 -- ========================================================================
--- Text Editing
+-- FFF (File Finder)
 -- ========================================================================
-map("v", "<", "<gv", { desc = "Indent left and reselect" })
-map("v", ">", ">gv", { desc = "Indent right and reselect" })
+map("n", "<leader>ff", "<cmd>FFFFind<cr>", { desc = "Find Files" })
+map("n", "<leader>fg", "<cmd>FFFScan<cr>", { desc = "Find in Git Root" })
 
 -- ========================================================================
 -- LSP
@@ -267,6 +267,9 @@ map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
 
+-- ========================================================================
+-- Diagnostics
+-- ========================================================================
 map("n", "[d", function()
   vim.diagnostic.jump({ count = -1 })
 end, { desc = "Previous diagnostic" })
@@ -308,6 +311,12 @@ end, { desc = "Reset Hunk" })
 map("n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Blame" })
 map("n", "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", { desc = "Blame URL" })
 map("n", "<leader>gC", "<cmd>GitBlameCopySHA<cr>", { desc = "Copy SHA" })
+map("n", "<leader>gc", function()
+  Snacks.picker.git_log()
+end, { desc = "Commits" })
+map("n", "<leader>gs", function()
+  Snacks.picker.git_status()
+end, { desc = "Status" })
 map("n", "<leader>gf", function()
   local file = vim.api.nvim_buf_get_name(0)
   if file ~= "" then
@@ -322,6 +331,12 @@ map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next git hunk" })
 -- ========================================================================
 -- UFO Folding
 -- ========================================================================
+map("n", "zR", function()
+  require("ufo").openAllFolds()
+end, { desc = "Open all folds" })
+map("n", "zM", function()
+  require("ufo").closeAllFolds()
+end, { desc = "Close all folds" })
 map("n", "zr", function()
   require("ufo").openFoldsExceptKinds()
 end, { desc = "Fold less" })
@@ -342,6 +357,24 @@ map("n", "<leader>mh", "<cmd>Markview hybridToggle<cr>", { desc = "Hybrid Mode" 
 map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split View" })
 
 -- ========================================================================
+-- AI (Sidekick, Context)
+-- ========================================================================
+map({ "n", "t", "i", "x" }, "<c-.>", "<cmd>Sidekick toggle<cr>", { desc = "Sidekick Toggle" })
+map("n", "<leader>aa", "<cmd>Sidekick toggle<cr>", { desc = "Sidekick Toggle" })
+map({ "x", "n" }, "<leader>at", "<cmd>Sidekick send-this<cr>", { desc = "Send This" })
+map("n", "<leader>af", "<cmd>Sidekick send-file<cr>", { desc = "Send File" })
+map("x", "<leader>av", "<cmd>Sidekick send-selection<cr>", { desc = "Send Selection" })
+map("x", "<leader>ae", "<cmd>Sidekick explain-selection<cr>", { desc = "Explain Selection" })
+map("x", "<leader>ax", "<cmd>Sidekick fix-selection<cr>", { desc = "Fix Selection" })
+map("x", "<leader>ar", "<cmd>Sidekick refactor-selection<cr>", { desc = "Refactor Selection" })
+map("n", "<leader>ac", "<cmd>Context<cr>", { desc = "Context" })
+
+-- ========================================================================
+-- Terminal
+-- ========================================================================
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- ========================================================================
 -- Quickfix
 -- ========================================================================
 map("n", "[q", "<cmd>cprev<cr>zz", { desc = "Previous quickfix" })
@@ -350,20 +383,14 @@ map("n", "<leader>qo", "<cmd>copen<cr>", { desc = "Open quickfix" })
 map("n", "<leader>qc", "<cmd>cclose<cr>", { desc = "Close quickfix" })
 
 -- ========================================================================
--- Quit
--- ========================================================================
-map("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Quit Neovim" })
-
--- ========================================================================
 -- Miscellaneous
 -- ========================================================================
 map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update Plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+map("n", "<leader>ma", function()
+  Snacks.picker.marks()
+end, { desc = "Marks" })
 map("n", "<leader>?", function()
   require("which-key").show({ global = false })
 end, { desc = "Buffer Keymaps" })
-
--- ========================================================================
--- Terminal
--- ========================================================================
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Quit Neovim" })

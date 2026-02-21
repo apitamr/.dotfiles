@@ -19,7 +19,7 @@ return {
 
       -- stylua: ignore
       dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", "<cmd>lua require('fff').find_files()<cr>"),
+        dashboard.button("f", " " .. " Find file", "<cmd>FFFFind<cr>"),
         dashboard.button("r", " " .. " Recent files", "<cmd>lua Snacks.picker.recent()<cr>"),
         dashboard.button("g", " " .. " Live grep", "<cmd>lua Snacks.picker.grep()<cr>"),
         dashboard.button("c", " " .. " Config", "<cmd>e ~/.config/nvim/init.lua<cr>"),

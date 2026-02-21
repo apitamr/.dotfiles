@@ -2,10 +2,6 @@ return {
   {
     "folke/snacks.nvim",
     event = "VeryLazy",
-    keys = {
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "LazyGit" },
-      { "<leader>h", function() Snacks.terminal() end, desc = "Terminal" },
-    },
     opts = {
       dashboard = {
         enabled = false,

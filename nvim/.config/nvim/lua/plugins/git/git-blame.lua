@@ -1,8 +1,7 @@
 return {
   {
     "f-person/git-blame.nvim",
-    event = "BufReadPost", -- Load only when reading a file
-    cmd = { "GitBlameToggle", "GitBlameEnable", "GitBlameDisable" },
+    cmd = { "GitBlameToggle", "GitBlameEnable", "GitBlameDisable", "GitBlameOpenCommitURL", "GitBlameCopySHA" },
     opts = {
       enabled = false, -- Disable on startup, toggle manually with :GitBlameToggle
       message_template = " <summary> • <date> • <author>",

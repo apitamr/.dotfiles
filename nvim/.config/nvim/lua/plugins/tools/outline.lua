@@ -2,10 +2,6 @@ return {
   {
     "hedyhli/outline.nvim",
     cmd = "Outline",
-    keys = {
-      { "<leader>e", function() require("outline").toggle() end, desc = "Outline" },
-      { "<C-n>", "<cmd>Outline<cr>", desc = "Toggle Outline" },
-    },
     opts = {
       outline_window = {
         position = "left",

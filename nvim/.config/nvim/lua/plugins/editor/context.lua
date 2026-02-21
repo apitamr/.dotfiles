@@ -1,9 +1,6 @@
 return {
   "ahkohd/context.nvim",
-  cmd = { "Context" }, -- Load only when command is used
-  keys = {
-    { "<leader>ac", "<cmd>Context<cr>", desc = "Context" },
-  },
+  cmd = { "Context" },
   config = function()
     local context = require("context")
 

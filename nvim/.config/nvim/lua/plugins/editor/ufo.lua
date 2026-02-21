@@ -5,10 +5,6 @@ return {
       "kevinhwang91/promise-async",
     },
     event = "BufReadPost",
-    keys = {
-      { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
-      { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
-    },
     opts = {
       -- Treesitter for structured languages, indent as universal fallback
       provider_selector = function(_, filetype, buftype)
