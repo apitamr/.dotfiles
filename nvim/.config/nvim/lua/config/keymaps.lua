@@ -222,12 +222,6 @@ end, { desc = "Diagnostics" })
 -- ========================================================================
 -- File Finder
 -- ========================================================================
-map("n", "<leader>ff", function()
-  require("fff").find_files()
-end, { desc = "Find Files" })
-map("n", "<leader>fg", function()
-  require("fff").find_in_git_root()
-end, { desc = "Find in Git Root" })
 map("n", "<leader>fa", function()
   Snacks.picker.files({ hidden = true, ignored = true })
 end, { desc = "All Files (inc. hidden)" })

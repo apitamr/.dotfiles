@@ -2,11 +2,10 @@ return {
   -- Disable mini.icons from LazyVim
   { "nvim-mini/mini.icons", enabled = false },
 
-  -- Use nvim-web-devicons with catppuccin mocha colors applied to ALL icons
+  -- Use nvim-web-devicons with catppuccin latte colors applied to ALL icons
   {
     "nvim-tree/nvim-web-devicons",
     lazy = false,
-    dependencies = { "catppuccin/nvim" },
     config = function()
       -- Setup devicons first with defaults
       require("nvim-web-devicons").setup({
@@ -14,9 +13,24 @@ return {
         default = true,
       })
 
-      -- Get catppuccin latte palette
-      require("catppuccin").setup({ flavour = "latte" })
-      local icon_color_palette = require("catppuccin.palettes").get_palette("latte")
+      -- Catppuccin Latte palette (inlined to avoid loading catppuccin as a dependency)
+      local icon_color_palette = {
+        blue = "#1e66f5",
+        sapphire = "#209fb5",
+        green = "#40a02b",
+        teal = "#179299",
+        yellow = "#df8e1d",
+        peach = "#fe640b",
+        red = "#d20f39",
+        mauve = "#8839ef",
+        pink = "#ea76cb",
+        sky = "#04a5e5",
+        lavender = "#7287fd",
+        overlay0 = "#6c7086",
+        overlay1 = "#7f849c",
+        subtext0 = "#a6adc8",
+        text = "#4c4f69",
+      }
 
       -- Map common colors to palette equivalents
       local color_map = {

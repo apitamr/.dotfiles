@@ -28,13 +28,7 @@ return {
         "fallback",
       },
       ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
-      ["<CR>"] = {
-        function()
-          return require("sidekick").nes_jump_or_apply()
-        end,
-        "accept",
-        "fallback",
-      },
+      ["<CR>"] = { "accept", "fallback" },
       ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
