@@ -22,7 +22,10 @@ minimum-contrast = 1.1
 link-previews = osc8
 
 # Font
-font-family = JetBrainsMono NF Light
+font-family = JetBrains Mono Light
+font-family-bold = JetBrains Mono Bold
+font-family-italic = JetBrains Mono Italic
+font-family-bold-italic = JetBrains Mono Bold Italic
 font-size = 14
 font-thicken = true
 adjust-cell-width = -4%
