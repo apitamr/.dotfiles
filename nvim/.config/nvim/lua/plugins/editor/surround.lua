@@ -7,20 +7,10 @@ return {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
-    opts = {
-      keymaps = {
-        insert = false,
-        insert_line = false,
-        normal = "ys",
-        normal_cur = "yss",
-        normal_line = "yS",
-        normal_cur_line = "ySS",
-        visual = "S",
-        visual_line = "gS",
-        delete = "ds",
-        change = "cs",
-        change_line = "cS",
-      },
-    },
+    init = function()
+      -- Disable default insert-mode surrounds (must be set before plugin loads)
+      vim.g.nvim_surround_no_insert_mappings = true
+    end,
+    opts = {},
   },
 }
