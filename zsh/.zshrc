@@ -45,3 +45,6 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/opt/homebrew/opt/php@8.3/bin:$PATH"
 export PATH="/opt/homebrew/opt/php@8.3/sbin:$PATH"
 export COMPOSER_PHP="/opt/homebrew/opt/php@8.3/bin/php"
+
+# bun completions
+[ -s "/Users/apitamr/.bun/_bun" ] && source "/Users/apitamr/.bun/_bun"
