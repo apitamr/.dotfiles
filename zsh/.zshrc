@@ -6,8 +6,6 @@ setopt HIST_REDUCE_BLANKS   # remove extra blanks from history
 setopt SHARE_HISTORY        # share history across sessions
 setopt INTERACTIVE_COMMENTS # allow comments in interactive shell
 
-# Docker CLI Completions (must be before compinit)
-fpath=($HOME/.docker/completions $fpath)
 
 # Oh My Zsh Configuration
 export ZSH="$HOME/.oh-my-zsh"
@@ -48,3 +46,9 @@ export COMPOSER_PHP="/opt/homebrew/opt/php@8.3/bin/php"
 
 # bun completions
 [ -s "/Users/apitamr/.bun/_bun" ] && source "/Users/apitamr/.bun/_bun"
+
+# Docker CLI Completions (must be before compinit)
+fpath=($HOME/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
