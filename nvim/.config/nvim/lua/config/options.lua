@@ -4,7 +4,7 @@
 vim.opt.updatetime = 250
 vim.opt.redrawtime = 1500
 vim.opt.synmaxcol = 300
-vim.opt.lazyredraw = false
+vim.opt.lazyredraw = true
 
 -- Memory/history limits
 vim.opt.history = 100
