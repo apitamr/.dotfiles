@@ -9,28 +9,20 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Set border highlights for kanso theme
-local function set_border_colors()
-  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#23262c", bg = "NONE" })
-  vim.api.nvim_set_hl(0, "VertSplit", { fg = "#23262c", bg = "NONE" })
-  vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#23262c", bg = "NONE" })
-  -- LSP float with solid background
-  vim.api.nvim_set_hl(0, "LspFloat", { bg = "#1a1a1a" })
-  vim.api.nvim_set_hl(0, "LspFloatBorder", { bg = "#1a1a1a", fg = "#5c5c5c" })
-end
-
--- Set on colorscheme change
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "*",
-  callback = set_border_colors,
+  callback = function()
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#23262c", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "VertSplit", { fg = "#23262c", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#23262c", bg = "NONE" })
+    vim.api.nvim_set_hl(0, "LspFloat", { bg = "#1a1a1a" })
+    vim.api.nvim_set_hl(0, "LspFloatBorder", { bg = "#1a1a1a", fg = "#5c5c5c" })
+  end,
 })
 
 -- LSP float window styling (solid background, border)
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function()
-    -- Only override once
-    if vim.g.lsp_float_override then
-      return
-    end
+    if vim.g.lsp_float_override then return end
     vim.g.lsp_float_override = true
 
     local orig = vim.lsp.util.open_floating_preview
@@ -43,7 +35,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       if winnr and vim.api.nvim_win_is_valid(winnr) then
         vim.wo[winnr].winblend = 0
         vim.wo[winnr].winhighlight = "Normal:LspFloat,FloatBorder:LspFloatBorder"
-        -- Auto focus the float window
         vim.api.nvim_set_current_win(winnr)
       end
       return bufnr, winnr
@@ -51,21 +42,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- Disable auto comment continuation on new line (enforce for all filetypes)
+-- Disable auto comment continuation on new line
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
--- Open Oil automatically when Neovim starts with no file arguments
+-- Open Oil when Neovim starts with no file arguments
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    -- Check if no arguments were passed (or only a directory)
     if vim.fn.argc() == 0 then
-      vim.schedule(function()
-        require("oil").open(vim.fn.getcwd())
-      end)
+      vim.schedule(function() require("oil").open(vim.fn.getcwd()) end)
     end
   end,
 })
@@ -73,14 +61,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- Open file from lazygit without splits
 function _G.LazygitEdit(filename, line)
   vim.schedule(function()
-    -- Close all floating windows (lazygit)
     for _, win in ipairs(vim.api.nvim_list_wins()) do
-      local cfg = vim.api.nvim_win_get_config(win)
-      if cfg.relative ~= "" then
+      if vim.api.nvim_win_get_config(win).relative ~= "" then
         pcall(vim.api.nvim_win_close, win, true)
       end
     end
-    -- Open the file in the current window
     vim.cmd("edit " .. vim.fn.fnameescape(filename))
     if line and line > 0 then
       pcall(vim.api.nvim_win_set_cursor, 0, { line, 0 })
@@ -89,26 +74,18 @@ function _G.LazygitEdit(filename, line)
   return ""
 end
 
--- Auto-delete empty/unnamed buffers when leaving them (debounced)
-local buf_cleanup_timer = nil
+-- Auto-delete empty unnamed buffers when leaving them
 vim.api.nvim_create_autocmd("BufLeave", {
   callback = function(args)
     local buf = args.buf
-    -- Debounce to avoid running on rapid buffer switches
-    if buf_cleanup_timer then
-      vim.fn.timer_stop(buf_cleanup_timer)
-    end
-    buf_cleanup_timer = vim.fn.timer_start(100, function()
-      -- Check if buffer is unnamed and empty
-      if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf) == "" then
-        local ok, buftype = pcall(function() return vim.bo[buf].buftype end)
-        if ok and buftype == "" then
-          local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-          if #lines == 1 and lines[1] == "" then
-            pcall(vim.api.nvim_buf_delete, buf, { force = true })
-          end
-        end
+    vim.defer_fn(function()
+      if not vim.api.nvim_buf_is_valid(buf) then return end
+      if vim.api.nvim_buf_get_name(buf) ~= "" then return end
+      if vim.bo[buf].buftype ~= "" then return end
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      if #lines == 1 and lines[1] == "" then
+        pcall(vim.api.nvim_buf_delete, buf, { force = true })
       end
-    end)
+    end, 100)
   end,
 })
