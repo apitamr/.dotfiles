@@ -4,7 +4,7 @@ local map = vim.keymap.set
 
 -- Remove LazyVim defaults we don't use
 local del = { "<leader>xx", "<leader>xX", "<leader>xq", "<leader>xQ", "<leader>ft", "<leader>fT",
-  "<c-/>", "<c-_>", "<leader>fe", "<leader>fE" }
+  "<c-/>", "<c-_>", "<leader>fe", "<leader>fE", "<leader>-" }
 for _, k in ipairs(del) do pcall(vim.keymap.del, { "n", "t" }, k) end
 
 -- General
