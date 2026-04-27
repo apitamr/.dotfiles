@@ -9,8 +9,6 @@ return {
     opts = {
       preview = {
         modes = { "n", "no", "c" }, -- Modes where markview is active
-        hybrid_modes = { "n" }, -- Hybrid mode shows raw markdown on cursor line
-        -- Callbacks for when markview is attached/detached
         callbacks = {
           on_enable = function(_, win)
             vim.wo[win].conceallevel = 2

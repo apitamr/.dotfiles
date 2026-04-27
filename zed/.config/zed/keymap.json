@@ -125,7 +125,8 @@
 
       // Navigation & Panels
       "space e": "project_panel::ToggleFocus",
-      "space x": "pane::CloseActiveItem"
+      "-": "project_panel::ToggleFocus",
+      "space x": "pane::CloseActiveItem",
 
       // Git (commented out)
       // "space g g": ["task::Spawn", { "task_name": "LazyGit", "reveal_target": "center" }]

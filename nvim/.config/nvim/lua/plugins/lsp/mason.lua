@@ -7,35 +7,25 @@ return {
       },
       ensure_installed = {
         -- LSP Servers
-        "clangd",
         "css-lsp",
         "docker-compose-language-service",
         "docker-language-server",
         "gopls",
         "html-lsp",
-        "intelephense",
         "json-lsp",
         "lua-language-server",
         "prisma-language-server",
-        "python-lsp-server",
         "rust-analyzer",
         "tailwindcss-language-server",
         "vtsls",
-        "vue-language-server",
         "yaml-language-server",
         "zls",
 
         -- Formatters & Linters
-        "biome",
-        "black",
-        "gofumpt",
-        "goimports",
-        "htmlhint",
-        "isort",
-        "prettier",
-        "shfmt",
         "stylua",
         "taplo",
+        "oxlint",
+        "oxfmt",
 
         -- Tools
         "tree-sitter-cli",

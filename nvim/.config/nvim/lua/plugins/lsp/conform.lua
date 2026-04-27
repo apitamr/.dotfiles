@@ -5,22 +5,22 @@ return {
       -- Disable format on save (use <leader>fm for manual formatting)
       format_on_save = false,
       formatters_by_ft = {
-        -- JavaScript/TypeScript (Biome or Prettier)
-        javascript = { "biome", "prettier", stop_after_first = true },
-        javascriptreact = { "biome", "prettier", stop_after_first = true },
-        typescript = { "biome", "prettier", stop_after_first = true },
-        typescriptreact = { "biome", "prettier", stop_after_first = true },
+        -- JS/TS (oxfmt, biome fallback)
+        javascript = { "oxfmt", "biome", stop_after_first = true },
+        javascriptreact = { "oxfmt", "biome", stop_after_first = true },
+        typescript = { "oxfmt", "biome", stop_after_first = true },
+        typescriptreact = { "oxfmt", "biome", stop_after_first = true },
 
         -- Web
-        html = { "prettier" },
-        css = { "prettier" },
-        scss = { "prettier" },
-        less = { "prettier" },
-        json = { "biome", "prettier", stop_after_first = true },
-        jsonc = { "biome", "prettier", stop_after_first = true },
-        yaml = { "prettier" },
-        markdown = { "prettier" },
-        graphql = { "prettier" },
+        html = { "oxfmt" },
+        css = { "oxfmt" },
+        scss = { "oxfmt" },
+        less = { "oxfmt" },
+        json = { "oxfmt", "biome", stop_after_first = true },
+        jsonc = { "oxfmt", "biome", stop_after_first = true },
+        yaml = { "oxfmt" },
+        markdown = { "oxfmt" },
+        graphql = { "oxfmt" },
 
         -- Lua
         lua = { "stylua" },
@@ -40,15 +40,13 @@ return {
 
         -- Other
         toml = { "taplo" },
-        xml = { "xmlformat" },
+        xml = { "xmllint" },
+        svg = { "xmllint" },
       },
       -- Customize formatters (merged with builtin formatters)
       formatters = {
         shfmt = {
           prepend_args = { "-i", "2", "-ci" }, -- 2 spaces, indent switch cases
-        },
-        prettier = {
-          prepend_args = { "--tab-width", "2", "--single-quote" },
         },
       },
     },

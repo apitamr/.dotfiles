@@ -6,7 +6,10 @@ return {
 
     opts = {
       default_file_explorer = true,
-      columns = { "icon" },
+      columns = {
+        "icon",
+        { "size", highlight = "Special" },
+      },
       view_options = {
         show_hidden = true,
         is_hidden_file = function(name, _)

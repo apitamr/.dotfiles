@@ -115,7 +115,21 @@ map("n", "<leader>x", function()
 end, { desc = "Close buffer", nowait = true })
 
 -- Oil
-map("n", "-", "<cmd>Oil<cr>", { desc = "Parent directory" })
+map("n", "-", function()
+  if vim.wo.winfixbuf then
+    local cur = vim.api.nvim_get_current_win()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if win ~= cur
+        and not vim.wo[win].winfixbuf
+        and vim.api.nvim_win_get_config(win).relative == ""
+      then
+        vim.api.nvim_set_current_win(win)
+        break
+      end
+    end
+  end
+  vim.cmd("Oil")
+end, { desc = "Parent directory" })
 map("n", "<leader>o", function()
   if vim.bo.filetype ~= "oil" then require("oil").open_float() end
 end, { desc = "Oil float" })
@@ -160,9 +174,15 @@ map("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration" })
 map("n", "gr", vim.lsp.buf.references, { desc = "References" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation" })
 map("n", "gy", vim.lsp.buf.type_definition, { desc = "Type definition" })
-map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature help" })
-map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+map("n", "K", function()
+  vim.lsp.buf.hover({ border = "rounded", max_width = 80, max_height = 20 })
+end, { desc = "Hover" })
+map("n", "gK", function()
+  vim.lsp.buf.signature_help({ border = "rounded", max_width = 80 })
+end, { desc = "Signature help" })
+map("i", "<C-k>", function()
+  vim.lsp.buf.signature_help({ border = "rounded", max_width = 80 })
+end, { desc = "Signature help" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LSP info" })
@@ -238,6 +258,38 @@ map("n", "<leader>qc", "<cmd>cclose<cr>", { desc = "Close quickfix" })
 -- Misc
 map("n", "<leader>uu", "<cmd>Lazy update<cr>", { desc = "Update plugins" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+map("n", "<leader>ue", function()
+  local cur_buf = vim.api.nvim_get_current_buf()
+  local path = vim.b.image_source_path or vim.api.nvim_buf_get_name(cur_buf)
+  if path == "" then return end
+
+  if vim.b.image_source_path then
+    -- We're in source mode → reopen the file (snacks will render the image)
+    vim.cmd("edit! " .. vim.fn.fnameescape(path))
+    pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
+  else
+    -- Switch to source mode in a fresh scratch buffer
+    pcall(function() Snacks.image.placement.clean(cur_buf) end)
+    local lines = vim.fn.readfile(path)
+    local new_buf = vim.api.nvim_create_buf(true, true)
+    vim.api.nvim_buf_set_lines(new_buf, 0, -1, false, lines)
+    vim.b[new_buf].image_source_path = path
+    vim.b[new_buf].snacks_image_attached = true
+    vim.api.nvim_buf_set_name(new_buf, path .. " [source]")
+    vim.bo[new_buf].filetype = vim.filetype.match({ filename = path }) or "xml"
+    vim.bo[new_buf].buftype = "acwrite"
+    vim.api.nvim_create_autocmd("BufWriteCmd", {
+      buffer = new_buf,
+      callback = function()
+        vim.fn.writefile(vim.api.nvim_buf_get_lines(new_buf, 0, -1, false), path)
+        vim.bo[new_buf].modified = false
+      end,
+    })
+    vim.api.nvim_set_current_buf(new_buf)
+    pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
+    vim.cmd("redraw!")
+  end
+end, { desc = "Toggle image/source" })
 map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
 map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer keymaps" })
 map("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Quit" })

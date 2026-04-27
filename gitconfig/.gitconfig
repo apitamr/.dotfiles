@@ -1,5 +1,5 @@
 [user]
-	name = strygwyr
+	name = apitamr
 	email = 13832826+apitamr@users.noreply.github.com
 [init]
 	defaultBranch = main
@@ -19,6 +19,10 @@
 	algorithm = histogram
 [merge]
 	conflictstyle = zdiff3
+[pager]
+	blame = delta
+[delta]
+	hyperlinks = true
 [include]
 	path = ~/.dotfiles/gitconfig/.gitconfig-work
 [credential "https://codeberg.org"]
@@ -28,3 +32,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[credential "https://repo.transjakarta.co.id"]
+	provider = generic

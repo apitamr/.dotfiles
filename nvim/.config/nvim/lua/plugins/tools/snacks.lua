@@ -3,7 +3,13 @@ return {
     "folke/snacks.nvim",
     event = "VeryLazy",
     opts = {
-      image = {},
+      image = {
+        formats = {
+          "png", "jpg", "jpeg", "gif", "bmp", "webp", "tiff",
+          "heic", "avif", "mp4", "mov", "avi", "mkv", "webm",
+          "pdf", "icns", "svg",
+        },
+      },
       dashboard = {
         enabled = false,
       },
@@ -43,8 +49,8 @@ return {
             height = 0.8,
             {
               box = "vertical",
-              { win = "list", title = "{source} {live}", border = "rounded" },
               { win = "input", height = 1, border = "rounded" },
+              { win = "list", title = "{source} {live}", border = "rounded" },
             },
             { win = "preview", width = 0.5, border = "rounded" },
           },

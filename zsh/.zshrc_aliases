@@ -7,7 +7,6 @@ alias z='zed'
 alias bbdd='brew bundle dump --describe'
 alias ff='fastfetch'
 alias reload='source ~/.zshrc'
-alias ls='lsd'
 
 # ─── Git Aliases ────────────────────────────────────────────────────────────
 alias gs='git status'
@@ -30,15 +29,10 @@ alias glogp='git log --pretty=format:"%h %s" --graph'
 alias gfo='git fetch origin'
 alias gf='git fetch'
 alias gm='git merge'
+alias gtag='git tag'
 
-# ─── Docker Aliases ─────────────────────────────────────────────────────────
-alias doc='docker'
-alias dps='docker ps'
-alias dlogs='docker logs'
-alias dim='docker image'
-alias dc='docker container'
-alias dn='docker network'
-alias dvol='docker volume'
+# ─── Ngrok ──────────────────────────────────────────────────────────────────
+alias ngrok='TERM=xterm-256color ngrok'
 
 # ─── TMUX Aliases ─────────────────────────────────────────────────────────
 alias t='tmux'
