@@ -31,9 +31,4 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-# Auto-start tmux (skip inside Zed's integrated terminal)
-if [ -x "$(command -v tmux)" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$ZED_TERM" ]; then
-  tmux new-session -A -s main
-fi
-
 source <(COMPLETE=zsh jj)
