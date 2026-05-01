@@ -43,7 +43,7 @@ confirm-close-surface = true
 
 # macOS
 maximize = true
-macos-non-native-fullscreen = true
+macos-non-native-fullscreen = false
 macos-window-buttons = visible
 macos-titlebar-proxy-icon = hidden
 macos-icon = official

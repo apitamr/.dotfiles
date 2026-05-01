@@ -45,6 +45,13 @@ return {
             },
           },
         },
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              classFunctions = { "cva", "cx", "tv", "cn", "clsx", "twMerge" },
+            },
+          },
+        },
       },
     },
   },
