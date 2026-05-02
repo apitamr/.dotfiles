@@ -8,6 +8,7 @@ return {
     require("fff").setup(opts)
     local image = require("fff.file_picker.image")
     local orig_is_image = image.is_image
+    ---@diagnostic disable-next-line: duplicate-set-field
     image.is_image = function(file_path)
       if type(file_path) == "string" and file_path:lower():match("%.svg$") then
         return true
