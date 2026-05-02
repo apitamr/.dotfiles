@@ -31,19 +31,7 @@ return {
         border = "rounded",
       },
       keymaps = {
-        ["q"] = {
-          callback = function()
-            -- Only close if there's another buffer to return to
-            local bufs = vim.fn.getbufinfo({ buflisted = 1 })
-            local non_oil_bufs = vim.tbl_filter(function(buf)
-              return vim.bo[buf.bufnr].filetype ~= "oil"
-            end, bufs)
-            if #non_oil_bufs > 0 then
-              require("oil.actions").close.callback()
-            end
-          end,
-          desc = "Close oil if other buffers exist",
-        },
+        ["q"] = "actions.close",
         ["<Esc>"] = {
           callback = function()
             local win = vim.api.nvim_get_current_win()

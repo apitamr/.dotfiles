@@ -1,13 +1,5 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 
--- Disable LazyVim's root detection autocmd
-vim.api.nvim_create_autocmd("User", {
-  pattern = "LazyVimStarted",
-  callback = function()
-    pcall(vim.api.nvim_del_augroup_by_name, "lazyvim_root")
-  end,
-})
-
 -- Set border highlights for kanso theme
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
@@ -20,32 +12,27 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- LSP float window styling (solid background, border)
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function()
-    if vim.g.lsp_float_override then return end
-    vim.g.lsp_float_override = true
-
-    local orig = vim.lsp.util.open_floating_preview
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-      opts = opts or {}
-      opts.border = opts.border or "rounded"
-      opts.focus_id = "lsp_float"
-      opts.max_width = math.min(opts.max_width or 120, 120)
-      opts.max_height = math.min(opts.max_height or 20, 20)
-      opts.wrap = true
-      local bufnr, winnr = orig(contents, syntax, opts, ...)
-      if winnr and vim.api.nvim_win_is_valid(winnr) then
-        vim.wo[winnr].winblend = 0
-        vim.wo[winnr].winhighlight = "Normal:LspFloat,FloatBorder:LspFloatBorder"
-        vim.wo[winnr].conceallevel = 2
-        vim.wo[winnr].concealcursor = "n"
-        vim.api.nvim_set_current_win(winnr)
-      end
-      return bufnr, winnr
+do
+  local orig = vim.lsp.util.open_floating_preview
+  ---@diagnostic disable-next-line: duplicate-set-field
+  vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or "rounded"
+    opts.focus_id = "lsp_float"
+    opts.max_width = math.min(opts.max_width or 120, 120)
+    opts.max_height = math.min(opts.max_height or 20, 20)
+    opts.wrap = true
+    local bufnr, winnr = orig(contents, syntax, opts, ...)
+    if winnr and vim.api.nvim_win_is_valid(winnr) then
+      vim.wo[winnr].winblend = 0
+      vim.wo[winnr].winhighlight = "Normal:LspFloat,FloatBorder:LspFloatBorder"
+      vim.wo[winnr].conceallevel = 2
+      vim.wo[winnr].concealcursor = "n"
+      vim.api.nvim_set_current_win(winnr)
     end
-  end,
-})
+    return bufnr, winnr
+  end
+end
 
 -- Disable auto comment continuation on new line
 vim.api.nvim_create_autocmd("FileType", {

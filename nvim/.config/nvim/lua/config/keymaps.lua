@@ -7,6 +7,9 @@ local del = { "<leader>xx", "<leader>xX", "<leader>xq", "<leader>xQ", "<leader>f
   "<c-/>", "<c-_>", "<leader>fe", "<leader>fE", "<leader>-" }
 for _, k in ipairs(del) do pcall(vim.keymap.del, { "n", "t" }, k) end
 
+-- Disable mark-setting (m{a-z}/m{A-Z}); use jumps/search instead
+map({ "n", "x" }, "m", "<Nop>", { desc = "Disabled (was: set mark)" })
+
 -- General
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
@@ -90,6 +93,34 @@ map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "New buffer" })
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
 
+-- Switch buffer + resend image if landing on an image buffer
+local function switch_then_resend(cmd)
+  return function()
+    vim.cmd(cmd)
+    local b = vim.api.nvim_get_current_buf()
+    local name = vim.api.nvim_buf_get_name(b)
+    if name == "" or not (Snacks and Snacks.image and Snacks.image.supports_file(name)) then return end
+    Snacks.image.placement.clean(b)
+    Snacks.image.image.clear()
+    Snacks.image.buf.attach(b)
+  end
+end
+map("n", "<S-h>", switch_then_resend("bprevious"), { desc = "Prev buffer (resend image)" })
+map("n", "<S-l>", switch_then_resend("bnext"), { desc = "Next buffer (resend image)" })
+
+local function close_current_buffer()
+  local non_oil = vim.tbl_filter(function(b)
+    return vim.bo[b.bufnr].filetype ~= "oil"
+  end, vim.fn.getbufinfo({ buflisted = 1 }))
+  Snacks.bufdelete()
+  if #non_oil <= 1 then
+    vim.schedule(function() require("oil").open() end)
+  end
+end
+
+map("n", "<leader>bx", close_current_buffer, { desc = "Close buffer", nowait = true })
+map("n", "<leader>x", close_current_buffer, { desc = "Close buffer", nowait = true })
+
 map("n", "<leader>bd", function()
   local win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_get_current_buf()
@@ -102,17 +133,7 @@ map("n", "<leader>bd", function()
     end
   end
   vim.schedule(function() require("oil").open(vim.fn.getcwd()) end)
-end, { desc = "Close all buffers" })
-
-map("n", "<leader>x", function()
-  local non_oil = vim.tbl_filter(function(b)
-    return vim.bo[b.bufnr].filetype ~= "oil"
-  end, vim.fn.getbufinfo({ buflisted = 1 }))
-  Snacks.bufdelete()
-  if #non_oil <= 1 then
-    vim.schedule(function() require("oil").open() end)
-  end
-end, { desc = "Close buffer", nowait = true })
+end, { desc = "Close all buffers", nowait = true })
 
 -- Oil
 map("n", "-", function()
@@ -147,7 +168,6 @@ map("v", "<leader>fw", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
   vim.schedule(function() Snacks.picker.grep({ search = table.concat(lines, "\n") }) end)
 end, { desc = "Grep selection" })
-map("n", "<leader>fa", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "All files" })
 map("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
 map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help" })
 map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent files" })
@@ -228,8 +248,6 @@ map("n", "zp", function() require("ufo").peekFoldedLinesUnderCursor() end, { des
 
 -- Markdown (Markview)
 map("n", "<leader>mt", "<cmd>Markview toggle<cr>", { desc = "Toggle preview" })
-map("n", "<leader>mp", "<cmd>Markview enable<cr>", { desc = "Enable preview" })
-map("n", "<leader>ms", "<cmd>Markview disable<cr>", { desc = "Disable preview" })
 map("n", "<leader>mh", "<cmd>Markview hybridToggle<cr>", { desc = "Hybrid mode" })
 map("n", "<leader>mv", "<cmd>Markview splitToggle<cr>", { desc = "Split view" })
 
@@ -244,7 +262,6 @@ map("x", "<leader>ax", function() require("sidekick.cli").send({ prompt = "fix" 
 map("x", "<leader>ar", function() require("sidekick.cli").send({ prompt = "optimize" }) end, { desc = "Optimize" })
 map({ "n", "x" }, "<leader>ap", function() require("sidekick.cli").prompt() end, { desc = "Select prompt" })
 map("n", "<leader>as", function() require("sidekick.cli").select() end, { desc = "Select CLI" })
-map("n", "<leader>ac", "<cmd>Context<cr>", { desc = "Context" })
 
 -- Terminal
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
@@ -290,6 +307,26 @@ map("n", "<leader>ue", function()
     vim.cmd("redraw!")
   end
 end, { desc = "Toggle image/source" })
-map("n", "<leader>ma", function() Snacks.picker.marks() end, { desc = "Marks" })
+map("n", "<leader>ir", function()
+  local targets = {}
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(b) then
+      local name = vim.api.nvim_buf_get_name(b)
+      if name ~= "" and Snacks.image.supports_file(name) then
+        targets[#targets + 1] = b
+      end
+    end
+  end
+  Snacks.image.placement.clean()
+  Snacks.image.image.clear()
+  for _, b in ipairs(targets) do
+    Snacks.image.buf.attach(b)
+  end
+end, { desc = "Re-send images to terminal" })
+map("n", "<leader>fm", function() Snacks.picker.marks() end, { desc = "Marks" })
+map("n", "<leader>fM", function()
+  vim.cmd("delmarks! | delmarks A-Z0-9")
+  vim.notify("All marks cleared")
+end, { desc = "Clear all marks" })
 map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer keymaps" })
 map("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Quit" })

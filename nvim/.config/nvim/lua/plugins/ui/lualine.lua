@@ -1,6 +1,5 @@
 return {
   "nvim-lualine/lualine.nvim",
-  optional = true,
   event = "VeryLazy",
   opts = {
     options = {
@@ -8,9 +7,6 @@ return {
       component_separators = "",
       section_separators = "",
       globalstatus = true,
-      refresh = {
-        statusline = 500,
-      },
     },
     sections = {
       lualine_a = { "mode" },
@@ -28,6 +24,8 @@ return {
         },
       },
       lualine_x = {
+        "selectioncount",
+        "%S",
         {
           "diagnostics",
           symbols = { error = " ", warn = " ", info = " ", hint = " " },

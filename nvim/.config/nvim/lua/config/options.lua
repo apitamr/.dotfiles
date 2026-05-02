@@ -4,7 +4,6 @@
 vim.opt.updatetime = 250
 vim.opt.redrawtime = 1500
 vim.opt.synmaxcol = 300
-vim.opt.lazyredraw = true
 
 -- Memory/history limits
 vim.opt.history = 100
@@ -19,9 +18,6 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
--- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.autoformat = false
 
 -- Editor behavior
@@ -47,3 +43,9 @@ vim.opt.fillchars:append({
 
 -- Faster key sequences
 vim.opt.ttimeoutlen = 0
+
+-- Hide cmdline when not in use (noice handles it)
+vim.opt.cmdheight = 0
+
+-- Route partial keystrokes (showcmd) to statusline
+vim.opt.showcmdloc = "statusline"
