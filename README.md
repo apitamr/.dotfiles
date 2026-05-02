@@ -14,6 +14,7 @@ Personal configuration files for development environment setup.
 - **lazygit** - Git TUI configuration
 - **gitconfig** - Git configuration
 - **opencode** - OpenCode AI assistant configuration
+- **fastfetch** - System info display configuration
 
 ## Installation
 
@@ -56,7 +57,7 @@ Uses [GNU Stow](https://www.gnu.org/software/stow/) for symlink management.
 ```bash
 # Set environment variables (optional)
 export DOTFILES=$HOME/.dotfiles
-export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,gitconfig,opencode"
+export STOW_FOLDERS="tmux,zsh,nvim,ghostty,zed,lazygit,gitconfig,opencode,fastfetch"
 
 # Run install script
 ./install
@@ -97,6 +98,7 @@ Each directory represents a package that can be independently stowed:
 
 ```
 .dotfiles/
+├── fastfetch/        # System info display
 ├── ghostty/          # Terminal emulator
 ├── gitconfig/        # Git configuration
 ├── lazygit/          # Git TUI

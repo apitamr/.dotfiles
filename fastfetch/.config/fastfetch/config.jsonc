@@ -1,0 +1,145 @@
+// Adapted from fastfetch preset #25 -- grouped boxes per category
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "builtin",
+        "source": "apple",
+        "padding": {
+            "top": 1,
+            "right": 3
+        }
+    },
+    "display": {
+        "color": {
+            "keys": "magenta"
+        },
+        "separator": "",
+        "constants": [
+            "──────────────────────────────────────────────",
+            "\u001b[47D",
+            "\u001b[47C",
+            "\u001b[46C"
+        ],
+        "brightColor": false
+    },
+    "modules": [
+        {
+            "type": "custom",
+            "key": "{#cyan}┌──────────────┬{$1}┐{#}\u001b[37D",
+            "format": "{#bright_cyan} System "
+        },
+        {
+            "type": "os",
+            "key": "{#cyan}│ {icon}  Darwin    │{$4}│{#}{$2}"
+        },
+        {
+            "type": "kernel",
+            "key": "{#cyan}│ {icon}  Kernel    │{$4}│{#}{$2}"
+        },
+        {
+            "type": "locale",
+            "key": "{#cyan}│ {icon}  Locale    │{$4}│{#}{$2}"
+        },
+        {
+            "type": "packages",
+            "key": "{#cyan}│ {icon}  Packages  │{$4}│{#}{$2}"
+        },
+        {
+            "type": "uptime",
+            "key": "{#cyan}│ {icon}  Uptime    │{$4}│{#}{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "{#cyan}└──────────────┴{$1}┘{#}",
+            "format": ""
+        },
+
+        {
+            "type": "custom",
+            "key": "{#green}┌──────────────┬{$1}┐{#}\u001b[37D",
+            "format": "{#bright_green} Hardware "
+        },
+        {
+            "type": "chassis",
+            "key": "{#green}│ {icon}  Chassis   │{$4}│{#}{$2}"
+        },
+        {
+            "type": "memory",
+            "key": "{#green}│ {icon}  RAM       │{$4}│{#}{$2}"
+        },
+        {
+            "type": "swap",
+            "key": "{#green}│ {icon}  SWAP      │{$4}│{#}{$2}"
+        },
+        {
+            "type": "cpu",
+            "key": "{#green}│ {icon}  CPU       │{$4}│{#}{$2}",
+            "showPeCoreCount": true
+        },
+        {
+            "type": "gpu",
+            "key": "{#green}│ {icon}  GPU       │{$4}│{#}{$2}"
+        },
+        {
+            "type": "disk",
+            "key": "{#green}│ {icon}  Disk      │{$4}│{#}{$2}",
+            "format": "{size-used} / {size-total} ({size-percentage}) - {filesystem}"
+        },
+        {
+            "type": "battery",
+            "key": "{#green}│ {icon}  Battery   │{$4}│{#}{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "{#green}└──────────────┴{$1}┘{#}",
+            "format": ""
+        },
+
+        {
+            "type": "custom",
+            "key": "{#green}┌──────────────┬{$1}┐{#}\u001b[37D",
+            "format": "{#bright_green} Desktop "
+        },
+        {
+            "type": "wm",
+            "key": "{#green}│ {icon}  Session   │{$4}│{#}{$2}"
+        },
+        {
+            "type": "display",
+            "key": "{#green}│ {icon}  Display   │{$4}│{#}{$2}",
+            "compactType": "original-with-refresh-rate"
+        },
+        {
+            "type": "font",
+            "key": "{#green}│ {icon}  UI Font   │{$4}│{#}{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "{#green}└──────────────┴{$1}┘{#}",
+            "format": ""
+        },
+
+        {
+            "type": "custom",
+            "key": "{#yellow}┌──────────────┬{$1}┐{#}\u001b[37D",
+            "format": "{#bright_yellow} Terminal "
+        },
+        {
+            "type": "shell",
+            "key": "{#yellow}│ {icon}  Shell     │{$4}│{#}{$2}"
+        },
+        {
+            "type": "terminal",
+            "key": "{#yellow}│ {icon}  Terminal  │{$4}│{#}{$2}"
+        },
+        {
+            "type": "terminalfont",
+            "key": "{#yellow}│ {icon}  Term Font │{$4}│{#}{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "{#yellow}└──────────────┴{$1}┘{#}",
+            "format": ""
+        }
+    ]
+}
