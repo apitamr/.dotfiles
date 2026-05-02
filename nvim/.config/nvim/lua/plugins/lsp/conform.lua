@@ -5,22 +5,22 @@ return {
       -- Disable format on save (use <leader>fm for manual formatting)
       format_on_save = false,
       formatters_by_ft = {
-        -- JS/TS (oxfmt, biome fallback)
-        javascript = { "oxfmt", "biome", stop_after_first = true },
-        javascriptreact = { "oxfmt", "biome", stop_after_first = true },
-        typescript = { "oxfmt", "biome", stop_after_first = true },
-        typescriptreact = { "oxfmt", "biome", stop_after_first = true },
+        -- JS/TS (oxfmt → biome → prettier)
+        javascript = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        javascriptreact = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        typescript = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        typescriptreact = { "oxfmt", "biome", "prettier", stop_after_first = true },
 
         -- Web
-        html = { "oxfmt" },
-        css = { "oxfmt" },
-        scss = { "oxfmt" },
-        less = { "oxfmt" },
-        json = { "oxfmt", "biome", stop_after_first = true },
-        jsonc = { "oxfmt", "biome", stop_after_first = true },
-        yaml = { "oxfmt" },
-        markdown = { "oxfmt" },
-        graphql = { "oxfmt" },
+        html = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        css = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        scss = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        less = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        json = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        jsonc = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        yaml = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        markdown = { "oxfmt", "biome", "prettier", stop_after_first = true },
+        graphql = { "oxfmt", "biome", "prettier", stop_after_first = true },
 
         -- Lua
         lua = { "stylua" },
