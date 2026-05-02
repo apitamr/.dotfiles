@@ -1,13 +1,13 @@
 return {
   {
     "f-person/git-blame.nvim",
-    cmd = { "GitBlameToggle", "GitBlameEnable", "GitBlameDisable", "GitBlameOpenCommitURL", "GitBlameCopySHA" },
+    event = "VeryLazy",
     opts = {
-      enabled = false, -- Disable on startup, toggle manually with :GitBlameToggle
+      enabled = true,
       message_template = " <summary> • <date> • <author>",
       date_format = "%r",
       virtual_text_column = 1,
-      delay = 500, -- Delay in ms before showing blame (reduces CPU usage)
+      delay = 0,
     },
   },
 }
