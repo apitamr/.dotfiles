@@ -30,7 +30,7 @@ return {
       default_component_configs = {
         indent = {
           indent_size = 2,
-          padding = 1,
+          padding = 0,
           with_markers = true,
           indent_marker = "│",
           last_indent_marker = "└",
@@ -68,8 +68,6 @@ return {
           ["<space>"] = "none",
           ["<cr>"] = "open",
           ["<esc>"] = "cancel",
-          ["l"] = "none",
-          ["h"] = "close_node",
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["<C-v>"] = "open_vsplit",
           ["<C-s>"] = "open_split",
