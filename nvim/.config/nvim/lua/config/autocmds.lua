@@ -41,11 +41,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Open Oil when Neovim starts with no file arguments
+-- Open Neo-tree (full window) when Neovim starts with no file arguments
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 0 then
-      vim.schedule(function() require("oil").open(vim.fn.getcwd()) end)
+      vim.schedule(function()
+        vim.cmd("Neotree position=current dir=" .. vim.fn.fnameescape(vim.fn.getcwd()))
+      end)
     end
   end,
 })

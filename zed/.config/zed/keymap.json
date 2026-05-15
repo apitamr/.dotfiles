@@ -128,6 +128,10 @@
       "-": "project_panel::ToggleFocus",
       "space x": "pane::CloseActiveItem",
 
+      // Tab navigation (nvim-style)
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePreviousItem",
+
       // Git (commented out)
       // "space g g": ["task::Spawn", { "task_name": "LazyGit", "reveal_target": "center" }]
     }

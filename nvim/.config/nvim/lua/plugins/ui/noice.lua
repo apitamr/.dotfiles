@@ -4,7 +4,7 @@ return {
   dependencies = { "MunifTanjim/nui.nvim" },
   opts = {
     cmdline = {
-      enabled = true,
+      enabled = false,
       view = "cmdline", -- render at bottom (native-style), not popup
       format = {
         cmdline = { pattern = "^:", icon = ":", lang = "vim" },

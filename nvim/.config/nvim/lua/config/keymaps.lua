@@ -57,6 +57,12 @@ map("n", "<leader>wv", "<C-w>v", { desc = "Vertical split" })
 map("n", "<leader>ws", "<C-w>s", { desc = "Horizontal split" })
 map("n", "<leader>w=", "<C-w>=", { desc = "Equalize windows" })
 
+local function open_tree_current()
+  -- Close any existing neo-tree windows so we never end up with a duplicate tree
+  pcall(vim.cmd, "Neotree close")
+  vim.cmd("Neotree position=current dir=" .. vim.fn.fnameescape(vim.fn.getcwd()))
+end
+
 map("n", "<leader>wd", function()
   local buf = vim.api.nvim_get_current_buf()
   local normal_wins = vim.tbl_filter(function(w)
@@ -66,7 +72,7 @@ map("n", "<leader>wd", function()
     vim.cmd("close")
     pcall(vim.api.nvim_buf_delete, buf, { force = true })
   else
-    require("oil").open(vim.fn.getcwd())
+    open_tree_current()
     vim.schedule(function() pcall(vim.api.nvim_buf_delete, buf, { force = true }) end)
   end
 end, { desc = "Close window" })
@@ -74,15 +80,15 @@ end, { desc = "Close window" })
 map("n", "<leader>wq", function()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
-    if vim.bo[buf].filetype ~= "oil" then
+    if vim.bo[buf].filetype ~= "neo-tree" then
       if not pcall(vim.api.nvim_win_close, win, false) then
         vim.api.nvim_set_current_win(win)
-        require("oil").open(vim.fn.getcwd())
+        open_tree_current()
       end
     end
   end
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "oil" then
+    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted and vim.bo[buf].filetype ~= "neo-tree" then
       pcall(vim.api.nvim_buf_delete, buf, { force = true })
     end
   end
@@ -109,12 +115,12 @@ map("n", "<S-h>", switch_then_resend("bprevious"), { desc = "Prev buffer (resend
 map("n", "<S-l>", switch_then_resend("bnext"), { desc = "Next buffer (resend image)" })
 
 local function close_current_buffer()
-  local non_oil = vim.tbl_filter(function(b)
-    return vim.bo[b.bufnr].filetype ~= "oil"
+  local non_tree = vim.tbl_filter(function(b)
+    return vim.bo[b.bufnr].filetype ~= "neo-tree"
   end, vim.fn.getbufinfo({ buflisted = 1 }))
   Snacks.bufdelete()
-  if #non_oil <= 1 then
-    vim.schedule(function() require("oil").open() end)
+  if #non_tree <= 1 then
+    vim.schedule(open_tree_current)
   end
 end
 
@@ -122,38 +128,57 @@ map("n", "<leader>bx", close_current_buffer, { desc = "Close buffer", nowait = t
 map("n", "<leader>x", close_current_buffer, { desc = "Close buffer", nowait = true })
 
 map("n", "<leader>bd", function()
-  local win = vim.api.nvim_get_current_win()
-  local buf = vim.api.nvim_get_current_buf()
-  if vim.api.nvim_win_get_config(win).relative ~= "" and vim.bo[buf].filetype == "oil" then
-    vim.api.nvim_win_close(win, true)
-  end
-  for _, b in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted and vim.bo[b].filetype ~= "oil" then
-      pcall(vim.api.nvim_buf_delete, b, { force = true })
+  -- Close any floating neo-tree first
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local b = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_win_get_config(win).relative ~= "" and vim.bo[b].filetype == "neo-tree" then
+      pcall(vim.api.nvim_win_close, win, true)
     end
   end
-  vim.schedule(function() require("oil").open(vim.fn.getcwd()) end)
-end, { desc = "Close all buffers", nowait = true })
-
--- Oil
-map("n", "-", function()
-  if vim.wo.winfixbuf then
-    local cur = vim.api.nvim_get_current_win()
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if win ~= cur
-        and not vim.wo[win].winfixbuf
-        and vim.api.nvim_win_get_config(win).relative == ""
-      then
-        vim.api.nvim_set_current_win(win)
-        break
+  -- Open full-window tree before nuking buffers so nvim never goes empty
+  open_tree_current()
+  vim.schedule(function()
+    for _, b in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted and vim.bo[b].filetype ~= "neo-tree" then
+        pcall(vim.api.nvim_buf_delete, b, { force = true })
       end
     end
+  end)
+end, { desc = "Close all buffers", nowait = true })
+
+-- Neo-tree
+local function has_real_buffer()
+  for _, b in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+    if vim.bo[b.bufnr].filetype ~= "neo-tree" and vim.api.nvim_buf_get_name(b.bufnr) ~= "" then
+      return true
+    end
   end
-  vim.cmd("Oil")
-end, { desc = "Parent directory" })
-map("n", "<leader>o", function()
-  if vim.bo.filetype ~= "oil" then require("oil").open_float() end
-end, { desc = "Oil float" })
+  return false
+end
+
+local function in_fullwindow_tree()
+  local wins = vim.tbl_filter(function(w)
+    return vim.api.nvim_win_get_config(w).relative == ""
+  end, vim.api.nvim_list_wins())
+  if #wins ~= 1 then return false end
+  return vim.bo[vim.api.nvim_win_get_buf(wins[1])].filetype == "neo-tree"
+end
+
+local function tree_toggle(position)
+  if vim.bo.filetype == "neo-tree" or in_fullwindow_tree() then
+    vim.cmd("Neotree close")
+    return
+  end
+  if position == "current" or not has_real_buffer() then
+    open_tree_current()
+  else
+    vim.cmd("Neotree toggle reveal position=" .. position)
+  end
+end
+
+map("n", "-",         function() tree_toggle("left") end,  { desc = "Toggle file tree" })
+map("n", "<leader>e", function() tree_toggle("left") end,  { desc = "Toggle sidebar tree" })
+map("n", "<leader>o", function() tree_toggle("float") end, { desc = "File tree (float)" })
 
 -- Picker (Snacks)
 map("n", "<leader>fw", function() Snacks.picker.grep() end, { desc = "Grep" })

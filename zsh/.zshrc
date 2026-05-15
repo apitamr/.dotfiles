@@ -32,3 +32,6 @@ compinit
 # End of Docker CLI completions
 
 source <(COMPLETE=zsh jj)
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
