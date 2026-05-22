@@ -17,7 +17,7 @@ return {
     },
     messages = { enabled = false },
     popupmenu = { enabled = false },
-    notify = { enabled = false },
+    notify = { enabled = true },
     lsp = {
       progress = { enabled = false },
       hover = { enabled = false },

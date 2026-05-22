@@ -208,6 +208,8 @@ map("n", "gsS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "
 -- Tools (Snacks)
 map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "LazyGit" })
 map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Terminal" })
+map("n", "<leader>th", function() Snacks.terminal.open(nil, { win = { position = "bottom" } }) end, { desc = "New terminal (horizontal)" })
+map("n", "<leader>tv", function() Snacks.terminal.open(nil, { win = { position = "right" } }) end, { desc = "New terminal (vertical)" })
 
 -- FFF (File Finder)
 map("n", "<leader>ff", "<cmd>FFFFind<cr>", { desc = "Find files" })
@@ -290,6 +292,12 @@ map("n", "<leader>as", function() require("sidekick.cli").select() end, { desc =
 
 -- Terminal
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Window resize
+map("n", "<A-k>", "<cmd>resize +2<cr>", { desc = "Increase height" })
+map("n", "<A-j>", "<cmd>resize -2<cr>", { desc = "Decrease height" })
+map("n", "<A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease width" })
+map("n", "<A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase width" })
 
 -- Quickfix
 map("n", "[q", "<cmd>cprev<cr>zz", { desc = "Prev quickfix" })
