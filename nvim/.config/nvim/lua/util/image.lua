@@ -1,0 +1,63 @@
+local M = {}
+
+function M.switch_then_resend(cmd)
+  return function()
+    vim.cmd(cmd)
+    local b = vim.api.nvim_get_current_buf()
+    local name = vim.api.nvim_buf_get_name(b)
+    if name == "" or not (Snacks and Snacks.image and Snacks.image.supports_file(name)) then return end
+    Snacks.image.placement.clean(b)
+    Snacks.image.image.clear()
+    Snacks.image.buf.attach(b)
+  end
+end
+
+function M.toggle_source()
+  local cur_buf = vim.api.nvim_get_current_buf()
+  local path = vim.b.image_source_path or vim.api.nvim_buf_get_name(cur_buf)
+  if path == "" then return end
+
+  if vim.b.image_source_path then
+    vim.cmd("edit! " .. vim.fn.fnameescape(path))
+    pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
+  else
+    pcall(function() Snacks.image.placement.clean(cur_buf) end)
+    local lines = vim.fn.readfile(path)
+    local new_buf = vim.api.nvim_create_buf(true, true)
+    vim.api.nvim_buf_set_lines(new_buf, 0, -1, false, lines)
+    vim.b[new_buf].image_source_path = path
+    vim.b[new_buf].snacks_image_attached = true
+    vim.api.nvim_buf_set_name(new_buf, path .. " [source]")
+    vim.bo[new_buf].filetype = vim.filetype.match({ filename = path }) or "xml"
+    vim.bo[new_buf].buftype = "acwrite"
+    vim.api.nvim_create_autocmd("BufWriteCmd", {
+      buffer = new_buf,
+      callback = function()
+        vim.fn.writefile(vim.api.nvim_buf_get_lines(new_buf, 0, -1, false), path)
+        vim.bo[new_buf].modified = false
+      end,
+    })
+    vim.api.nvim_set_current_buf(new_buf)
+    pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
+    vim.cmd("redraw!")
+  end
+end
+
+function M.resend_all()
+  local targets = {}
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(b) then
+      local name = vim.api.nvim_buf_get_name(b)
+      if name ~= "" and Snacks.image.supports_file(name) then
+        targets[#targets + 1] = b
+      end
+    end
+  end
+  Snacks.image.placement.clean()
+  Snacks.image.image.clear()
+  for _, b in ipairs(targets) do
+    Snacks.image.buf.attach(b)
+  end
+end
+
+return M
