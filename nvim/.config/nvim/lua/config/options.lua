@@ -44,7 +44,7 @@ vim.opt.fillchars:append({
 -- Faster key sequences
 vim.opt.ttimeoutlen = 0
 
--- Hide cmdline when not in use (noice handles it)
+-- Hide cmdline when not in use; native nvim shows it on demand
 vim.opt.cmdheight = 0
 
 -- Route partial keystrokes (showcmd) to statusline

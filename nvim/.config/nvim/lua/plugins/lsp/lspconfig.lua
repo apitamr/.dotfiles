@@ -11,6 +11,8 @@ return {
           prefix = "●",
           source = "if_many",
         },
+        virtual_lines = { current_line = true },
+        jump = { float = true },
         float = {
           border = "rounded",
           source = "if_many",

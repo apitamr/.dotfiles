@@ -36,7 +36,7 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      automatic_installation = true,
+      automatic_enable = true,
     },
   },
 }
