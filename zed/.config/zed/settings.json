@@ -11,10 +11,10 @@
   },
   "agent_servers": {
     "glm-acp-agent": {
-      "type": "registry"
+      "type": "registry",
     },
     "codex-acp": {
-      "type": "registry"
+      "type": "registry",
     },
     "claude-acp": {
       "default_config_options": {
@@ -71,7 +71,11 @@
   // Window & Tabs
   "use_system_window_tabs": false,
   "confirm_quit": true,
-  "title_bar": { "show_sign_in": false, "show_user_picture": false },
+  "title_bar": {
+    "show_sign_in": false,
+    "show_user_picture": false,
+    "show_user_menu": false,
+  },
   "tab_bar": { "show_nav_history_buttons": false },
   "tabs": { "file_icons": true },
   "toolbar": {
@@ -88,7 +92,7 @@
   "extend_comment_on_newline": false,
   "completion_menu_scrollbar": "always",
   "restore_on_startup": "launchpad",
-  "hide_mouse": "on_typing_and_movement",
+  "hide_mouse": "on_typing_and_action",
   "show_edit_predictions": false,
 
   // Project Panel

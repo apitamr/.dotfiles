@@ -2,6 +2,11 @@ return {
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
+    keys = {
+      { "<leader>gb", "<cmd>GitBlameToggle<cr>", desc = "Blame" },
+      { "<leader>gB", "<cmd>GitBlameOpenCommitURL<cr>", desc = "Blame URL" },
+      { "<leader>gC", "<cmd>GitBlameCopySHA<cr>", desc = "Copy SHA" },
+    },
     opts = {
       enabled = true,
       message_template = " <summary> • <date> • <author>",

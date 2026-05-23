@@ -5,6 +5,13 @@ return {
       "kevinhwang91/promise-async",
     },
     event = "BufReadPost",
+    keys = {
+      { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
+      { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
+      { "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" },
+      { "zm", function() require("ufo").closeFoldsWith() end, desc = "Fold more" },
+      { "zp", function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" },
+    },
     opts = {
       -- Treesitter for structured languages, indent as universal fallback
       provider_selector = function(_, filetype, buftype)

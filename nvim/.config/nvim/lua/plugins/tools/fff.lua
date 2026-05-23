@@ -4,6 +4,10 @@ return {
     require("fff.download").download_or_build_binary()
   end,
   cmd = { "FFFFind", "FFFScan" },
+  keys = {
+    { "<leader>ff", "<cmd>FFFFind<cr>", desc = "Find files" },
+    { "<leader>fg", "<cmd>FFFScan<cr>", desc = "Find in git root" },
+  },
   config = function(_, opts)
     require("fff").setup(opts)
     local image = require("fff.file_picker.image")
