@@ -59,6 +59,11 @@ return {
       input = {
         enabled = false,
       },
+      indent = {
+        enabled = true,
+        indent = { char = "┇" },
+        scope = { char = "┇" },
+      },
     },
   },
 }

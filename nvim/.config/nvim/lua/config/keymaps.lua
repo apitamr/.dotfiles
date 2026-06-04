@@ -75,8 +75,8 @@ map("n", "gss", function() Snacks.picker.lsp_symbols() end, { desc = "Document s
 map("n", "gsS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace symbols" })
 
 -- Tools (Snacks)
-map("n", "<leader>h", function() Snacks.terminal() end, { desc = "Terminal" })
-map("n", "<leader>th", function() Snacks.terminal.open(nil, { win = { position = "bottom" } }) end, { desc = "New terminal (horizontal)" })
+map("n", "<leader>h", function() Snacks.terminal(nil, { win = { position = "bottom", relative = "win" } }) end, { desc = "Terminal" })
+map("n", "<leader>th", function() Snacks.terminal.open(nil, { win = { position = "bottom", relative = "win" } }) end, { desc = "New terminal (horizontal)" })
 map("n", "<leader>tv", function() Snacks.terminal.open(nil, { win = { position = "right" } }) end, { desc = "New terminal (vertical)" })
 
 -- LSP (custom: Snacks pickers + custom borders)

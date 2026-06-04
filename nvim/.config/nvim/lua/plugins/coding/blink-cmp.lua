@@ -5,7 +5,7 @@ return {
       default = { "lsp", "snippets", "buffer", "path" },
     },
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      accept = { auto_brackets = { enabled = false } },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
@@ -23,11 +23,11 @@ return {
     keymap = {
       preset = "default",
       ["<Tab>"] = {
-        "snippet_forward",
         "select_next",
+        "snippet_forward",
         "fallback",
       },
-      ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
       ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-u>"] = { "scroll_documentation_up", "fallback" },

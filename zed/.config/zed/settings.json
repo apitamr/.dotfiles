@@ -2,175 +2,181 @@
 // Docs: https://zed.dev/docs/configuring-zed
 
 {
-  "cli_default_open_behavior": "new_window",
-  "diff_view_style": "split",
-  "preview_tabs": {
-    "enable_keep_preview_on_code_navigation": true,
-    "enable_preview_multibuffer_from_code_navigation": true,
-    "enable_preview_from_file_finder": true,
-  },
-  "agent_servers": {
-    "glm-acp-agent": {
-      "type": "registry",
+    "tab_size": 4,
+    "hard_tabs": false,
+    "cli_default_open_behavior": "new_window",
+    "diff_view_style": "split",
+    "preview_tabs": {
+        "enable_keep_preview_on_code_navigation": true,
+        "enable_preview_multibuffer_from_code_navigation": true,
+        "enable_preview_from_file_finder": true,
     },
-    "codex-acp": {
-      "type": "registry",
+    "agent_servers": {
+        "glm-acp-agent": {
+            "type": "registry",
+        },
+        "codex-acp": {
+            "type": "registry",
+        },
+        "claude-acp": {
+            "default_config_options": {
+                "mode": "bypassPermissions",
+            },
+            "type": "registry",
+        },
+        "opencode": {
+            "type": "registry",
+        },
     },
-    "claude-acp": {
-      "default_config_options": {
-        "mode": "bypassPermissions",
-      },
-      "type": "registry",
+    "which_key": {
+        "enabled": true,
     },
-    "opencode": {
-      "type": "registry",
+    // Appearance
+    "session": {
+        "trust_all_worktrees": true,
     },
-  },
-  "which_key": {
-    "enabled": true,
-  },
-  // Appearance
-  "session": {
-    "trust_all_worktrees": true,
-  },
-  "git_panel": {
-    "tree_view": false,
-  },
-  "always_treat_brackets_as_autoclosed": true,
-  "colorize_brackets": true,
-  "theme": {
-    "mode": "dark",
-    "light": "Kanso Zen (No italics)",
-    "dark": "Kanso Zen (No italics)",
-  },
-  "icon_theme": {
-    "mode": "dark",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Latte",
-  },
-  "ui_font_family": "JetBrains Mono",
-  "ui_font_size": 14.0,
-  "buffer_font_family": "JetBrains Mono",
-  "buffer_font_size": 13,
-  "buffer_font_weight": 600,
-  "buffer_line_height": {
-    "custom": 1.8,
-  },
-  "cursor_shape": "bar",
-  "scrollbar": { "show": "never" },
-  "minimap": {
-    "show": "never",
-  },
-  "indent_guides": {
-    "coloring": "indent_aware",
-    "active_line_width": 2,
-  },
-  "inlay_hints": { "enabled": false },
-  "sticky_scroll": { "enabled": true },
+    "git_panel": {
+        "tree_view": false,
+    },
+    "always_treat_brackets_as_autoclosed": true,
+    "colorize_brackets": true,
+    "theme": {
+        "mode": "dark",
+        "light": "Kanso Zen (No italics)",
+        "dark": "Kanso Zen (No italics)",
+    },
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Catppuccin Latte",
+        "dark": "Catppuccin Latte",
+    },
+    "ui_font_family": "JetBrains Mono",
+    "ui_font_size": 14.0,
+    "buffer_font_family": "JetBrains Mono",
+    "buffer_font_size": 13,
+    "buffer_font_weight": 600,
+    "buffer_line_height": {
+        "custom": 1.8,
+    },
+    "cursor_shape": "bar",
+    "scrollbar": { "show": "never" },
+    "minimap": {
+        "show": "never",
+    },
+    "indent_guides": {
+        "line_width": 1,
+        "coloring": "fixed",
+        "active_line_width": 2,
+    },
+    "inlay_hints": { "enabled": false },
+    "sticky_scroll": { "enabled": true },
 
-  // Window & Tabs
-  "use_system_window_tabs": false,
-  "confirm_quit": true,
-  "title_bar": {
-    "show_sign_in": false,
-    "show_user_picture": false,
-    "show_user_menu": false,
-  },
-  "tab_bar": { "show_nav_history_buttons": false },
-  "tabs": { "file_icons": true },
-  "toolbar": {
-    "code_actions": false,
-    "quick_actions": false,
-  },
-
-  // Editor Behavior
-  "vim_mode": true,
-  "relative_line_numbers": "enabled",
-  "autosave": "off",
-  "format_on_save": "off",
-  "soft_wrap": "editor_width",
-  "extend_comment_on_newline": false,
-  "completion_menu_scrollbar": "always",
-  "restore_on_startup": "launchpad",
-  "hide_mouse": "on_typing_and_action",
-  "show_edit_predictions": false,
-
-  // Project Panel
-  "project_panel": {
-    "git_status": true,
-    "hide_gitignore": false,
-    "auto_reveal_entries": true,
-    "hide_root": true,
-    "auto_fold_dirs": false,
-    "file_icons": true,
-    "folder_icons": true,
-  },
-
-  // Terminal
-  "terminal": {
-    "dock": "bottom",
-    "font_family": "JetBrainsMono Nerd Font",
-    "toolbar": { "breadcrumbs": true },
-  },
-
-  // Git & Diagnostics
-  "git": {
-    "blame": { "show_avatar": true },
-    "inline_blame": { "enabled": true },
-  },
-  "diagnostics": {
-    "inline": {
-      "enabled": true,
-      "update_debounce_ms": 150,
-      "padding": 2,
-      "min_column": 80,
-      "max_severity": "info",
+    // Window & Tabs
+    "use_system_window_tabs": false,
+    "confirm_quit": true,
+    "title_bar": {
+        "show_sign_in": false,
+        "show_user_picture": false,
+        "show_user_menu": false,
     },
-  },
+    "tab_bar": { "show_nav_history_buttons": false },
+    "tabs": { "file_icons": true },
+    "toolbar": {
+        "code_actions": false,
+        "quick_actions": false,
+    },
 
-  // AI & Agent
-  "agent": {
-    "sidebar_side": "right",
-    "notify_when_agent_waiting": "all_screens",
-    "default_profile": "ask",
-    "default_model": {
-      "provider": "GLM 4.6",
-      "model": "glm-4.6",
-    },
-  },
+    // Editor Behavior
+    "vim_mode": true,
+    "relative_line_numbers": "enabled",
+    "autosave": "off",
+    "format_on_save": "off",
+    "soft_wrap": "editor_width",
+    "extend_comment_on_newline": false,
+    "completion_menu_scrollbar": "always",
+    "restore_on_startup": "launchpad",
+    "hide_mouse": "on_typing_and_action",
+    "show_edit_predictions": false,
 
-  // MCP Context Servers
-  "context_servers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"],
+    // Project Panel
+    "project_panel": {
+        "git_status": true,
+        "hide_gitignore": false,
+        "auto_reveal_entries": true,
+        "hide_root": true,
+        "auto_fold_dirs": false,
+        "file_icons": true,
+        "folder_icons": true,
     },
-  },
 
-  // Language Servers
-  "languages": {
-    "TypeScript": {
-      "language_servers": ["typescript-language-server", "!vtsls", "..."],
+    // Terminal
+    "terminal": {
+        "dock": "bottom",
+        "font_family": "JetBrainsMono Nerd Font",
+        "toolbar": { "breadcrumbs": true },
     },
-    "TSX": {
-      "language_servers": ["typescript-language-server", "!vtsls", "..."],
-    },
-    "JavaScript": {
-      "language_servers": ["typescript-language-server", "!vtsls", "..."],
-    },
-  },
 
-  "lsp": {
-    "tailwindcss-language-server": {
-      "settings": {
-        "classFunctions": ["cva", "cx"],
-      },
+    // Git & Diagnostics
+    "git": {
+        "blame": { "show_avatar": true },
+        "inline_blame": { "enabled": true },
     },
-  },
+    "diagnostics": {
+        "inline": {
+            "enabled": true,
+            "update_debounce_ms": 150,
+            "padding": 2,
+            "min_column": 80,
+            "max_severity": "info",
+        },
+    },
 
-  // Telemetry
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false,
-  },
+    // AI & Agent
+    "agent": {
+        "expand_terminal_card": true,
+        "expand_edit_card": true,
+        "enable_feedback": false,
+        "sidebar_side": "left",
+        "notify_when_agent_waiting": "all_screens",
+        "default_profile": "ask",
+        "default_model": {
+            "provider": "GLM 4.6",
+            "model": "glm-4.6",
+        },
+    },
+
+    // MCP Context Servers
+    "context_servers": {
+        "chrome-devtools": {
+            "command": "npx",
+            "args": ["chrome-devtools-mcp@latest"],
+        },
+    },
+
+    // Language Servers
+    "languages": {
+        "TypeScript": {
+            "language_servers": ["typescript-language-server", "!vtsls", "..."],
+        },
+        "TSX": {
+            "language_servers": ["typescript-language-server", "!vtsls", "..."],
+        },
+        "JavaScript": {
+            "language_servers": ["typescript-language-server", "!vtsls", "..."],
+        },
+    },
+
+    "lsp": {
+        "tailwindcss-language-server": {
+            "settings": {
+                "classFunctions": ["cva", "cx"],
+            },
+        },
+    },
+
+    // Telemetry
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false,
+    },
 }

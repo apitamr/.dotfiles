@@ -10,6 +10,7 @@ source "$ZSH/oh-my-zsh.sh"
 eval "$(starship init zsh)"
 
 # Path Configuration
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/trash/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"

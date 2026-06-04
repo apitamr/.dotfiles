@@ -1,6 +1,5 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 
--- Set border highlights for kanso theme
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#23262c", bg = "NONE" })
@@ -66,6 +65,47 @@ function _G.LazygitEdit(filename, line)
     end
   end)
   return ""
+end
+
+-- Hide cursor when viewing image buffers (snacks.image)
+do
+  local saved_guicursor = nil
+
+  local function is_image_buf(buf)
+    local name = vim.api.nvim_buf_get_name(buf)
+    return name ~= ""
+      and _G.Snacks
+      and Snacks.image
+      and Snacks.image.supports_file(name)
+      and not vim.b[buf].image_source_path
+  end
+
+  local function hide_cursor()
+    if saved_guicursor == nil then
+      saved_guicursor = vim.o.guicursor
+    end
+    vim.api.nvim_set_hl(0, "HiddenCursor", { blend = 100, nocombine = true })
+    vim.opt.guicursor = "a:HiddenCursor/HiddenCursor"
+    io.stdout:write("\27[?25l")
+  end
+
+  local function restore_cursor()
+    if saved_guicursor ~= nil then
+      vim.o.guicursor = saved_guicursor
+      saved_guicursor = nil
+    end
+    io.stdout:write("\27[?25h")
+  end
+
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function(args)
+      if is_image_buf(args.buf) then
+        hide_cursor()
+      else
+        restore_cursor()
+      end
+    end,
+  })
 end
 
 -- Auto-delete empty unnamed buffers when leaving them

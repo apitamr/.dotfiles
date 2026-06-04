@@ -35,3 +35,10 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[credential "https://repository.ssdm.polri.go.id"]
+	provider = generic
+[core]
+	pager = hunk pager
+[alias]
+	hdiff = -c core.pager=\"hunk pager\" diff
+	hshow = -c core.pager=\"hunk pager\" show
