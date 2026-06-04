@@ -33,6 +33,19 @@ do
   end
 end
 
+-- Reapply the colorscheme on SIGUSR1 (sent by a tmux hook on session switch),
+-- which otherwise resets the transparent background to a solid one. Signal
+-- fires in a fast context where :colorscheme is blocked, and the post-switch
+-- event that resets the background lands shortly after, so defer past it.
+vim.api.nvim_create_autocmd("Signal", {
+  pattern = "SIGUSR1",
+  callback = function()
+    vim.defer_fn(function()
+      vim.cmd.colorscheme("kanso")
+    end, 200)
+  end,
+})
+
 -- Disable auto comment continuation on new line
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()

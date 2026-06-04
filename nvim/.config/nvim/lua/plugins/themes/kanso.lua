@@ -3,6 +3,7 @@ return {
   lazy = false,
   opts = {
     background = "zen",
+    dimInactive = false,
     foreground = {
       light = "saturated",
       dark = "saturated",
