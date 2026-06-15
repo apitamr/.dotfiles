@@ -2,6 +2,13 @@
 // Docs: https://zed.dev/docs/configuring-zed
 
 {
+    "outline_panel": {
+        "dock": "left",
+    },
+    "collaboration_panel": {
+        "dock": "left",
+    },
+    "lsp_document_colors": "inlay",
     "tab_size": 4,
     "hard_tabs": false,
     "cli_default_open_behavior": "new_window",
@@ -12,14 +19,18 @@
         "enable_preview_from_file_finder": true,
     },
     "agent_servers": {
-        "glm-acp-agent": {
+        "cursor": {
+            "default_config_options": {
+                "model": "default[]",
+            },
             "type": "registry",
         },
-        "codex-acp": {
+        "glm-acp-agent": {
             "type": "registry",
         },
         "claude-acp": {
             "default_config_options": {
+                "model": "default",
                 "mode": "bypassPermissions",
             },
             "type": "registry",
@@ -36,6 +47,7 @@
         "trust_all_worktrees": true,
     },
     "git_panel": {
+        "dock": "left",
         "tree_view": false,
     },
     "always_treat_brackets_as_autoclosed": true,
@@ -56,7 +68,7 @@
     "buffer_font_size": 13,
     "buffer_font_weight": 600,
     "buffer_line_height": {
-        "custom": 1.8,
+        "custom": 3.0,
     },
     "cursor_shape": "bar",
     "scrollbar": { "show": "never" },
@@ -100,6 +112,7 @@
 
     // Project Panel
     "project_panel": {
+        "dock": "left",
         "git_status": true,
         "hide_gitignore": false,
         "auto_reveal_entries": true,
@@ -133,6 +146,7 @@
 
     // AI & Agent
     "agent": {
+        "dock": "right",
         "expand_terminal_card": true,
         "expand_edit_card": true,
         "enable_feedback": false,
