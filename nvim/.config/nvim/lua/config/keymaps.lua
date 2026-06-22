@@ -4,6 +4,7 @@
 local map = vim.keymap.set
 local tree = require("util.tree")
 local image = require("util.image")
+local picker = require("util.picker")
 
 -- Remove LazyVim defaults we don't use
 local del = { "<leader>xx", "<leader>xX", "<leader>xq", "<leader>xQ", "<leader>ft", "<leader>fT",
@@ -57,19 +58,9 @@ map("n", "<leader>e", function() tree.toggle("left") end,  { desc = "Toggle side
 map("n", "<leader>o", function() tree.toggle("float") end, { desc = "File tree (float)" })
 
 -- Picker (Snacks) — only non-default variants
-map("v", "<leader>fw", function()
-  local _, sr, sc = unpack(vim.fn.getpos("v"))
-  local _, er, ec = unpack(vim.fn.getpos("."))
-  if sr > er or (sr == er and sc > ec) then sr, er, sc, ec = er, sr, ec, sc end
-  local lines = vim.fn.getline(sr, er)
-  if #lines == 0 then return end
-  if #lines == 1 then lines[1] = lines[1]:sub(sc, ec)
-  else lines[1] = lines[1]:sub(sc); lines[#lines] = lines[#lines]:sub(1, ec) end
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-  vim.schedule(function() Snacks.picker.grep({ search = table.concat(lines, "\n") }) end)
-end, { desc = "Grep selection" })
+map("v", "<leader>fw", picker.grep_selection, { desc = "Grep selection" })
 map("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Recent files" })
-map("n", "<leader>fO", function() vim.v.oldfiles = {}; vim.notify("Oldfiles cleared") end, { desc = "Clear recent" })
+map("n", "<leader>fO", picker.clear_recent, { desc = "Clear recent" })
 map("n", "<leader>fz", function() Snacks.picker.grep_buffers() end, { desc = "Grep buffer" })
 map("n", "gss", function() Snacks.picker.lsp_symbols() end, { desc = "Document symbols" })
 map("n", "gsS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace symbols" })
@@ -83,7 +74,7 @@ map("n", "<leader>tv", function() Snacks.terminal.open(nil, { win = { position =
 map("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References" })
 map("n", "gi", function() Snacks.picker.lsp_implementations() end, { desc = "Implementation" })
 map("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Type definition" })
--- LSP floats: border/size handled by open_floating_preview override in autocmds.lua
+-- LSP floats: border/size handled by open_floating_preview override in util/lsp.lua
 map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature help" })
 map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
@@ -100,11 +91,7 @@ map("v", "<leader>ghs", function() require("gitsigns").stage_hunk({ vim.fn.line(
 map("v", "<leader>ghr", function() require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Reset hunk" })
 map("n", "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Commits" })
 map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Status" })
-map("n", "<leader>gf", function()
-  local file = vim.api.nvim_buf_get_name(0)
-  if file ~= "" then Snacks.picker.git_log_file({ file = file })
-  else vim.notify("No file in current buffer", vim.log.levels.WARN) end
-end, { desc = "File history" })
+map("n", "<leader>gf", picker.git_file_history, { desc = "File history" })
 
 -- Window resize
 map("n", "<A-k>", "<cmd>resize +2<cr>", { desc = "Increase height" })
@@ -120,8 +107,5 @@ map("n", "<leader>qc", "<cmd>cclose<cr>", { desc = "Close quickfix" })
 map("n", "<leader>ue", image.toggle_source, { desc = "Toggle image/source" })
 map("n", "<leader>ir", image.resend_all, { desc = "Re-send images to terminal" })
 map("n", "<leader>fm", function() Snacks.picker.marks() end, { desc = "Marks" })
-map("n", "<leader>fM", function()
-  vim.cmd("delmarks! | delmarks A-Z0-9")
-  vim.notify("All marks cleared")
-end, { desc = "Clear all marks" })
+map("n", "<leader>fM", picker.clear_marks, { desc = "Clear all marks" })
 map("n", "<leader>?", function() require("which-key").show({ global = false }) end, { desc = "Buffer keymaps" })

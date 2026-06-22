@@ -60,4 +60,45 @@ function M.resend_all()
   end
 end
 
+-- Hide the cursor while viewing image buffers (snacks.image), restore otherwise.
+function M.setup_cursor_autohide()
+  local saved_guicursor = nil
+
+  local function is_image_buf(buf)
+    local name = vim.api.nvim_buf_get_name(buf)
+    return name ~= ""
+      and _G.Snacks
+      and Snacks.image
+      and Snacks.image.supports_file(name)
+      and not vim.b[buf].image_source_path
+  end
+
+  local function hide_cursor()
+    if saved_guicursor == nil then
+      saved_guicursor = vim.o.guicursor
+    end
+    vim.api.nvim_set_hl(0, "HiddenCursor", { blend = 100, nocombine = true })
+    vim.opt.guicursor = "a:HiddenCursor/HiddenCursor"
+    io.stdout:write("\27[?25l")
+  end
+
+  local function restore_cursor()
+    if saved_guicursor ~= nil then
+      vim.o.guicursor = saved_guicursor
+      saved_guicursor = nil
+    end
+    io.stdout:write("\27[?25h")
+  end
+
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    callback = function(args)
+      if is_image_buf(args.buf) then
+        hide_cursor()
+      else
+        restore_cursor()
+      end
+    end,
+  })
+end
+
 return M
