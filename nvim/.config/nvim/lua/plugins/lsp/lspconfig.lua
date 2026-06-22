@@ -14,7 +14,7 @@ return {
         virtual_lines = { current_line = true },
         jump = { float = true },
         float = {
-          border = "rounded",
+          -- border inherits the global `winborder` option
           source = "if_many",
           header = "",
           prefix = "",

@@ -28,6 +28,9 @@ vim.opt.textwidth = 120
 -- Disable LazyVim's root detection and use cwd instead
 vim.g.root_spec = { "cwd" }
 
+-- Rounded borders for all floating windows (LSP, completion, mason, pickers…)
+vim.opt.winborder = "rounded"
+
 -- Window borders
 vim.opt.fillchars:append({
   horiz = "─",

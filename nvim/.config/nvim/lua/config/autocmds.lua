@@ -10,13 +10,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
--- LSP float window styling (solid background, border)
+-- LSP float window styling (solid background, sizing, focus).
+-- Border comes from the global `winborder` option.
 do
   local orig = vim.lsp.util.open_floating_preview
   ---@diagnostic disable-next-line: duplicate-set-field
   vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
     opts = opts or {}
-    opts.border = opts.border or "rounded"
     opts.focus_id = "lsp_float"
     opts.max_width = math.min(opts.max_width or 120, 120)
     opts.max_height = math.min(opts.max_height or 20, 20)
