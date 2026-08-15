@@ -132,6 +132,10 @@
       "shift-l": "pane::ActivateNextItem",
       "shift-h": "pane::ActivatePreviousItem",
 
+      // file finder
+      "space f f": "file_finder::Toggle",
+      "space f w": "text_finder::Toggle",
+
       // Git (commented out)
       // "space g g": ["task::Spawn", { "task_name": "LazyGit", "reveal_target": "center" }]
     },

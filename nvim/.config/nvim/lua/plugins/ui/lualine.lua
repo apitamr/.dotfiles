@@ -16,7 +16,7 @@ return {
       lualine_c = {
         {
           "filename",
-          path = 1,
+          path = 0,
           symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
           cond = function()
             return vim.bo.buftype == ""
@@ -36,7 +36,7 @@ return {
     },
     inactive_sections = {
       lualine_c = {
-        { "filename", path = 1 },
+        { "filename", path = 0 },
       },
       lualine_x = {},
     },

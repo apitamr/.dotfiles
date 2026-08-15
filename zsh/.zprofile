@@ -5,3 +5,8 @@ eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 # if [ -x "$(command -v tmux)" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ -z "$ZED_TERM" ]; then
 #   tmux new-session -A -s main
 # fi
+
+# Automatically launch or attach to Herdr, avoiding infinite loops
+# if [[ -z "$HERDR" ]] && [ "$SHLVL" -eq 1 ] && command -v herdr &> /dev/null; then
+#     exec herdr
+# fi

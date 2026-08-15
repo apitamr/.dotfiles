@@ -17,12 +17,20 @@ function M.toggle_source()
   local path = vim.b.image_source_path or vim.api.nvim_buf_get_name(cur_buf)
   if path == "" then return end
 
+  -- Already in a hex view (binary image) — :Hex knows how to get back.
+  if vim.b.hex then return vim.cmd("Hex") end
+
   if vim.b.image_source_path then
     vim.cmd("edit! " .. vim.fn.fnameescape(path))
     pcall(vim.api.nvim_buf_delete, cur_buf, { force = true })
   else
     pcall(function() Snacks.image.placement.clean(cur_buf) end)
     local lines = vim.fn.readfile(path)
+    -- readfile() turns NUL bytes into newlines, which nvim_buf_set_lines
+    -- rejects. Only text formats (svg) round-trip; show bytes for the rest.
+    for _, line in ipairs(lines) do
+      if line:find("\n", 1, true) then return vim.cmd("Hex") end
+    end
     local new_buf = vim.api.nvim_create_buf(true, true)
     vim.api.nvim_buf_set_lines(new_buf, 0, -1, false, lines)
     vim.b[new_buf].image_source_path = path
@@ -71,6 +79,7 @@ function M.setup_cursor_autohide()
       and Snacks.image
       and Snacks.image.supports_file(name)
       and not vim.b[buf].image_source_path
+      and not vim.b[buf].hex -- hex view of an image: still a .png name, but text
   end
 
   local function hide_cursor()

@@ -30,11 +30,6 @@
 	required = true
 [credential "https://repo.transjakarta.co.id"]
 	provider = generic
-[credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [credential "https://repository.ssdm.polri.go.id"]
 	provider = generic
 [core]
@@ -42,3 +37,8 @@
 [alias]
 	hdiff = -c core.pager=\"hunk pager\" diff
 	hshow = -c core.pager=\"hunk pager\" show
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true

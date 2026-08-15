@@ -1,0 +1,237 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1782097853.8584268,
+    "ast_hash": "fc0db3cc9fb148b5929c8afde7cb55dd",
+    "semantic_hash": "fc0db3cc9fb148b5929c8afde7cb55dd"
+  },
+  "install": {
+    "mtime": 1774956438.8850138,
+    "ast_hash": "bf84c8439bfb8fdbcf6068c85e42f888",
+    "semantic_hash": "bf84c8439bfb8fdbcf6068c85e42f888"
+  },
+  "nvim/.config/nvim/.claude/settings.local.json": {
+    "mtime": 1779530868.6926444,
+    "ast_hash": "befd77a90d244f1da2581c56a09d36ed",
+    "semantic_hash": "befd77a90d244f1da2581c56a09d36ed"
+  },
+  "nvim/.config/nvim/init.lua": {
+    "mtime": 1782090668.474346,
+    "ast_hash": "74348a79e8f696ddb63371ae3671e768",
+    "semantic_hash": "74348a79e8f696ddb63371ae3671e768"
+  },
+  "nvim/.config/nvim/lazy-lock.json": {
+    "mtime": 1782093342.5698197,
+    "ast_hash": "482c3545811a52640c79d8b44231fbcc",
+    "semantic_hash": "482c3545811a52640c79d8b44231fbcc"
+  },
+  "nvim/.config/nvim/lazyvim.json": {
+    "mtime": 1782090668.474767,
+    "ast_hash": "e6edb40ba591124d73493a4c7b695ff2",
+    "semantic_hash": "e6edb40ba591124d73493a4c7b695ff2"
+  },
+  "nvim/.config/nvim/lua/config/autocmds.lua": {
+    "mtime": 1782095337.6281686,
+    "ast_hash": "ecb1a56ec604ce3ff49eeb8cb23c28b8",
+    "semantic_hash": "ecb1a56ec604ce3ff49eeb8cb23c28b8"
+  },
+  "nvim/.config/nvim/lua/config/keymaps.lua": {
+    "mtime": 1782093640.8251376,
+    "ast_hash": "1b0dcc4269e959969590e2032dd74680",
+    "semantic_hash": "1b0dcc4269e959969590e2032dd74680"
+  },
+  "nvim/.config/nvim/lua/config/lazy.lua": {
+    "mtime": 1782097847.7994266,
+    "ast_hash": "73c2046d975a531dc0d628d0a2c1a45d",
+    "semantic_hash": "73c2046d975a531dc0d628d0a2c1a45d"
+  },
+  "nvim/.config/nvim/lua/config/options.lua": {
+    "mtime": 1782095242.6283212,
+    "ast_hash": "4386ea26aea15eebef9382f88415ea09",
+    "semantic_hash": "4386ea26aea15eebef9382f88415ea09"
+  },
+  "nvim/.config/nvim/lua/plugins/coding/blink-cmp.lua": {
+    "mtime": 1782092519.842779,
+    "ast_hash": "c3069ea9dfbcbaa4431f5917a0845881",
+    "semantic_hash": "c3069ea9dfbcbaa4431f5917a0845881"
+  },
+  "nvim/.config/nvim/lua/plugins/coding/markview.lua": {
+    "mtime": 1782092556.2072234,
+    "ast_hash": "65dc302830a01e626e141a9f61f09185",
+    "semantic_hash": "65dc302830a01e626e141a9f61f09185"
+  },
+  "nvim/.config/nvim/lua/plugins/coding/treesitter.lua": {
+    "mtime": 1782094071.4334364,
+    "ast_hash": "e0b9a1d689069b2f57ac000bf33290db",
+    "semantic_hash": "e0b9a1d689069b2f57ac000bf33290db"
+  },
+  "nvim/.config/nvim/lua/plugins/editor/multicursor.lua": {
+    "mtime": 1782090668.4768522,
+    "ast_hash": "dd929955cb13cfb659b2740b758d1be6",
+    "semantic_hash": "dd929955cb13cfb659b2740b758d1be6"
+  },
+  "nvim/.config/nvim/lua/plugins/editor/surround.lua": {
+    "mtime": 1782090668.477009,
+    "ast_hash": "d856f4295dfcda45103e8c377cf1eef3",
+    "semantic_hash": "d856f4295dfcda45103e8c377cf1eef3"
+  },
+  "nvim/.config/nvim/lua/plugins/editor/ufo.lua": {
+    "mtime": 1782090668.477145,
+    "ast_hash": "fa9748d0a604c6d7bb8ef45d49e86de4",
+    "semantic_hash": "fa9748d0a604c6d7bb8ef45d49e86de4"
+  },
+  "nvim/.config/nvim/lua/plugins/git/git-blame.lua": {
+    "mtime": 1782090668.4773462,
+    "ast_hash": "084ed5453ba9a48ebf22f59bcd6fe6e8",
+    "semantic_hash": "084ed5453ba9a48ebf22f59bcd6fe6e8"
+  },
+  "nvim/.config/nvim/lua/plugins/init.lua": {
+    "mtime": 1782093331.3240182,
+    "ast_hash": "803eb1100ee16c767668e521f3c3acb1",
+    "semantic_hash": "803eb1100ee16c767668e521f3c3acb1"
+  },
+  "nvim/.config/nvim/lua/plugins/lsp/conform.lua": {
+    "mtime": 1782090668.4776957,
+    "ast_hash": "ce7ed7aaa3b5a619a264aa006644c54e",
+    "semantic_hash": "ce7ed7aaa3b5a619a264aa006644c54e"
+  },
+  "nvim/.config/nvim/lua/plugins/lsp/lspconfig.lua": {
+    "mtime": 1782092543.8287284,
+    "ast_hash": "5f2e5b51432fb169c397223a00717380",
+    "semantic_hash": "5f2e5b51432fb169c397223a00717380"
+  },
+  "nvim/.config/nvim/lua/plugins/lsp/mason.lua": {
+    "mtime": 1782090668.477988,
+    "ast_hash": "73941759465df9ac20c15ea418f90245",
+    "semantic_hash": "73941759465df9ac20c15ea418f90245"
+  },
+  "nvim/.config/nvim/lua/plugins/themes/kanso.lua": {
+    "mtime": 1782090668.4781616,
+    "ast_hash": "4a16957c1e10931d337b4800c68fc0f9",
+    "semantic_hash": "4a16957c1e10931d337b4800c68fc0f9"
+  },
+  "nvim/.config/nvim/lua/plugins/tools/fff.lua": {
+    "mtime": 1782090668.4783335,
+    "ast_hash": "7c6e6534f3fa92fc999306b2a77115c7",
+    "semantic_hash": "7c6e6534f3fa92fc999306b2a77115c7"
+  },
+  "nvim/.config/nvim/lua/plugins/tools/neo-tree.lua": {
+    "mtime": 1782090668.478466,
+    "ast_hash": "898287f16b77ab6718456e6dc94f0a38",
+    "semantic_hash": "898287f16b77ab6718456e6dc94f0a38"
+  },
+  "nvim/.config/nvim/lua/plugins/tools/sidekick.lua": {
+    "mtime": 1782090668.4786386,
+    "ast_hash": "37edc26febef8f348cc4023b8ec9dff7",
+    "semantic_hash": "37edc26febef8f348cc4023b8ec9dff7"
+  },
+  "nvim/.config/nvim/lua/plugins/tools/snacks.lua": {
+    "mtime": 1782096884.7983456,
+    "ast_hash": "905913112a0f83d64a8791b52ccad1ac",
+    "semantic_hash": "905913112a0f83d64a8791b52ccad1ac"
+  },
+  "nvim/.config/nvim/lua/plugins/tools/which-key.lua": {
+    "mtime": 1782090668.478951,
+    "ast_hash": "09b33f2e0d4e0af9ef4d1f2dcac3d229",
+    "semantic_hash": "09b33f2e0d4e0af9ef4d1f2dcac3d229"
+  },
+  "nvim/.config/nvim/lua/plugins/ui/fidget.lua": {
+    "mtime": 1782090668.4791427,
+    "ast_hash": "6392c06b83dfbace2d0fe18861f90374",
+    "semantic_hash": "6392c06b83dfbace2d0fe18861f90374"
+  },
+  "nvim/.config/nvim/lua/plugins/ui/icons.lua": {
+    "mtime": 1782090668.4792597,
+    "ast_hash": "9b160d4b53d5e506a458d5b0f711f1d6",
+    "semantic_hash": "9b160d4b53d5e506a458d5b0f711f1d6"
+  },
+  "nvim/.config/nvim/lua/plugins/ui/lualine.lua": {
+    "mtime": 1782090668.4793763,
+    "ast_hash": "17ac2a0bb26f3033632063661ad98c60",
+    "semantic_hash": "17ac2a0bb26f3033632063661ad98c60"
+  },
+  "nvim/.config/nvim/lua/util/buffer.lua": {
+    "mtime": 1782093595.9936528,
+    "ast_hash": "b6cb101076beb31e5d226baf712b9ed1",
+    "semantic_hash": "b6cb101076beb31e5d226baf712b9ed1"
+  },
+  "nvim/.config/nvim/lua/util/image.lua": {
+    "mtime": 1782093605.8970132,
+    "ast_hash": "22f5bccbcedfa288df928f069c540b88",
+    "semantic_hash": "22f5bccbcedfa288df928f069c540b88"
+  },
+  "nvim/.config/nvim/lua/util/lsp.lua": {
+    "mtime": 1782093589.2236135,
+    "ast_hash": "c6769a7849284241cccd92e13ec93db5",
+    "semantic_hash": "c6769a7849284241cccd92e13ec93db5"
+  },
+  "nvim/.config/nvim/lua/util/picker.lua": {
+    "mtime": 1782093582.2756183,
+    "ast_hash": "9c44ff4b3ac02d78762a3dc87045fede",
+    "semantic_hash": "9c44ff4b3ac02d78762a3dc87045fede"
+  },
+  "nvim/.config/nvim/lua/util/tree.lua": {
+    "mtime": 1782090668.4797635,
+    "ast_hash": "3a15359482b83841844d1c2b2c65ea43",
+    "semantic_hash": "3a15359482b83841844d1c2b2c65ea43"
+  },
+  "stow": {
+    "mtime": 1777720425.3918643,
+    "ast_hash": "5da13244fa2437f2367b868d39d254ac",
+    "semantic_hash": "5da13244fa2437f2367b868d39d254ac"
+  },
+  "zed/.config/zed/keymap.json": {
+    "mtime": 1782436811.4416103,
+    "ast_hash": "bad0d8298cb006cb2571d8ee1313126e",
+    "semantic_hash": "bad0d8298cb006cb2571d8ee1313126e"
+  },
+  "zed/.config/zed/settings.json": {
+    "mtime": 1783926546.6173935,
+    "ast_hash": "9952c7efc9ce2ca73c555edb2ec9ddd9",
+    "semantic_hash": "9952c7efc9ce2ca73c555edb2ec9ddd9"
+  },
+  "zed/.config/zed/tasks.json": {
+    "mtime": 1774956438.8895924,
+    "ast_hash": "fd5f4ea231c7c847f6a23681045629a1",
+    "semantic_hash": "fd5f4ea231c7c847f6a23681045629a1"
+  },
+  "zed/.config/zed/themes/cyberdream.json": {
+    "mtime": 1774956438.8899014,
+    "ast_hash": "88f1e0ef12ec43dbcbb145160802f7b2",
+    "semantic_hash": "88f1e0ef12ec43dbcbb145160802f7b2"
+  },
+  "zed/.config/zed/themes/github-dark.json": {
+    "mtime": 1774956438.8901467,
+    "ast_hash": "9bb3c4d91a29448fbbe7c0263c62adc9",
+    "semantic_hash": "9bb3c4d91a29448fbbe7c0263c62adc9"
+  },
+  "README.md": {
+    "mtime": 1777720441.4843986,
+    "ast_hash": "398bab33cfcfea4d51b0122d25080bec",
+    "semantic_hash": "398bab33cfcfea4d51b0122d25080bec"
+  },
+  "lazygit/.config/lazygit/config.yml": {
+    "mtime": 1778336339.447412,
+    "ast_hash": "0ae710517f6fea5a7f48a322f9a868d6",
+    "semantic_hash": "0ae710517f6fea5a7f48a322f9a868d6"
+  },
+  "images/anime-city.jpg": {
+    "mtime": 1774956438.8385878,
+    "ast_hash": "de92b37878f4fa25e5ec3f517162f870",
+    "semantic_hash": "de92b37878f4fa25e5ec3f517162f870"
+  },
+  "images/goku-cosmic.jpg": {
+    "mtime": 1774956438.848252,
+    "ast_hash": "28b2e48fe245b1e9fbaf16ec3abe2031",
+    "semantic_hash": "28b2e48fe245b1e9fbaf16ec3abe2031"
+  },
+  "images/luffy.jpg": {
+    "mtime": 1774956438.8486743,
+    "ast_hash": "33c0ea537d1fa1628b0bd09fc1415ee0",
+    "semantic_hash": "33c0ea537d1fa1628b0bd09fc1415ee0"
+  },
+  "images/thunderstorm-city.jpg": {
+    "mtime": 1774956438.884704,
+    "ast_hash": "a85efd9945372988e59e18d70ad77936",
+    "semantic_hash": "a85efd9945372988e59e18d70ad77936"
+  }
+}
