@@ -17,7 +17,6 @@ return {
             modified = "\u{25CF}", -- ●
             readonly = "\u{F023}", -- lock
             recording = "\u{F111}", -- filled circle
-            explorer = "\u{F07C}", -- open folder
             dot = "\u{00B7}", -- ·
             divider = "\u{2502}", -- │
             clock = "\u{F0150}", -- clock face
@@ -353,20 +352,7 @@ return {
             return table.concat(out, hl("dim", BAR) .. " " .. icon.dot .. " %#" .. BAR .. "#")
         end
 
-        local function project_name()
-            local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-            return name == "" and "/" or name
-        end
-
         local function title()
-            if vim.bo.filetype == "NvimTree" then
-                if statusline.is_truncated(20) then
-                    return ""
-                end
-
-                return label(title_group(), icon.explorer .. " " .. project_name())
-            end
-
             if statusline.is_truncated(40) then
                 return ""
             end
@@ -423,8 +409,9 @@ return {
 
             local gutter = "%#" .. BAR .. "# "
 
+            -- Project name lives in the bufferline offset above the tree
             if vim.bo.filetype == "NvimTree" then
-                return "%=" .. title() .. "%="
+                return gutter
             end
 
             local parts = {
@@ -466,7 +453,7 @@ return {
             local content
 
             if vim.bo.filetype == "NvimTree" then
-                content = icon.explorer .. " " .. project_name()
+                return "%#" .. BAR .. "#"
             elseif vim.bo.buftype == "terminal" then
                 content = "%t"
             else

@@ -6,3 +6,6 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 elif [[ -x /usr/local/bin/brew ]]; then
   eval "$(/usr/local/bin/brew shellenv zsh)"
 fi
+
+# After brew so ~/.local/bin stays first (uv, pipx, etc.)
+path=("$HOME/.local/bin" $path)

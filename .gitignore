@@ -9,3 +9,9 @@ graphify-out/
 
 # Zed runtime prompt database
 zed/.config/zed/prompts/
+
+# herdr runtime if the config dir is ever folded into the repo
+herdr/.config/herdr/*.log
+herdr/.config/herdr/*.sock
+herdr/.config/herdr/session.json
+herdr/.config/herdr/sessions/

@@ -14,7 +14,10 @@ return {
                 offsets = {
                     {
                         filetype = "NvimTree",
-                        text = "Explorer",
+                        text = function()
+                            local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+                            return "\u{F07C} " .. (name == "" and "/" or name)
+                        end,
                         highlight = "Directory",
                         separator = false,
                     },

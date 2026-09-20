@@ -102,6 +102,13 @@ for pkg in "${packages[@]}"; do
   done < <(find "$DOTFILES/$pkg" -mindepth 1 -print0)
 done
 
+# Herdr also writes logs, sockets, and session state into ~/.config/herdr.
+# Keep that directory real so stow links only config.toml instead of folding
+# the whole tree into the repo.
+if [[ " ${packages[*]} " == *" herdr "* ]]; then
+  run mkdir -p "$TARGET/.config/herdr"
+fi
+
 # 6. link
 stow_flags=(-d "$DOTFILES" -t "$TARGET" --ignore='\.DS_Store' -v)
 if ((DRY_RUN)); then
