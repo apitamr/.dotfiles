@@ -27,6 +27,7 @@ do
     vim.o.timeoutlen = 300
     vim.o.splitright = true
     vim.o.splitbelow = true
+    vim.o.equalalways = false
 
     vim.o.list = true
     vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }

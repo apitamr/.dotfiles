@@ -77,7 +77,7 @@
     "enabled": false
   },
   "hide_mouse": "on_typing_and_action",
-  "reduce_motion": "true",
+  "reduce_motion": "off",
   "focus_follows_mouse": {
     "enabled": false,
     "debounce_ms": 250

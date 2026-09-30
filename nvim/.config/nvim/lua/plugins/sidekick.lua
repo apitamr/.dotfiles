@@ -36,5 +36,17 @@ return {
         map("n", "<leader>af", function() cli.send({ msg = "{file}" }) end, "Sidekick send file")
         map("x", "<leader>av", function() cli.send({ msg = "{selection}" }) end, "Sidekick send selection")
         map({ "n", "x" }, "<leader>ap", function() cli.prompt() end, "Sidekick select prompt")
+
+        vim.api.nvim_create_autocmd("VimResized", {
+            group = vim.api.nvim_create_augroup("sidekick-width", { clear = true }),
+            callback = function()
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    if vim.w[win].sidekick_cli and vim.api.nvim_win_get_config(win).relative == "" then
+                        vim.wo[win].winfixwidth = true
+                        pcall(vim.api.nvim_win_set_width, win, math.min(80, math.floor(vim.o.columns * 0.5)))
+                    end
+                end
+            end,
+        })
     end,
 }

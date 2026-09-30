@@ -12,3 +12,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 (( $+commands[starship] )) && eval "$(starship init zsh)"
+
+# Private env vars (not in git)
+[ -f ~/.secrets.zsh ] && source ~/.secrets.zsh

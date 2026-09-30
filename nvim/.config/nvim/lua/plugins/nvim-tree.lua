@@ -44,7 +44,7 @@ return {
                         icons = { corner = "┆", edge = "┆", item = "┆", none = " " },
                     },
                 },
-                filters = { dotfiles = false },
+                filters = { dotfiles = false, exclude = { ".env" } },
             })
         end
 

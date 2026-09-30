@@ -70,6 +70,10 @@
       "rev": "5f032a85be210cd1c6ac98861eb3b187ff3bd5eb",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
+    "render-markdown.nvim": {
+      "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
     "sidekick.nvim": {
       "rev": "3d80a47e6375f6d647c9695d3afea6fa1b3275df",
       "src": "https://github.com/folke/sidekick.nvim"

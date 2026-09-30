@@ -48,6 +48,13 @@ return {
                         },
 
                         cmdline = {
+                            -- keymap.preset = "enter" is insert mode only; the cmdline
+                            -- has its own table, and blink's cmdline preset leaves <CR> unbound
+                            keymap = {
+                                preset = "cmdline",
+                                -- Accept the highlighted item; with nothing highlighted, run the command
+                                ["<CR>"] = { "accept", "fallback" },
+                            },
                             completion = {
                                 menu = { auto_show = true },
                                 -- A preselected item would rewrite the cmdline and <CR> would run it
