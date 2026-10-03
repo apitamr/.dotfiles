@@ -324,13 +324,15 @@
     "entry_primary_click_action": "project_diff"
   },
   "agent": {
+    "threads_sidebar": {
+      "position": "left"
+    },
     "inline_assistant_use_streaming_tools": true,
     "commit_message_include_project_rules": true,
     "enabled": true,
     "button": true,
     "dock": "left",
     "flexible": true,
-    "sidebar_side": "left",
     "default_width": 640,
     "default_height": 320,
     "limit_content_width": true,
@@ -487,7 +489,7 @@
     "metrics": true,
     "anthropic_retention": false
   },
-  "disable_ai": false,
+  "disable_ai": true,
   "auto_update": true,
   "lsp_document_colors": "inlay",
   "lsp_document_links": true,
