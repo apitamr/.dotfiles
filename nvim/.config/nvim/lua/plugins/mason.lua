@@ -37,8 +37,11 @@ return {
                 "shellcheck",
                 "stylua",
                 "shfmt",
+                "oxfmt",
                 "prettier",
                 "clang-format",
+                "goimports",
+                "taplo",
             },
         })
     end,

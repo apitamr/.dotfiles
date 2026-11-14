@@ -15,9 +15,9 @@ working-directory = home
 
 # Appearance
 # background-opacity = 0.9
-background-blur = true
-background-image = ~/.dotfiles/bg/wow-4k.jpg
-background-image-fit = cover
+# background-blur = true
+# background-image = ~/.dotfiles/bg/wow-4k.jpg
+# background-image-fit = cover
 # Mixes the image with the theme background so text stays readable
 background-image-opacity = 0.3
 unfocused-split-opacity = 0.85
