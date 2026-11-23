@@ -1,0 +1,124 @@
+[
+  {
+    "context": "menu",
+    "bindings": {
+      "ctrl-tab": "menu::SelectPrevious",
+      "tab": "menu::SelectNext",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-`": "editor::ToggleFocus",
+    },
+  },
+
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-w": null,
+      // New window, so the current one's terminal processes keep running
+      "cmd-alt-o": ["projects::OpenRecent", { "create_new_window": true }],
+      "cmd-shift-o": ["projects::OpenRecent", { "create_new_window": true }],
+      "alt-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+
+  {
+    "context": "Workspace || Editor",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+    },
+  },
+
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-enter": "project_panel::Rename",
+      "space e": "project_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "m": "project_panel::CollapseAllEntries",
+    },
+  },
+
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-tab": "editor::ContextMenuPrevious",
+      "ctrl-p": "editor::ContextMenuPrevious",
+      "tab": "editor::ContextMenuNext",
+      "ctrl-n": "editor::ContextMenuNext",
+      "pageup": "editor::ContextMenuFirst",
+      "pagedown": "editor::ContextMenuLast",
+    },
+  },
+
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "tab": null,
+    },
+  },
+
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+    },
+  },
+
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": ["vim::PushAddSurrounds", {}],
+      "space /": "editor::ToggleComments",
+    },
+  },
+
+  {
+    "context": "Editor && !VimCount && (vim_mode == normal || vim_mode == visual)",
+    "bindings": {
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }],
+    },
+  },
+
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space d s": "diagnostics::DeployCurrentFile",
+      "space d l": "diagnostics::Deploy",
+
+      "space c f": "editor::Format",
+      "space /": "editor::ToggleComments",
+
+      "space e": "project_panel::ToggleFocus",
+      "-": "project_panel::ToggleFocus",
+      "space x": "pane::CloseActiveItem",
+
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePreviousItem",
+
+      "space f f": "file_finder::Toggle",
+      "space f w": "text_finder::Toggle",
+
+    },
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "R": "editor::Rename",
+    },
+  },
+  {
+    "bindings": {
+      "alt-cmd-0": "zed::ResetAllZoom",
+    },
+  },
+]
