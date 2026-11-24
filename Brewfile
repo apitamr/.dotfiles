@@ -9,6 +9,8 @@ brew "git-lfs"
 brew "herdr"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -21,6 +23,8 @@ cask "claude-code@latest"
 cask "cursor-cli"
 # Voice and text chat software
 cask "discord"
+# Web browser
+cask "firefox@developer-edition"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
