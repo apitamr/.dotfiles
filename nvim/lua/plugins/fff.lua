@@ -84,6 +84,14 @@ return {
             },
         })
 
+        -- fff's own image list leaves out SVG, video and icns; preview anything snacks.image
+        -- can render (snacks.lua widens that to SVG and a few more)
+        local image = require("fff.file_picker.image")
+        local is_image = image.is_image
+        image.is_image = function(path)
+            return is_image(path) or Snacks.image.supports_file(path)
+        end
+
         local map = function(lhs, fn, desc) vim.keymap.set("n", lhs, fn, { desc = desc }) end
 
         map("<leader>ff", function() require("fff").find_files() end, "Find files")

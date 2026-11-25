@@ -1,6 +1,8 @@
-tap "docker/tap", trusted: true
+tap "libracoder/kiri"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # Git extension for versioning large files
@@ -35,12 +37,16 @@ cask "git-credential-manager"
 cask "google-chrome"
 # Chromium-based web browser
 cask "helium-browser"
+# Container runtime compatible with the Docker CLI, Compose and buildx
+cask "libracoder/kiri/kiri", trusted: true
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Collaboration platform for API development
 cask "postman"
 # Desktop client for Proton Pass
 cask "proton-pass"
+# Web browser
+cask "thebrowsercompany-dia"
 # Application launcher and productivity tool
 cask "tinycast"
 # Native desktop client for WhatsApp
