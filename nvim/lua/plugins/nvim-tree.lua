@@ -21,9 +21,12 @@ return {
 
             require("nvim-tree").setup({
                 on_attach = function(bufnr)
-                    require("nvim-tree.api").config.mappings.default_on_attach(bufnr)
+                    local api = require("nvim-tree.api")
+                    api.config.mappings.default_on_attach(bufnr)
                     -- Free <C-k> for window navigation
                     vim.keymap.del("n", "<C-k>", { buffer = bufnr })
+                    -- Vim-style: y marks the file for copy, p pastes it (default y only copies the name)
+                    vim.keymap.set("n", "y", api.fs.copy.node, { buffer = bufnr, desc = "nvim-tree: Copy" })
                 end,
                 hijack_cursor = true,
                 sync_root_with_cwd = true,
@@ -44,7 +47,7 @@ return {
                         icons = { corner = "┆", edge = "┆", item = "┆", none = " " },
                     },
                 },
-                filters = { dotfiles = false, exclude = { ".env" } },
+                filters = { dotfiles = false, exclude = { ".env", ".npmrc" } },
             })
         end
 
