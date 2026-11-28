@@ -344,10 +344,10 @@ pane_gaps = false
 # tab_bar_right = []
 # tab_bar_right_separator = " "
 tab_bar_right_separator = "  "
-# tab_bar_right = [
-#   { type = "zoom" },
-#   { type = "datetime", format = "%Y-%m-%d 󰅐 %H:%M" },
-# ]
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "datetime", format = "%Y-%m-%d 󰅐 %H:%M" },
+]
 
 # Title Herdr writes to the terminal it runs in, which is what window managers
 # show in title, tab, and group bars. Tokens are {hostname}, {workspace}, {tab},
