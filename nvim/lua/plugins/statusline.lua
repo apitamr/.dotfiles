@@ -441,7 +441,8 @@ return {
                 parts[#parts + 1] = "%="
             end
 
-            local right = { fileinfo(narrow), clock() }
+            -- %l line, %v screen column (counts a tab or wide char as its width)
+            local right = { fileinfo(narrow), "%l:%v", clock() }
             parts[#parts + 1] =
                 block(BAR, table.concat(vim.tbl_filter(function(x) return x ~= "" end, right), divider(BAR)))
             parts[#parts + 1] = gutter
