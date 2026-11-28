@@ -1,0 +1,18 @@
+id = "apitamr.pane-hide"
+name = "Pane Hide"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Hide the focused pane into a 'hidden' tab; unhide puts it back where it was"
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "hide"
+title = "Hide pane"
+contexts = ["workspace"]
+command = ["sh", "pane.sh", "hide"]
+
+[[actions]]
+id = "unhide"
+title = "Unhide last hidden pane"
+contexts = ["workspace"]
+command = ["sh", "pane.sh", "unhide"]

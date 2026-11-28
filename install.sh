@@ -33,7 +33,10 @@ Configs:
   ghostty    ~/.config/ghostty
   nvim       ~/.config/nvim
   zed        ~/.config/zed/settings.json and keymap.json
-  herdr      ~/.config/herdr/config.toml
+  herdr      ~/.config/herdr/config.toml and the plugins in herdr/plugins
+  claude     ~/.claude/settings.json, and CLAUDE.md from agents/AGENTS.md
+  cursor     ~/.cursor/cli-config.json (copied once, Cursor writes login state into it),
+             and ~/.cursor/rules/global.mdc from agents/AGENTS.md
 EOF
 }
 
@@ -150,6 +153,31 @@ link_zed() {
 
 link_herdr() {
     link "$DOTFILES/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+    if command -v herdr >/dev/null; then
+        for plugin in "$DOTFILES"/herdr/plugins/*/; do
+            herdr plugin link "${plugin%/}" >/dev/null && info "Linked herdr plugin $(basename "$plugin")"
+        done
+    fi
+}
+
+link_claude() {
+    link "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+    link "$DOTFILES/agents/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+    # Hide the ponytail band by default; `/ponytail band` brings it back.
+    [[ -e "$HOME/.claude/.ponytail-band" ]] || echo off > "$HOME/.claude/.ponytail-band"
+}
+
+# Copied, not linked: Cursor rewrites this file with login and cache data.
+link_cursor() {
+    local dest="$HOME/.cursor/cli-config.json"
+    if [[ -e "$dest" ]]; then
+        info "Keeping existing $dest"
+    else
+        mkdir -p "$(dirname "$dest")"
+        cp "$DOTFILES/cursor/cli-config.json" "$dest"
+        info "Copied $dest"
+    fi
+    link "$DOTFILES/agents/AGENTS.md" "$HOME/.cursor/rules/global.mdc"
 }
 
 link_named() {
@@ -161,6 +189,8 @@ link_named() {
         nvim) link_nvim ;;
         zed) link_zed ;;
         herdr) link_herdr ;;
+        claude) link_claude ;;
+        cursor) link_cursor ;;
         *)
             echo "Unknown config: $1" >&2
             usage >&2
@@ -177,6 +207,8 @@ link_all() {
     link_nvim
     link_zed
     link_herdr
+    link_claude
+    link_cursor
 }
 
 if [[ ${#configs[@]} -eq 0 ]]; then

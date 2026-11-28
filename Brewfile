@@ -1,6 +1,10 @@
 tap "libracoder/kiri"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -13,12 +17,18 @@ brew "herdr"
 brew "imagemagick"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
 # Command-line agent for Cursor
@@ -45,6 +55,8 @@ cask "obsidian"
 cask "postman"
 # Desktop client for Proton Pass
 cask "proton-pass"
+# Music streaming service
+cask "spotify"
 # Web browser
 cask "thebrowsercompany-dia"
 # Application launcher and productivity tool

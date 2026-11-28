@@ -111,8 +111,8 @@ detach = ["prefix+d", "prefix+q"]   # tmux: d detach
 reload_config = "prefix+r"          # tmux: r reloads; herdr's default prefix+r is resize-mode
 # open_notification_target = "prefix+o"
 # workspace_picker = "prefix+w"
-workspace_picker = "prefix+s"       # tmux: s session list
-# goto = "prefix+g"
+# tmux s (session list): workspace-picker plugin, see keys.command below
+goto = "prefix+g"
 # new_workspace = "prefix+shift+n"
 # Unbound: the keys.command entries below create it at $HOME instead,
 # like tmux's `bind S new-session -c "$HOME"`.
@@ -134,9 +134,9 @@ new_tab = ["prefix+c", "prefix+shift+w"]  # tmux: W new-window, c still works
 # rename_tab = "prefix+shift+t"
 rename_tab = ["prefix+shift+t", "prefix+comma"]
 # previous_tab = "prefix+p"
-previous_tab = ["prefix+n", "prefix+p"]   # tmux: n previous (p still previous)
+# previous_tab = ["prefix+n", "prefix+p"]   # tmux: n previous (p still previous)
 # next_tab = "prefix+n"
-next_tab = "prefix+m"                     # tmux: m next window
+# next_tab = "prefix+m"                     # tmux: m next window
 # move_tab_previous = ""   # optional, e.g. "alt+shift+left" moves the tab toward the front
 # move_tab_next = ""       # optional, e.g. "alt+shift+right" moves the tab toward the back
 # switch_tab = "prefix+1..9"
@@ -164,10 +164,14 @@ resize_mode = ""                          # prefix+r is reload, like tmux
 # resize_pane_down = ""   # optional, e.g. "ctrl+shift+alt+down"
 # resize_pane_up = ""     # optional, e.g. "ctrl+shift+alt+up"
 # resize_pane_right = ""  # optional, e.g. "ctrl+shift+alt+right"
-resize_pane_left = "prefix+shift+h"       # tmux: HJKL resize
-resize_pane_down = "prefix+shift+j"
-resize_pane_up = "prefix+shift+k"
-resize_pane_right = "prefix+shift+l"
+resize_pane_left = "prefix+alt+h"         # option+HJKL; shift+HJKL is swap (herdr default)
+resize_pane_down = "prefix+alt+j"
+resize_pane_up = "prefix+alt+k"
+resize_pane_right = "prefix+alt+l"
+# swap_pane_left = "prefix+shift+h"
+# swap_pane_down = "prefix+shift+j"
+# swap_pane_up = "prefix+shift+k"
+# swap_pane_right = "prefix+shift+l"
 # toggle_sidebar = "prefix+b"
 
 # Navigate-mode movement. These local shortcuts win while navigate mode is open.
@@ -192,14 +196,33 @@ navigate_pane_up = "ctrl+k"
 # type = "popup" opens a session-modal terminal without changing the tab layout.
 # Popup width and height accept terminal cells or percentages such as "80%".
 # On Windows, command strings run through cmd.exe /d /c.
-# [[keys.command]]
-# key = "prefix+alt+g"
-# type = "popup"
-# command = "lazygit"
-# width = "80%"
-# height = "80%"
+[[keys.command]]
+key = "prefix+alt+g"
+type = "popup"
+command = "lazygit"
+description = "run lazygit"   # label shown for the command
+width = "80%"
+height = "80%"
 
 # New workspace at $HOME (new_cwd = "follow" keeps panes/tabs on the current path)
+[[keys.command]]
+key = "prefix+s"
+type = "plugin_action"
+command = "apitamr.workspace-picker.open"
+description = "pick workspace"
+
+[[keys.command]]
+key = "prefix+m"
+type = "plugin_action"
+command = "apitamr.pane-hide.hide"
+description = "hide pane"
+
+[[keys.command]]
+key = "prefix+u"
+type = "plugin_action"
+command = "apitamr.pane-hide.unhide"
+description = "unhide last hidden pane"
+
 [[keys.command]]
 key = "prefix+shift+s"
 type = "shell"
@@ -401,6 +424,8 @@ accent = "#87a987"
 # Resume supported AI-agent panes into their native conversation sessions after
 # a Herdr server restart. Requires official integrations that report session refs.
 # resume_agents_on_restore = true
+# Restored agents start one at a time, this many ms apart (0 disables spacing).
+# startup_per_agent_delay_ms = 100
 
 [remote]
 # Whether herdr manages the ssh config used for `herdr --remote`.

@@ -1,0 +1,19 @@
+id = "apitamr.workspace-picker"
+name = "Workspace Picker"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Popup fuzzy list of workspaces only; Enter focuses the pick"
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "open"
+title = "Pick workspace"
+contexts = ["workspace"]
+# CLI `pane open` can't request popup; the manifest placement below applies
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin \"$HERDR_PLUGIN_ID\" --entrypoint picker"]
+
+[[panes]]
+id = "picker"
+title = "Workspaces"
+placement = "popup"
+command = ["sh", "picker.sh"]
